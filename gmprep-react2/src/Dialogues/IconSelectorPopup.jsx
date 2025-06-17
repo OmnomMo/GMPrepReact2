@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 
-function IconSelectorPopup({dialogResult, setDialogResult}) {
+function IconSelectorPopup({setDialogResult}) {
 
 	const [iconData, setIconData] = new useState([]);
 	const [selectedIcon, setSelectedIcon] = new useState(null);

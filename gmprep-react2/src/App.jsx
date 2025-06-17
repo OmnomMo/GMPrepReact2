@@ -7,6 +7,7 @@ function App() {
 
 	const [dialogContent, setDialogContent] = new useState(null);
 	const [dialogResult, setDialogResult] = new useState(null);
+	const [currentIcon, setCurrentIcon] = new useState(null);
 
 	const dialogRef = useRef(null);
 
@@ -23,6 +24,7 @@ function App() {
 		dialogRef.current.close();
 		let selected = dialogResult;
 		if (!selected) { return; }
+		setCurrentIcon(selected);
 		console.log("Icon selected " + selected);
 	}
 
@@ -39,7 +41,7 @@ function App() {
 				{dialogContent}
 			</DialogBase>
 			<div>
-				{dialogResult && dialogResult != "" && <img src={"/icons/default/" + dialogResult} width="128" height="128"/>}
+				{currentIcon && currentIcon != "" && <img src={"/icons/default/" + currentIcon} width="128" height="128"/>}
 			</div>
 		</div>
 	);
