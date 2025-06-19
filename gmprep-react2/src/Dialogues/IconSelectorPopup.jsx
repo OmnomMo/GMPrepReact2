@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import {useEffect, useState } from "react";
 
 function IconSelectorPopup({setDialogResult}) {
 
@@ -29,6 +29,7 @@ function IconSelectorPopup({setDialogResult}) {
 		getData()
 	}, [])
 
+
 	function iconSelected(e) {
 
 		let targetIcon = e.target;
@@ -51,17 +52,20 @@ function IconSelectorPopup({setDialogResult}) {
 	}
 
 	return (
-	<>
-	<form method = "dialog">
-		<h1>Select an icon!</h1>
-		<div style={{overflowY: "scroll", height:"400px", width:"400px"}}>
-			{
-				iconData && iconData.length > 0 && iconData.map(
-					(icon) => <img className="deselected" id={icon.Name} key={icon.Name} src={"/icons/default/" + icon.Name} height="64" width="64" onClick={iconSelected}/>)
-			}
-		</div>
-	</form>
-	</>
+		<>
+			<form method="dialog" >
+				<h1>Select an icon!</h1>
+				<div className="h-100 overflow-y-scroll" >
+				<div className=" columns-5 w-100 ">
+					{
+						iconData && iconData.length > 0 && iconData.map(
+							(icon) => <img className="deselected" id={icon.Name} key={icon.Name} src={"/icons/default/" + icon.Name} height="64" width="64" onClick={iconSelected} />)
+					}
+				</div>
+				</div>
+
+			</form>
+		</>
 	)
 }
 

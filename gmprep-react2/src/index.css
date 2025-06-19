@@ -54,6 +54,10 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+dialog {
+	background-color: rgb(30, 30, 31);
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

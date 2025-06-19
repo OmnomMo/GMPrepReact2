@@ -1,9 +1,10 @@
 import { forwardRef } from "react";
+import '../App.css'
 
 const DialogBase = forwardRef(({children, onCancel, onSubmit}, ref) => {
 
 	function submit() {
-		onSubmit(1);
+		onSubmit();
 	}
 
 	function cancel() {
