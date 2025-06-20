@@ -2,7 +2,8 @@ import { useRef, useState } from 'react';
 import './App.css'
 import DialogBase from './Dialogues/DialogueBase';
 import IconSelectorPopup from './Dialogues/IconSelectorPopup';
-import NewNodeSidebar from './Dialogues/NewNodePopup/NewNodeSidebar';
+import SidebarBase from './Dialogues/SideBarBase';
+import NewNode from './Dialogues/NewNodePopup/NewNode';
 
 
 
@@ -47,7 +48,9 @@ function App() {
 					{currentIcon && currentIcon != "" && <img src={"/icons/default/" + currentIcon} width="128" height="128"/>}
 				</div>
 			</div>
-			<NewNodeSidebar />
+			<SidebarBase>
+				<NewNode/>
+			</SidebarBase>
 		</>
 
 	);
