@@ -19,7 +19,7 @@ export default function EditeableMultiline({ defaultValue, labelName, onChanged 
 				<textarea
 					autoFocus
 					rows="6"
-					className="bg-gray-700 w-full"
+					className="bg-gray-700 w-full mt-2 p-2"
 					defaultValue={textContent ?? "Name"}
 					onChange={(e) => setTextContent((previousValue) => {
 						setPreviousTextContent(previousValue);
@@ -48,7 +48,7 @@ export default function EditeableMultiline({ defaultValue, labelName, onChanged 
 					<p className="flex-grow text-left">{labelName}</p>
 					<img src="/icons/ui/wrench_icon.png" onClick={() => setIsBeingEdited(true)} />
 				</div>
-				<div className="flex-grow text-left whitespace-pre-wrap bg-gray-800">{textContent}</div>
+				<div className="flex-grow text-left whitespace-pre-wrap bg-gray-800 mt-2 p-2">{textContent}</div>
 			</div>
 		);
 	}

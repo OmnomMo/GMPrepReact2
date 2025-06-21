@@ -5,6 +5,7 @@ import IconSelectorPopup from "../Dialogues/IconSelectorPopup";
 export default function IconPicker({defaultIcon, onChanged}) {
 	const [currentIcon, setCurrentIcon] = useState(defaultIcon);
 	const [dialogResult, setDialogResult] = new useState(null);
+	const [iconSize, setIconSize] = new useState("64")
 
 	const dialogRef = useRef(null);
 
@@ -19,7 +20,11 @@ export default function IconPicker({defaultIcon, onChanged}) {
 					dialogRef.current.close();
 				}}
 				onSubmit={() => {
-					setCurrentIcon(dialogResult);
+					if (!dialogResult.icon) {
+						return;
+					}
+					setCurrentIcon(dialogResult.icon);
+					setIconSize(dialogResult.icon);
 					dialogRef.current.close();
 					onChanged(dialogResult)
 				}}

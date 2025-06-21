@@ -5,6 +5,7 @@ import SecretsFormComponent from "./SecretsFormComponent";
 import EditeableText from "../../EditeableFields/EditeableText";
 import EditeableMultiline from "../../EditeableFields/EditeableMultiline";
 import IconPicker from "../../EditeableFields/IconPicker";
+import EditeableHeader from "../../EditeableFields/EditeableHeader";
 
 
 
@@ -23,19 +24,14 @@ export default function NewNode() {
 
 	return <div className="w-full">
 			<div>
-				<IconPicker onChanged={(icon) => console.log(icon)} defaultIcon="well.png"/>
+				<IconPicker onChanged={(dialogResult) => {console.log(dialogResult.icon + dialogResult.iconSize)}} defaultIcon="well.png"/>
 			</div>
 			<div>
-				<EditeableText defaultValue="Default Name" onChanged={(newText) => console.log(newText)}/>
+				<EditeableHeader defaultValue="Default Name" onChanged={(newText) => console.log(newText)}/>
 			</div>
 			<div>
 				<EditeableMultiline defaultValue="" onChanged={(newDescription) => console.log(newDescription)} labelName="Description:"/>
 			</div>
-			<select defaultValue={inputs.mapIconSize ?? "64"} name="mapIconSize" onChange={handleChange}>
-				<option value="32">32</option>
-				<option value="64">64</option>
-				<option value="96">96</option>
-			</select>
 
 			<CharacterInfoFormComponent />
 			<LocationInfoFormComponent />

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function EditeableText({defaultValue, onChanged}) {
+export default function EditeableHeader({defaultValue, onChanged}) {
 	const [isBeingEdited, setIsBeingEdited] = useState(false);
 	const [textContent, setTextContent] = useState(defaultValue);
 
@@ -12,7 +12,7 @@ export default function EditeableText({defaultValue, onChanged}) {
 			<input
 				type="text"
 				autoFocus
-				className="bg-gray-700 flex-grow text-center"
+				className="h3TextInput bg-gray-700 flex-grow text-center"
 				defaultValue={textContent ?? "Name"}
 				onChange={(e) => setTextContent(e.target.value)}
 				onKeyUp={(e) => {
@@ -22,7 +22,7 @@ export default function EditeableText({defaultValue, onChanged}) {
 					}
 				}}
 			/>
-			<img src="/icons/ui/check_icon.png" onClick={() => {
+			<img src="/icons/ui/check_icon.png" className="self-end" onClick={() => {
 				setIsBeingEdited(false);
 				onChanged(textContent);
 			}}/>
@@ -31,7 +31,7 @@ export default function EditeableText({defaultValue, onChanged}) {
 	} else {
 		return (
 			<div className="flex columns w-full">
-			<p className="flex-grow">{textContent}</p>
+			<h3 className="flex-grow">{textContent}</h3>
 			<img src="/icons/ui/wrench_icon.png" className="self-end" onClick={() => setIsBeingEdited(true)} />
 			</div>
 		);
