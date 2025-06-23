@@ -12,7 +12,7 @@ export default function EditeableText({defaultValue, onChanged}) {
 			<input
 				type="text"
 				autoFocus
-				className="bg-gray-700 flex-grow text-center"
+				className="flex-grow text-center"
 				defaultValue={textContent ?? "Name"}
 				onChange={(e) => setTextContent(e.target.value)}
 				onKeyUp={(e) => {

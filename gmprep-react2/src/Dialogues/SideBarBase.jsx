@@ -36,13 +36,13 @@ export default function SidebarBase({children}) {
 
 	return <>
 		<aside id="sidebar" className="fixed top-0 right-0 z-40 h-screen bg-gray-900 flex " style={{ width: `${sidebarWidth / 16}rem` }}>
-			<div id="resizeHandle" className="bg-gray-400 relative h-screen left-0 w-2" onMouseDown={() => {
+			<div id="resizeHandle" className="bg-gray-400 relative h-screen left-0 w-2 cursor-ew-resize" onMouseDown={() => {
 				//disables selection of text until mouse up
 				document.addEventListener('selectstart', onStartSelect)
 				isResized.current = true;
 			}}>
 			</div>
-			<div id="content" className="p-10 w-full">
+			<div id="content" className="m-10 w-full">
 				{children}
 			</div>
 		</aside>

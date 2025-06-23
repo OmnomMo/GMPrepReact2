@@ -30,7 +30,7 @@ export default function NewNode() {
 				<EditeableHeader defaultValue="Default Name" onChanged={(newText) => console.log(newText)}/>
 			</div>
 			<div>
-				<EditeableMultiline defaultValue="" onChanged={(newDescription) => console.log(newDescription)} labelName="Description:"/>
+				<EditeableMultiline defaultValue="" onChanged={(newDescription) => console.log(newDescription)} labelName="Description"/>
 			</div>
 
 			<CharacterInfoFormComponent />
