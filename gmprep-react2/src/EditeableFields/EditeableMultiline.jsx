@@ -16,7 +16,7 @@ export default function EditeableMultiline({ defaultValue, labelName, onChanged 
 							setIsBeingEdited(false);
 							onChanged(textContent);
 						}}
-						className="self-center"/>
+						className="self-end pb-1"/>
 				</div>
 			<textarea
 				autoFocus
@@ -48,7 +48,7 @@ export default function EditeableMultiline({ defaultValue, labelName, onChanged 
 			<div className="flex flex-col w-full">
 				<div className="flex flex-row w-full">
 					<h4 className="flex-grow text-left">{labelName}</h4>
-					<img src="/icons/ui/wrench_icon.png"  className="self-center" onClick={() => setIsBeingEdited(true)} />
+					<img src="/icons/ui/wrench_icon.png"  className="self-end pb-1" onClick={() => setIsBeingEdited(true)} />
 				</div>
 				<div className="flex-grow text-left whitespace-pre-wrap bg-gray-800 mt-2 p-2">{textContent}</div>
 			</div>

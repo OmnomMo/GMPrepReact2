@@ -1,5 +1,5 @@
 import { useState } from "react"
-import SKILLS from "../../Globals/Skills";
+import {SKILLS} from "../../Globals/Skills";
 
 export default function Secret({defaultContent, onDelete, onUpdate}) {
 
@@ -17,7 +17,7 @@ export default function Secret({defaultContent, onDelete, onUpdate}) {
 	if (!editing) {
 		//Default Secret display
 		return (
-			<div style={{ display: "flex", flexDirection: "row" }} className="w-full">
+			<div style={{ display: "flex", flexDirection: "row" }} className="w-full  mt-2 p-2 bg-gray-100/5">
 
 				<div className="w-full" style={{ display: "flex", flexDirection: "column" }}>
 					{(defaultContent && defaultContent.skill != "None") && 
@@ -32,7 +32,7 @@ export default function Secret({defaultContent, onDelete, onUpdate}) {
 	} else {
 		//Editing secret
 		return (
-			<div style={{ display: "flex", flexDirection: "column" }} className="w-full">
+			<div style={{ display: "flex", flexDirection: "column" }} className="w-full  mt-2 p-2 bg-gray-100/5">
 				<div style={{ display: "flex", flexDirection: "row" }}>
 					<select value={selectedSkill} onChange={e => setSelectedSkill(e.target.value)}>
 						{SKILLS.map(skill => <option key={skill} value={skill}>{skill}</option>)}

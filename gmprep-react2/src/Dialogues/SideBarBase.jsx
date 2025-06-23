@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-const SIDEBAR_MIN_WIDTH = 350;
+const SIDEBAR_MIN_WIDTH = 450;
 const SIDEBAR_MAX_WIDTH = 1000;
 
 
@@ -42,7 +42,7 @@ export default function SidebarBase({children}) {
 				isResized.current = true;
 			}}>
 			</div>
-			<div id="content" className="m-10 w-full">
+			<div id="content" className="p-10 w-full overflow-y-auto">
 				{children}
 			</div>
 		</aside>

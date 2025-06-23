@@ -12,7 +12,7 @@ export default function EditeableHeader({defaultValue, onChanged}) {
 			<input
 				type="text"
 				autoFocus
-				className="h3TextInput bg-gray-700 flex-grow text-center"
+				className="h3TextInput bg-gray-700 w-full text-center"
 				defaultValue={textContent ?? "Name"}
 				onChange={(e) => setTextContent(e.target.value)}
 				onKeyUp={(e) => {
