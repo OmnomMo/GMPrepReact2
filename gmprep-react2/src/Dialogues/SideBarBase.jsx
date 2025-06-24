@@ -6,7 +6,7 @@ const SIDEBAR_MAX_WIDTH = 1000;
 
 //Sidebar with variable (user defined width)
 export default function SidebarBase({children}) {
-	const [sidebarWidth, setSidebarWidth] = useState(400);
+	const [sidebarWidth, setSidebarWidth] = useState(450);
 	const isResized = useRef(false);
 
 

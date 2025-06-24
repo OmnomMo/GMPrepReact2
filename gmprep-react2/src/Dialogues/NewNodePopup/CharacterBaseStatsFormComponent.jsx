@@ -2,6 +2,7 @@ import { useState } from "react";
 import CharacterBaseStat from "./CharacterBaseStat";
 import EditeableNumericicon from "../../EditeableFields/EditeableNumericIcon";
 import { ABILITIES} from "../../Globals/Skills";
+import ImmunitiesResistances from "./ImmunitiesResistances";
 
 export default function CharacterBaseStatsFormComponent() {
 	const [editingStats, setEditingStats] = useState(false);
@@ -17,7 +18,7 @@ export default function CharacterBaseStatsFormComponent() {
 
 	return (
 		<>
-		<div style={{display:"flex", flexDirection:"row"}}>
+		<div className="flexRow">
 			<h4 className="text-left w-full">Stats</h4>
 			{(!editingStats) && <img src="/icons/ui/wrench_icon.png" className="self-end pb-1" onClick={() => setEditingStats(true)} />}
 			{(editingStats) && <img src="/icons/ui/check_icon.png" className="self-end pb-1" onClick={() => setEditingStats(false)} />}
@@ -29,6 +30,7 @@ export default function CharacterBaseStatsFormComponent() {
 			{ABILITIES.map(ability =>
 				<CharacterBaseStat
 					label={ability + ":"}
+					key={ability}
 					defaultValue={10}
 					editeable={editingStats}
 					doneEditing={doneEditingStats}
@@ -36,7 +38,10 @@ export default function CharacterBaseStatsFormComponent() {
 				/>)
 			}
 		</div>
-		<div id="speedblock" style={{display:"flex", flexDirection:"row"}} className="bg-gray-100/5 p-2 mt-2 w-full">
+		<div id="Immunities" className="statBlock flexRow w-full">
+			<ImmunitiesResistances editing={editingStats} />
+		</div>
+		<div id="speedblock" className="statBlock flexRow">
 			<EditeableNumericicon defaultValue={30} iconSource={"/icons/ui/walk_icon.png"} showEditIcon={false} editeableOverride={editingSpeed} onUpdate={onUpdateSpeed}/>
 			<EditeableNumericicon defaultValue={0} iconSource={"/icons/ui/swim_icon.png"} showEditIcon={false} editeableOverride={editingSpeed}  onUpdate={onUpdateSpeed}/>
 			<EditeableNumericicon defaultValue={0} iconSource={"/icons/ui/fly_icon.png"} showEditIcon={false} editeableOverride={editingSpeed} onUpdate={onUpdateSpeed}/>

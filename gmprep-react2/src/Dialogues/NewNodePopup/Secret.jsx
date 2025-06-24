@@ -17,9 +17,9 @@ export default function Secret({defaultContent, onDelete, onUpdate}) {
 	if (!editing) {
 		//Default Secret display
 		return (
-			<div style={{ display: "flex", flexDirection: "row" }} className="w-full  mt-2 p-2 bg-gray-100/5">
+			<div className="statBlock flexRow">
 
-				<div className="w-full" style={{ display: "flex", flexDirection: "column" }}>
+				<div className="w-full flexCol">
 					{(defaultContent && defaultContent.skill != "None") && 
 						<p className="text-left w-full font-bold">{defaultContent.skill + " (" + defaultContent.difficulty + "):"}</p>
 					}
@@ -32,8 +32,8 @@ export default function Secret({defaultContent, onDelete, onUpdate}) {
 	} else {
 		//Editing secret
 		return (
-			<div style={{ display: "flex", flexDirection: "column" }} className="w-full  mt-2 p-2 bg-gray-100/5">
-				<div style={{ display: "flex", flexDirection: "row" }}>
+			<div className="statBlock flexCol">
+				<div className="flexRow">
 					<select value={selectedSkill} onChange={e => setSelectedSkill(e.target.value)}>
 						{SKILLS.map(skill => <option key={skill} value={skill}>{skill}</option>)}
 					</select>
@@ -57,7 +57,7 @@ export default function Secret({defaultContent, onDelete, onUpdate}) {
 				<textarea
 					autoFocus
 					rows="4"
-					className="bg-gray-700 w-full mt-2 p-2"
+					className="w-full"
 					defaultValue={defaultContent.description ?? ""}
 					onKeyDown={(e) => {
 						//when pressing enter we stop editing but also the enter input should not be written into the text

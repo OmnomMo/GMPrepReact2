@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-
+//Dynamic list of generic elements (provided as children)
+//Children must implement defaultContent (generic object of default data), and must call functions called onUpdate and onDelete that are
+//passed to them as props
 export default function EditeableList ({children, defaultElement, header}) {
 
 	const [elements, setElements] = useState([]);
