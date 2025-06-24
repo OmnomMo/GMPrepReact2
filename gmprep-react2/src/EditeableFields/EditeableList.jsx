@@ -1,11 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 //Dynamic list of generic elements (provided as children)
 //Children must implement defaultContent (generic object of default data), and must call functions called onUpdate and onDelete that are
 //passed to them as props
-export default function EditeableList ({children, defaultElement, header}) {
+export default function EditeableList ({children, defaultElement, header, onChange}) {
+
+
+	const listData = useRef({});
 
 	const [elements, setElements] = useState([]);
 	const [maxId, setMaxId] = useState(0);
+
+	useEffect(() => {
+		onChange(listData.current)
+	}, [listData, onChange]);
+
+	function updateListData(id, value) {
+		let tempData = listData.current;
+		tempData[id] = value;
+		listData.current = tempData;
+	}
 
 	function addElement() {
 		//clone default element
@@ -18,8 +31,17 @@ export default function EditeableList ({children, defaultElement, header}) {
 	}
 
 	function deleteElement(id) {
+
 		let updatedElements = elements.filter(function(e) {return e.id !== id});
 		setElements(updatedElements);
+
+		//remove from data ref
+		let tempData = listData.current;
+		delete tempData[id];
+		
+		listData.current = tempData;
+
+
 	}
 
 	function updateElement(id, content) {
@@ -41,7 +63,14 @@ export default function EditeableList ({children, defaultElement, header}) {
 		<ul>
 			{elements.map(element => 
 			<li className="w-full" key={element.id}>
-				{React.cloneElement(children, {defaultContent:element, onDelete:deleteElement, onUpdate:updateElement})}
+				{React.cloneElement(children, {
+					defaultContent:element,
+					onDelete:deleteElement,
+					onUpdate:updateElement,
+					onChange:(newValue) => {
+						updateListData(element.id, newValue)
+					}
+				})}
 			</li>)}
 		</ul>
 	</div>

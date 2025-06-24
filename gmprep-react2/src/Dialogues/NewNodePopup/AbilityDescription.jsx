@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function AbilityDescription({ defaultContent, onUpdate, onDelete }) {
+export default function AbilityDescription({ defaultContent, onUpdate, onDelete, onChange}) {
 
 	const [editing, setEditing] = useState(false);
 	const [abilityName, setAbilityName] = useState(defaultContent.abilityName);
 	const [abilityDescription, setAbilityDescription] = useState(defaultContent.abilityDescription);
+
+	useEffect(() => {
+		onChange({name:abilityName, desciptions:abilityDescription});
+	}, [abilityName, abilityDescription, onChange])
 
 	function doneEditing() {
 		setEditing(false);

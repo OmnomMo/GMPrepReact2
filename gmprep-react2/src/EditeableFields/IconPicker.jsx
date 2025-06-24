@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DialogBase from "../Dialogues/DialogueBase";
 import IconSelectorPopup from "../Dialogues/IconSelectorPopup";
 
@@ -6,6 +6,10 @@ export default function IconPicker({defaultIcon, onChanged}) {
 	const [currentIcon, setCurrentIcon] = useState(defaultIcon);
 	const [dialogResult, setDialogResult] = new useState(null);
 	const [iconSize, setIconSize] = new useState("64")
+
+	useEffect(() => {
+		onChanged({icon:currentIcon, iconSize:iconSize})
+	}, [onChanged, currentIcon, iconSize])
 
 	const dialogRef = useRef(null);
 
@@ -23,13 +27,12 @@ export default function IconPicker({defaultIcon, onChanged}) {
 					if (!dialogResult.icon) {
 						return;
 					}
-					setCurrentIcon(dialogResult.icon);
-					setIconSize(dialogResult.icon);
+					setCurrentIcon(dialogResult.icon ?? currentIcon);
+					setIconSize(dialogResult.iconSize);
 					dialogRef.current.close();
-					onChanged(dialogResult)
 				}}
 				ref={dialogRef}>
-				<IconSelectorPopup dialogResult={dialogResult} setDialogResult={setDialogResult} />
+				<IconSelectorPopup dialogResult={dialogResult} setDialogResult={setDialogResult} defaultIcon={currentIcon} defaultIconSize={iconSize}/>
 			</DialogBase>
 		</div>
 	)

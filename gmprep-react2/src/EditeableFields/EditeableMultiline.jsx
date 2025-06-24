@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function EditeableMultiline({ defaultValue, labelName, onChanged }) {
+export default function EditeableMultiline({ defaultValue, labelName, onChanged, rows = 6 }) {
 	const [isBeingEdited, setIsBeingEdited] = useState(false);
 	const [textContent, setTextContent] = useState(defaultValue);
 	const [previousTextContent, setPreviousTextContent] = useState(textContent);
 
+	useEffect(() => {
+		onChanged(textContent)
+	}, [onChanged, textContent])
 
 	if (isBeingEdited) {
 		return (
@@ -14,13 +17,12 @@ export default function EditeableMultiline({ defaultValue, labelName, onChanged 
 					<img src="/icons/ui/check_icon.png"
 						onClick={() => {
 							setIsBeingEdited(false);
-							onChanged(textContent);
 						}}
 						className="self-end pb-1"/>
 				</div>
 			<textarea
 				autoFocus
-				rows="6"
+				rows={rows}
 				className="bg-gray-700 w-full mt-2 p-2"
 				defaultValue={textContent ?? "Name"}
 				onChange={(e) => setTextContent((previousValue) => {
@@ -34,8 +36,7 @@ export default function EditeableMultiline({ defaultValue, labelName, onChanged 
 							//hack: For now we revert the textfield to the previous value when confirming with enter
 							//so that the enter is not accepted in the field
 							setTextContent(previousTextContent)
-							setIsBeingEdited(false)
-							onChanged(textContent);
+							setIsBeingEdited(false);
 						}
 					}
 				}}

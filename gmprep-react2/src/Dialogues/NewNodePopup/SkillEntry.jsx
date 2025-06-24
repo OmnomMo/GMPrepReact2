@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import StringSelect from "../../EditeableFields/StringSelect";
 import { SKILLS } from "../../Globals/Skills";
 
-export default function SkillEntry({ defaultContent, onDelete, onUpdate }) {
+export default function SkillEntry({ defaultContent, onDelete, onUpdate, onChange}) {
 
 	const [editing, setEditing] = useState(false);
 	const [selectedSkill, setSelectedSkill] = useState(defaultContent.skill);
 	const [bonus, setBonus] = useState(defaultContent.bonus);
+
+	useEffect(() => {
+		onChange({skill:selectedSkill, bonus:bonus});
+	}, [selectedSkill, bonus, onChange])
 
 	function doneEditing() {
 		setEditing(false);

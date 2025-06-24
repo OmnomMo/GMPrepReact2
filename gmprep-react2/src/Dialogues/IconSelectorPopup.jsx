@@ -1,12 +1,16 @@
 
 import { useEffect, useState } from "react";
 
-function IconSelectorPopup({ setDialogResult, defaultIconSize}) {
+function IconSelectorPopup({ setDialogResult, defaultIconSize, defaultIcon}) {
 
 	const [iconData, setIconData] = new useState([]);
 	const [selectedIcon, setSelectedIcon] = new useState(null);
 	const [iconSize, setIconSize] = new useState(defaultIconSize)
 
+
+	useEffect(() => {
+		setDialogResult({icon:selectedIcon?.id ?? defaultIcon, iconSize:iconSize})},
+	[defaultIcon, selectedIcon, iconSize, setDialogResult])
 
 	const getData = () => {
 		fetch('DefaultIcons.json'
@@ -39,11 +43,7 @@ function IconSelectorPopup({ setDialogResult, defaultIconSize}) {
 			selectedIcon.className = "deselected";
 		}
 
-		if (selectedIcon === targetIcon) {
-			setSelectedIcon(null);
-			setDialogResult({icon: "", iconSize: iconSize});
-			targetIcon.className = "deselected";
-		} else {
+		if (selectedIcon != targetIcon) {
 			console.log(targetIcon.id);
 			targetIcon.className = "selected";
 			setSelectedIcon(targetIcon);
@@ -64,9 +64,8 @@ function IconSelectorPopup({ setDialogResult, defaultIconSize}) {
 						}
 					</div>
 					<p>Icon Size:</p>
-					<select defaultValue={defaultIconSize ?? "64"} name="mapIconSize" onChange={(e) => {
+					<select value={iconSize} name="mapIconSize" onChange={(e) => {
 						setIconSize(e.target.value);
-						setDialogResult({icon: selectedIcon.id, iconSize: iconSize});
 					}}>
 						<option value="32">32</option>
 						<option value="64">64</option>

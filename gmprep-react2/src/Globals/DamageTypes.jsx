@@ -1,4 +1,7 @@
 const DAMAGE_TYPES = [
+	"Bludgeoning*",
+	"Piercing*",
+	"Slashing*",
 	"Acid",
 	"Bludgeoning",
 	"Cold",

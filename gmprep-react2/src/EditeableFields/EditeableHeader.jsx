@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function EditeableHeader({defaultValue, onChanged}) {
 	const [isBeingEdited, setIsBeingEdited] = useState(false);
 	const [textContent, setTextContent] = useState(defaultValue);
 
-
+	useEffect(() => {
+		onChanged(textContent);
+	},
+	[textContent, onChanged])
 
 	if (isBeingEdited) {
 		return (
@@ -18,13 +21,11 @@ export default function EditeableHeader({defaultValue, onChanged}) {
 				onKeyUp={(e) => {
 					if (e.key === 'Enter') {
 						setIsBeingEdited(false)
-						onChanged(textContent);
 					}
 				}}
 			/>
 			<img src="/icons/ui/check_icon.png" className="self-end" onClick={() => {
 				setIsBeingEdited(false);
-				onChanged(textContent);
 			}}/>
 			</div>
 		);

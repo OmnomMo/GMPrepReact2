@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function EditeableNumericicon({ defaultValue, iconSource, onUpdate, showEditIcon, editeableOverride = false }) {
+export default function EditeableNumericicon({ defaultValue, iconSource, onUpdate, onChange, showEditIcon, editeableOverride = false }) {
 	const [editing, setEditing] = useState(editeableOverride)
 	const [value, setValue] = useState(defaultValue)
+
+	useEffect(() => {
+		onChange(value);
+	}, [onChange, value])
 
 	if (!editing && !editeableOverride) {
 		return (

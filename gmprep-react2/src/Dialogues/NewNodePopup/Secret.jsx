@@ -1,13 +1,17 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {SKILLS} from "../../Globals/Skills";
 
-export default function Secret({defaultContent, onDelete, onUpdate}) {
+export default function Secret({defaultContent, onDelete, onUpdate, onChange}) {
 
 	const [editing, setEditing] = useState(false);
 	const [selectedSkill, setSelectedSkill] = useState(defaultContent.skill);
 	const [descriptionText, setDescriptionText] = useState(defaultContent.description);
 	const [previousDescriptionText, setPreviousDescriptionText] = useState(descriptionText);
 	const [selectedDifficulty, setSelectedDifficulty] = useState(defaultContent.difficulty);
+
+	useEffect(() => {
+		onChange({skill:selectedSkill, description:descriptionText, difficulty:selectedDifficulty});
+	}, [selectedSkill, selectedDifficulty, descriptionText, onChange])
 
 	function stopEditing() {
 		setEditing(false);

@@ -1,12 +1,20 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { CONDITIONS } from "../../Globals/Conditions";
 import { DAMAGE_TYPES } from "../../Globals/DamageTypes";
 
-export default function ImmunitiesResistances({editing}) {
+export default function ImmunitiesResistances({defaultData, onChange, editing}) {
 
-	const [conditionImmunities, setConditionImmunities] = useState([]);
-	const [damageResistances, setDamageResistances] = useState([]);
-	const [damageImmunities, setDamageImmunities] = useState([]);
+	const [conditionImmunities, setConditionImmunities] = useState(defaultData.conditionImmunities);
+	const [damageResistances, setDamageResistances] = useState(defaultData.damageResistances);
+	const [damageImmunities, setDamageImmunities] = useState(defaultData.damageImmunities);
+
+	useEffect(() => {
+		onChange({
+			conditionImmunities:conditionImmunities,
+			damageResistances:damageResistances,
+			damageImmunities:damageImmunities
+		})
+	}, [onChange, damageImmunities, damageResistances, conditionImmunities])
 
 	function toggleDamageResistance(name, add) {
 		if (add) {
@@ -45,14 +53,17 @@ export default function ImmunitiesResistances({editing}) {
 			}
 		}
 	}
+
+	
+
 	if (editing) {
 		return (
-			<div className="w-full">
+			<div className="w-full statBlock">
 				<p>Damage Resistances:</p>
 				<div name="damageResistances" className="toggleArea">
 					{DAMAGE_TYPES.map(damageType => {
 						return(
-						<label className="toggleButton">
+						<label className="toggleButton" key={damageType}>
 							<input
 								type="checkbox"
 								name={damageType}
@@ -68,10 +79,11 @@ export default function ImmunitiesResistances({editing}) {
 				<div name="damageImmunities" className="toggleArea">
 					{DAMAGE_TYPES.map(damageType => {
 						return(
-						<label className="toggleButton">
+						<label className="toggleButton" key={damageType}>
 							<input
 								type="checkbox"
 								name={damageType}
+								key={damageType}
 								checked={damageImmunities.includes(damageType)}
 								onChange={e => toggleDamageImmunity(e.target.name, e.target.checked)}
 							/>
@@ -84,9 +96,10 @@ export default function ImmunitiesResistances({editing}) {
 				<div name="conditionImmunities" className="toggleArea">
 					{CONDITIONS.map(condition => {
 						return(
-						<label className="toggleButton">
+						<label className="toggleButton" key={condition}>
 							<input
 								type="checkbox"
+								key={condition}
 								name={condition}
 								checked={conditionImmunities.includes(condition)}
 								onChange={e => toggleConditionImmunity(e.target.name, e.target.checked)}
@@ -99,8 +112,11 @@ export default function ImmunitiesResistances({editing}) {
 			</div>
 		)
 	} else {
+		if (conditionImmunities.length == 0 && damageResistances.length == 0 && damageImmunities.length == 0) {
+			return <></>
+		}
 		return (
-			<div className="flexColumn">
+			<div className="flexColumn statBlock">
 				{damageResistances.length > 0 && <p className="text-left"><b>Damage Resistances:</b> {damageResistances.join(", ")}</p>}
 				{damageImmunities.length > 0 && <p className="text-left"><b>Damage Immunities:</b> {damageImmunities.join(", ")}</p>}
 				{conditionImmunities.length > 0 && <p className="text-left"><b>Condition Immunities:</b> {conditionImmunities.join(", ")}</p>}

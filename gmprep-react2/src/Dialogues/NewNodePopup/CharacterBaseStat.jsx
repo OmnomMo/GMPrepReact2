@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GetAbilityModifier, GetModifierColor} from "../../Globals/Skills";
 
-export default function CharacterBaseStat({ defaultValue, label, editeable, doneEditing, showModifier = false}) {
+export default function CharacterBaseStat({ defaultValue, label, editeable, doneEditing, onChange, showModifier = false}) {
 	const [currentValue, setCurrentValue] = useState(defaultValue);
+
+	useEffect(() => {
+		onChange(label, currentValue);
+	}, [onChange, label, currentValue])
 
 	let modifier = GetAbilityModifier(currentValue);
 
@@ -10,7 +14,7 @@ export default function CharacterBaseStat({ defaultValue, label, editeable, done
 		return (
 			<>
 				<div style={{ display: "flex", flexDirection: "row" }}>
-					<p className="text-bold w-12 text-left">{label}</p>
+					<p className="text-bold w-12 text-left">{label}: </p>
 					<input
 						type="text"
 						inputMode="numeric"
@@ -30,7 +34,7 @@ export default function CharacterBaseStat({ defaultValue, label, editeable, done
 	} else {
 		return (
 			<div style={{ display: "flex", flexDirection: "row" }}>
-				<p className="text-bold w-12 text-left">{label}</p>
+				<p className="text-bold w-12 text-left">{label}: </p>
 				<p className="w-4">{currentValue}</p>
 				{showModifier && 
 					<p className="ml-2" style={{color:GetModifierColor(modifier)}}>

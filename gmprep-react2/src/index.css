@@ -138,6 +138,10 @@ dialog {
 	background-color: #213547;
 }
 
+input:checked+ .toggleBG img {
+	filter:invert(100%);
+}
+
 input:checked+.toggleBG {
 	background-color: greenyellow;
 	color: #14151a;
