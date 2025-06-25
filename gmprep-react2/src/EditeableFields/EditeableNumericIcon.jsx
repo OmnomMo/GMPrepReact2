@@ -11,7 +11,7 @@ export default function EditeableNumericicon({ defaultValue, iconSource, onUpdat
 	if (!editing && !editeableOverride) {
 		return (
 			<>
-				{value > 0 &&
+				{value != "0" &&
 					<div style={{ display: "flex", flexDirection: "row" }} className="w-full">
 						<img src={iconSource} />
 						<p className=" w-10 text-center">{value}</p>

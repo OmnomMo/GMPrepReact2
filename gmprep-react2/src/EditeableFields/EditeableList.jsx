@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 //Dynamic list of generic elements (provided as children)
 //Children must implement defaultContent (generic object of default data), and must call functions called onUpdate and onDelete that are
 //passed to them as props
@@ -10,22 +10,29 @@ export default function EditeableList ({children, defaultElement, header, onChan
 	const [elements, setElements] = useState([]);
 	const [maxId, setMaxId] = useState(0);
 
-	useEffect(() => {
-		onChange(listData.current)
-	}, [listData, onChange]);
+
 
 	function updateListData(id, value) {
-		let tempData = listData.current;
-		tempData[id] = value;
-		listData.current = tempData;
+		listData.current[id] = value;
+		let listArray = [];
+		let keys = Object.keys(listData.current);
+		keys.map(key => {
+			//FIXME: Sometimes undefined keys sneak into the data when editing entries;
+			if (key) {
+				listArray.push(listData.current[key]);
+			}
+		});
+		onChange(listArray);
 	}
 
 	function addElement() {
 		//clone default element
 		let newElement = {...defaultElement};
-		newElement.id = maxId;
+		newElement['id'] = maxId;
+
 		//add new element to list
 		setElements([...elements, newElement])
+
 		//increment max id
 		setMaxId((prev) => prev + 1);
 	}

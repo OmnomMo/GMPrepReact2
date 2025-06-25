@@ -7,7 +7,7 @@ export default function AbilityDescription({ defaultContent, onUpdate, onDelete,
 	const [abilityDescription, setAbilityDescription] = useState(defaultContent.abilityDescription);
 
 	useEffect(() => {
-		onChange({name:abilityName, desciptions:abilityDescription});
+		onChange({Name:abilityName, Description:abilityDescription});
 	}, [abilityName, abilityDescription, onChange])
 
 	function doneEditing() {

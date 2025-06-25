@@ -9,12 +9,12 @@ export default function LocationInfoFormComponent({defaultLocationData, onChange
 		let tempData = locationData.current;
 		tempData[key] = value;
 		locationData.current = tempData;
-		onChange(locationData);
+		onChange(locationData.current);
 	}
 
 	return (
 		<>
-		<EditeableMultiline labelName={"Location Info"} defaultValue={"Inhabitants: "} onChanged={newValue => {updateLocationData("locationInfo", newValue);}}/>
+		<EditeableMultiline labelName={"Location Info"} defaultValue={"Inhabitants: "} onChanged={newValue => {updateLocationData("Population", newValue);}}/>
 		</>
 	)
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CharacterInfoFormComponent from "./CharacterInfoFormComponent";
 import LocationInfoFormComponent from "./LocationInfoFormComponent";
 import EditeableText from "../../EditeableFields/EditeableText";
@@ -18,11 +18,17 @@ export default function NewNode() {
 	const [isCharacter, setIsCharacter] = useState(false);
 	const [isLocation, setIsLocation] = useState(false);
 
-	//Push data into nodeData at first render 
-	useEffect(() => {
-		nodeData.isCharacter = isCharacter;
-		nodeData.isLocation = isLocation;
-	}, [])
+
+	function postNode(data) {
+		const requestOptions = {
+			method: 'POST',
+			headers: {'Content-Type': 'application/json'},
+			body: JSON.stringify(data)
+		};
+		fetch('http://localhost:5140/Nodes/Update', requestOptions)
+			.then(response => response.json)
+			.then(data => console.log(data));
+	}
 
 	return <div className="w-full ">
 		<div className="flexRow  mb-4">
@@ -33,7 +39,6 @@ export default function NewNode() {
 					name="isCharacter"
 					checked={isCharacter}
 					onChange={e => {
-						nodeData.isCharacter = e.target.checked;
 						setIsCharacter(e.target.checked);
 					}}
 				/>
@@ -45,7 +50,6 @@ export default function NewNode() {
 					name="isLocation"
 					checked={isLocation}
 					onChange={e => {
-						nodeData.isLocation = e.target.checked;
 						setIsLocation(e.target.checked);
 					}}
 				/>
@@ -55,13 +59,13 @@ export default function NewNode() {
 		<div>
 			<IconPicker
 				onChanged={(dialogResult) => {
-					nodeData.icon = dialogResult.icon;
-					nodeData.iconSize = dialogResult.iconSize; }}
+					nodeData.MapIconPath = dialogResult.icon;
+					nodeData.MapIconSize = dialogResult.iconSize; }}
 				defaultIcon="well.png"
 			/>
 		</div>
 		<div>
-			<EditeableHeader defaultValue="Default Name" onChanged={(newText) => nodeData.displayName = newText} />
+			<EditeableHeader defaultValue="Default Name" onChanged={(newText) => nodeData.Name = newText} />
 		</div>
 		{isCharacter && <div>
 			<TypeAlignmentComponent
@@ -70,26 +74,29 @@ export default function NewNode() {
 				defaultAlignment={"Neutral Good"}
 				onChange={values => {
 					if (!("characterData" in nodeData)) {
-						nodeData.characterData = {};
+						nodeData.CreatureInfo = {};
 					}
-					nodeData.characterData.type = values.type;
-					nodeData.characterData.size = values.size;
-					nodeData.characterData.alignment = values.alignment;
+					nodeData.CreatureInfo.CreatureType = values.type;
+					nodeData.CreatureInfo.Size = values.size;
+					nodeData.CreatureInfo.Alignment = values.alignment;
 				}}/>
 		</div>}
 		<div>
-			<EditeableMultiline defaultValue="" onChanged={(newDescription) => nodeData.description = newDescription} labelName="Description" />
+			<EditeableMultiline defaultValue="" onChanged={(newDescription) => nodeData.Description = newDescription} labelName="Description" />
 		</div>
 
-		{isCharacter && <CharacterInfoFormComponent defaultCharacterData={{}} onChanged={newData => {nodeData.characterData = {...nodeData.characterData, ...newData};}}/>}
-		{isLocation && <LocationInfoFormComponent defaultLocationData={{}} onChange={newData => {nodeData.locationData = newData;}}/>}
-		<EditeableList defaultElement={{ skill: "None", difficulty: "10", description: "Description" }} header="Secrets" onChange={(newData) => {nodeData.secrets = newData;}} >
+		{isCharacter && <CharacterInfoFormComponent defaultCharacterData={{}} onChanged={newData => {nodeData.CreatureInfo = {...nodeData.CreatureInfo, ...newData};}}/>}
+		{isLocation && <LocationInfoFormComponent defaultLocationData={{}} onChange={newData => {nodeData.LocationInfo = newData;}}/>}
+		<EditeableList defaultElement={{ skill: "None", difficulty: "10", description: "Description" }} header="Secrets" onChange={(newData) => {nodeData.Secrets = newData;}} >
 			<Secret />
 		</EditeableList>
 
 		<div className="p-3 bottom-0 left-2 right-5 ">
 			<button className="mr-10">Cancel</button>
-			<button onClick={() => console.log(nodeData)}>Submit</button>
+			<button onClick={() => {
+				console.log(JSON.stringify(nodeData));
+				postNode(nodeData);
+			}}>Submit</button>
 		</div>
 	</div>
 

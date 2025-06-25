@@ -35,13 +35,13 @@ export default function CharacterBaseStatsFormComponent({defaultStatsData, onCha
 		</div>
 
 		<div id="statblock" className="grid grid-cols-2 gap-2 statBlock">
-			<CharacterBaseStat label="HP" defaultValue={20} editeable={editingStats} doneEditing={doneEditingStats} onChange={updateStatsData}/>
-			<CharacterBaseStat label="AC" defaultValue={10} editeable={editingStats} doneEditing={doneEditingStats} onChange={updateStatsData}/>
+			<CharacterBaseStat label="HP" defaultValue={"20"} editeable={editingStats} doneEditing={doneEditingStats} onChange={updateStatsData}/>
+			<CharacterBaseStat label="AC" defaultValue={"10"} editeable={editingStats} doneEditing={doneEditingStats} onChange={updateStatsData}/>
 			{ABILITIES.map(ability =>
 				<CharacterBaseStat
 					label={ability}
 					key={ability}
-					defaultValue={10}
+					defaultValue={"10"}
 					editeable={editingStats}
 					doneEditing={doneEditingStats}
 					onChange={updateStatsData}
@@ -57,42 +57,46 @@ export default function CharacterBaseStatsFormComponent({defaultStatsData, onCha
 					damageImmunities:[],
 					conditionImmunities:[]
 				}}
-				onChange={(newData) => {updateStatsData("resistances", newData)}}
+				onChange={(newData) => {
+					updateStatsData("DamageResistances", newData.DamageResistances);
+					updateStatsData("DamageImmunities", newData.DamageImmunities);
+					updateStatsData("ConditionImmunities", newData.ConditionImmunities);
+				}}
 			/>
 		</div>
 		<div className="statBlock">
-		<EditeableText defaultValue={1} labelName="CR" onChanged={(newValue) => {updateStatsData("CR", newValue)}}/>
+		<EditeableText defaultValue={"1"} labelName="CR" onChanged={(newValue) => {updateStatsData("CR", newValue)}}/>
 		</div>
 		<div id="speedblock" className="statBlock flexRow">
 			<EditeableNumericicon
-				defaultValue={30}
+				defaultValue={"30"}
 				iconSource={"/icons/ui/walk_icon.png"}
 				showEditIcon={false}
 				editeableOverride={editingSpeed}
 				onUpdate={onUpdateSpeed}
-				onChange={(newValue) => {updateStatsData("walkingSpeed", newValue)}}
+				onChange={(newValue) => {updateStatsData("Speed", newValue)}}
 			/>
 			<EditeableNumericicon
-				defaultValue={0}
+				defaultValue={"0"}
 				iconSource={"/icons/ui/swim_icon.png"}
 				showEditIcon={false}
 				editeableOverride={editingSpeed}
-				onChange={(newValue) => {updateStatsData("swimmingSpeed", newValue)}}
+				onChange={(newValue) => {updateStatsData("SpeedSwimming", newValue)}}
 				onUpdate={onUpdateSpeed}
 			/>
 			<EditeableNumericicon
-				defaultValue={0}
+				defaultValue={"0"}
 				iconSource={"/icons/ui/fly_icon.png"}
 				showEditIcon={false}
 				editeableOverride={editingSpeed}
-				onChange={(newValue) => {updateStatsData("flyingSpeed", newValue)}}
+				onChange={(newValue) => {updateStatsData("SpeedFlying", newValue)}}
 				onUpdate={onUpdateSpeed}
 			/>
 			{(!editingSpeed) && <img src="/icons/ui/wrench_icon.png" onClick={ () => setEditingSpeed(true)} />}
 			{editingSpeed && <img src="/icons/ui/check_icon.png" onClick={() => setEditingSpeed(false)} />}
 		</div>
-		<EditeableMultiline defaultValue="Common" labelName="Languages" rows={2} onChanged={(newValue) => {updateStatsData("languages", newValue)}}/>
-		<EditeableMultiline defaultValue="passive Perception 10" labelName="Senses" rows={2} onChanged={newValue => {updateStatsData("senses", newValue)}}/>
+		<EditeableMultiline defaultValue="Common" labelName="Languages" rows={2} onChanged={(newValue) => {updateStatsData("Languages", newValue)}}/>
+		<EditeableMultiline defaultValue="passive Perception 10" labelName="Senses" rows={2} onChanged={newValue => {updateStatsData("Senses", newValue)}}/>
 		</>
 	)
 }

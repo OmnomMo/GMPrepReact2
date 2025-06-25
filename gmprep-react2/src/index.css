@@ -3,7 +3,6 @@
 	line-height: 1.5;
 	font-weight: 400;
 
-	color-scheme: dark;
 	color: rgba(255, 255, 255, 0.87);
 	background-color: #242424;
 
@@ -149,19 +148,4 @@ input:checked+.toggleBG {
 
 input:focus+.toggleBG {
 	box-shadow: 0 0 1px #535bf2;
-}
-
-@media (prefers-color-scheme: light) {
-	:root {
-		color: #213547;
-		background-color: #14151a;
-	}
-
-	a:hover {
-		color: #747bff;
-	}
-
-	button {
-		background-color: #f9f9f9;
-	}
 }

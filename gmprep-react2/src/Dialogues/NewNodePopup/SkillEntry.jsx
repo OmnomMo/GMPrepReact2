@@ -9,7 +9,7 @@ export default function SkillEntry({ defaultContent, onDelete, onUpdate, onChang
 	const [bonus, setBonus] = useState(defaultContent.bonus);
 
 	useEffect(() => {
-		onChange({skill:selectedSkill, bonus:bonus});
+		onChange({SkillName:selectedSkill, Bonus:bonus});
 	}, [selectedSkill, bonus, onChange])
 
 	function doneEditing() {

@@ -10,7 +10,7 @@ export default function Secret({defaultContent, onDelete, onUpdate, onChange}) {
 	const [selectedDifficulty, setSelectedDifficulty] = useState(defaultContent.difficulty);
 
 	useEffect(() => {
-		onChange({skill:selectedSkill, description:descriptionText, difficulty:selectedDifficulty});
+		onChange({TestSkill:selectedSkill, Description:descriptionText, TestDifficulty:selectedDifficulty});
 	}, [selectedSkill, selectedDifficulty, descriptionText, onChange])
 
 	function stopEditing() {

@@ -10,9 +10,9 @@ export default function ImmunitiesResistances({defaultData, onChange, editing}) 
 
 	useEffect(() => {
 		onChange({
-			conditionImmunities:conditionImmunities,
-			damageResistances:damageResistances,
-			damageImmunities:damageImmunities
+			ConditionImmunities:conditionImmunities,
+			DamageResistances:damageResistances,
+			DamageImmunities:damageImmunities
 		})
 	}, [onChange, damageImmunities, damageResistances, conditionImmunities])
 
