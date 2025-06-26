@@ -63,6 +63,7 @@ function IconSelectorPopup({ setDialogResult, defaultIconSize, defaultIcon}) {
 								(icon) => <img className="deselected" id={icon.Name} key={icon.Name} src={"/icons/default/" + icon.Name} height="64" width="64" onClick={iconSelected} />)
 						}
 					</div>
+				</div>
 					<p>Icon Size:</p>
 					<select value={iconSize} name="mapIconSize" onChange={(e) => {
 						setIconSize(e.target.value);
@@ -71,7 +72,6 @@ function IconSelectorPopup({ setDialogResult, defaultIconSize, defaultIcon}) {
 						<option value="64">64</option>
 						<option value="96">96</option>
 					</select>
-				</div>
 
 			</form>
 		</>

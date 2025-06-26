@@ -21,6 +21,33 @@
 	display: flex;
 	flex-direction: column;
 }
+.sidebar {
+	top: 0px;
+	position: fixed;
+	z-index: 40;
+	height: 100vh;
+	background-color: #1b1b1b;
+	display: flex;
+
+}
+
+.leftSide {
+	left: 0px;
+}
+
+.rightSide {
+	right: 0px;
+}
+
+.sidebarHandle {
+	background-color: #303030;
+	position: absolute;
+	height: 100vh;
+	width: 7px;
+	cursor: ew-resize;
+}
+
+
 
 .statBlock {
 	background-color: #e4e4e40c;
@@ -104,7 +131,9 @@ button:focus-visible {
 }
 
 dialog {
-	background-color: rgb(30, 30, 31);
+	color: white;
+	background-color: rgb(27, 27, 27);
+	padding: 10px;
 }
 
 .toggleArea {

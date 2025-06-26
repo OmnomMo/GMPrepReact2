@@ -8,6 +8,8 @@
   text-align: center;
 }
 
+
+
 .Noselect * {
 	-webkit-user-select: none;
 	/* Safari */

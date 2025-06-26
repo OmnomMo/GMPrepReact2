@@ -18,7 +18,7 @@ export default function CharacterBaseStat({ defaultValue, label, editeable, done
 					<input
 						type="text"
 						inputMode="numeric"
-						maxLength={2}
+						maxLength={3}
 						className="w-10 text-center"
 						defaultValue={currentValue}
 						onChange={e => setCurrentValue(e.target.value)}

@@ -5,7 +5,7 @@ const SIDEBAR_MAX_WIDTH = 1000;
 
 
 //Sidebar with variable (user defined width)
-export default function SidebarBase({children}) {
+export default function SidebarBase({children, rightSide=true}) {
 	const [sidebarWidth, setSidebarWidth] = useState(450);
 	const isResized = useRef(false);
 
@@ -18,7 +18,8 @@ export default function SidebarBase({children}) {
 			}
 
 			setSidebarWidth((previousWidth) => {
-				let newWidth = previousWidth + e.movementX / -2;
+				let dirFactor = rightSide ? -2 : 2;
+				let newWidth = previousWidth + e.movementX / dirFactor;
 				return Math.max( SIDEBAR_MIN_WIDTH, Math.min(SIDEBAR_MAX_WIDTH, newWidth));
 			});
 		});
@@ -34,9 +35,12 @@ export default function SidebarBase({children}) {
 		return false;
 	}
 
+	let sidebarDir = rightSide ? "sidebar rightSide" : "sidebar leftSide";
+	let handleDir = rightSide ? "sidebarHandle leftSide" : "sidebarHandle rightSide";
+
 	return <>
-		<aside id="sidebar" className="fixed top-0 right-0 z-40 h-screen bg-gray-900 flex " style={{ width: `${sidebarWidth / 16}rem` }}>
-			<div id="resizeHandle" className="bg-gray-400 relative h-screen left-0 w-2 cursor-ew-resize" onMouseDown={() => {
+		<aside id="sidebar" className={sidebarDir} style={{ width: `${sidebarWidth / 16}rem`}}>
+			<div id="resizeHandle" className={handleDir} onMouseDown={() => {
 				//disables selection of text until mouse up
 				document.addEventListener('selectstart', onStartSelect)
 				isResized.current = true;
