@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 export default function AbilityDescription({ defaultContent, onUpdate, onDelete, onChange}) {
 
 	const [editing, setEditing] = useState(false);
-	const [abilityName, setAbilityName] = useState(defaultContent.abilityName);
-	const [abilityDescription, setAbilityDescription] = useState(defaultContent.abilityDescription);
+	const [abilityName, setAbilityName] = useState(defaultContent.name);
+	const [abilityDescription, setAbilityDescription] = useState(defaultContent.description);
 
 	useEffect(() => {
 		onChange({Name:abilityName, Description:abilityDescription});

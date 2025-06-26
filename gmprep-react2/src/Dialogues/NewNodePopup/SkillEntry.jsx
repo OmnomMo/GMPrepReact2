@@ -5,7 +5,7 @@ import { SKILLS } from "../../Globals/Skills";
 export default function SkillEntry({ defaultContent, onDelete, onUpdate, onChange}) {
 
 	const [editing, setEditing] = useState(false);
-	const [selectedSkill, setSelectedSkill] = useState(defaultContent.skill);
+	const [selectedSkill, setSelectedSkill] = useState(defaultContent.skillName);
 	const [bonus, setBonus] = useState(defaultContent.bonus);
 
 	useEffect(() => {

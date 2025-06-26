@@ -2,12 +2,12 @@ import React, { useRef, useState } from "react";
 //Dynamic list of generic elements (provided as children)
 //Children must implement defaultContent (generic object of default data), and must call functions called onUpdate and onDelete that are
 //passed to them as props
-export default function EditeableList ({children, defaultElement, header, onChange}) {
+export default function EditeableList ({children, defaultData, defaultElement, header, onChange}) {
 
 
 	const listData = useRef({});
 
-	const [elements, setElements] = useState([]);
+	const [elements, setElements] = useState(defaultData);
 	const [maxId, setMaxId] = useState(0);
 
 

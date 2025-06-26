@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import CharacterInfoFormComponent from "./CharacterInfoFormComponent";
 import LocationInfoFormComponent from "./LocationInfoFormComponent";
 import EditeableText from "../../EditeableFields/EditeableText";
@@ -8,15 +8,16 @@ import EditeableHeader from "../../EditeableFields/EditeableHeader";
 import TypeAlignmentComponent from "./TypeAlignmentComponent";
 import EditeableList from "../../EditeableFields/EditeableList";
 import Secret from "./Secret";
+import { NodeContext } from "../../Contexts";
 
 
 
 export default function NewNode() {
 
 	const [nodeData] = useState({});
-
-	const [isCharacter, setIsCharacter] = useState(false);
-	const [isLocation, setIsLocation] = useState(false);
+	const {currentNodeData, setCurrentNodeData} = useContext(NodeContext);
+	const [isCharacter, setIsCharacter] = useState(currentNodeData?.creatureInfo != null);
+	const [isLocation, setIsLocation] = useState(currentNodeData?.locationInfo != null);
 
 
 	function postNode(data) {
@@ -32,7 +33,6 @@ export default function NewNode() {
 
 	return <div className="w-full ">
 		<div className="flexRow  mb-4">
-
 			<label className="toggleButton m-2">
 				<input
 					type="checkbox"
@@ -61,17 +61,17 @@ export default function NewNode() {
 				onChanged={(dialogResult) => {
 					nodeData.MapIconPath = dialogResult.icon;
 					nodeData.MapIconSize = dialogResult.iconSize; }}
-				defaultIcon="well.png"
+				defaultIcon={currentNodeData?.mapIconPath ?? "well.png"}
 			/>
 		</div>
 		<div>
-			<EditeableHeader defaultValue="Default Name" onChanged={(newText) => nodeData.Name = newText} />
+			<EditeableHeader defaultValue={currentNodeData?.name ?? "Name"} onChanged={(newText) => nodeData.Name = newText} />
 		</div>
 		{isCharacter && <div>
 			<TypeAlignmentComponent
-				defaultSize="Medium"
-				defaultType="Humanoid"
-				defaultAlignment={"Neutral Good"}
+				defaultSize={currentNodeData?.creatureInfo?.size ?? "Medium"}
+				defaultType={currentNodeData?.creatureInfo?.creatureType ?? "Humanoid"}
+				defaultAlignment={currentNodeData?.creatureInfo?.alignment ?? "Neutral Good"}
 				onChange={values => {
 					if (!("characterData" in nodeData)) {
 						nodeData.CreatureInfo = {};
@@ -82,12 +82,12 @@ export default function NewNode() {
 				}}/>
 		</div>}
 		<div>
-			<EditeableMultiline defaultValue="" onChanged={(newDescription) => nodeData.Description = newDescription} labelName="Description" />
+			<EditeableMultiline defaultValue={currentNodeData?.description ?? ""} onChanged={(newDescription) => nodeData.Description = newDescription} labelName="Description" />
 		</div>
 
-		{isCharacter && <CharacterInfoFormComponent defaultCharacterData={{}} onChanged={newData => {nodeData.CreatureInfo = {...nodeData.CreatureInfo, ...newData};}}/>}
-		{isLocation && <LocationInfoFormComponent defaultLocationData={{}} onChange={newData => {nodeData.LocationInfo = newData;}}/>}
-		<EditeableList defaultElement={{ skill: "None", difficulty: "10", description: "Description" }} header="Secrets" onChange={(newData) => {nodeData.Secrets = newData;}} >
+		{isCharacter && <CharacterInfoFormComponent defaultCharacterData={currentNodeData?.creatureInfo ?? {}} onChanged={newData => {nodeData.CreatureInfo = {...nodeData.CreatureInfo, ...newData};}}/>}
+		{isLocation && <LocationInfoFormComponent defaultLocationData={currentNodeData?.locationInfo ?? {}} onChange={newData => {nodeData.LocationInfo = newData;}}/>}
+		<EditeableList defaultData={currentNodeData?.secrets ?? []} defaultElement={{ skill: "None", difficulty: "10", description: "Description" }} header="Secrets" onChange={(newData) => {nodeData.Secrets = newData;}} >
 			<Secret />
 		</EditeableList>
 

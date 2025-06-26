@@ -18,11 +18,12 @@ export default function CharacterInfoFormComponent({defaultCharacterData, onChan
 	}
 
 	return <>
-		<CharacterBaseStatsFormComponent defaultCharacterData={{}} onChange={newData => {
+		<CharacterBaseStatsFormComponent defaultStatsData={defaultCharacterData} onChange={newData => {
 			characterData.current = {...characterData.current, ...newData};
 			onChanged(characterData.current)
 		}}/>
 		<EditeableList
+			defaultData ={defaultCharacterData?.skills ?? []}
 			defaultElement={{skill:"Stealth", bonus:"2"}}
 			header="Skills"
 			onChange={newData => {updateCharacterData("Skills", newData);}}
@@ -30,6 +31,7 @@ export default function CharacterInfoFormComponent({defaultCharacterData, onChan
 			<SkillEntry />
 		</EditeableList>
 		<EditeableList
+			defaultData ={defaultCharacterData?.actions ?? []}
 			defaultElement={{abilityName:"Ability", abilityDescription:"Description"}}
 			header="Feats and Actions:"
 			onChange={newData => {updateCharacterData("Actions", newData);}}

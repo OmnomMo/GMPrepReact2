@@ -4,10 +4,10 @@ import {SKILLS} from "../../Globals/Skills";
 export default function Secret({defaultContent, onDelete, onUpdate, onChange}) {
 
 	const [editing, setEditing] = useState(false);
-	const [selectedSkill, setSelectedSkill] = useState(defaultContent.skill);
+	const [selectedSkill, setSelectedSkill] = useState(defaultContent.testSkill);
 	const [descriptionText, setDescriptionText] = useState(defaultContent.description);
 	const [previousDescriptionText, setPreviousDescriptionText] = useState(descriptionText);
-	const [selectedDifficulty, setSelectedDifficulty] = useState(defaultContent.difficulty);
+	const [selectedDifficulty, setSelectedDifficulty] = useState(defaultContent.testDifficulty);
 
 	useEffect(() => {
 		onChange({TestSkill:selectedSkill, Description:descriptionText, TestDifficulty:selectedDifficulty});
@@ -24,8 +24,8 @@ export default function Secret({defaultContent, onDelete, onUpdate, onChange}) {
 			<div className="statBlock flexRow">
 
 				<div className="w-full flexCol">
-					{(defaultContent && defaultContent.skill != "None") && 
-						<p className="text-left w-full font-bold">{defaultContent.skill + " (" + defaultContent.difficulty + "):"}</p>
+					{(defaultContent && defaultContent.testSkill != "None") && 
+						<p className="text-left w-full font-bold">{defaultContent.testSkill + " (" + defaultContent.testDifficulty + "):"}</p>
 					}
 					<p className="text-left whitespace-pre-wrap">{defaultContent.description}</p>
 				</div>

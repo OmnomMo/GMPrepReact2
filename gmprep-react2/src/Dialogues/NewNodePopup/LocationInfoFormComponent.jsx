@@ -14,7 +14,7 @@ export default function LocationInfoFormComponent({defaultLocationData, onChange
 
 	return (
 		<>
-		<EditeableMultiline labelName={"Location Info"} defaultValue={"Inhabitants: "} onChanged={newValue => {updateLocationData("Population", newValue);}}/>
+		<EditeableMultiline labelName={"Location Info"} defaultValue={defaultLocationData.population ?? "Inhabitants: "} onChanged={newValue => {updateLocationData("Population", newValue);}}/>
 		</>
 	)
 }
