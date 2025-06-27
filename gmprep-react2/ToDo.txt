@@ -1,0 +1,17 @@
+- DONE Delete nodes
+	- DONE confirmation dialog
+
+- Update nodes when they already exist
+
+- Place nodes on map background
+	- ToDo: design system for everything
+
+- Campaign and Map Handling
+
+
+
+
+BUGS:
+- FIXED new secrets say "undefined"
+- should switch currentNOde to new node after adding it
+- should switch back to default node when pressing cancel or plus icon

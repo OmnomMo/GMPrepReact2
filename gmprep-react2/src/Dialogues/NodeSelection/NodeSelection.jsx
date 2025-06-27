@@ -1,5 +1,8 @@
 import { useQuery  } from "@tanstack/react-query"
+import { defaultNode } from "../../Globals/DefaultNode";
+import { NodeContext } from "../../Contexts";
 import NodeButton from "./NodeButton";
+import { useContext, useRef } from "react";
 
 
 async function getAllNodes() {
@@ -14,15 +17,17 @@ async function getAllNodes() {
 
 export default function NodeSelection() {
 
+	const keyIteration = useRef(0);
+	const {setCurrentNodeData} = useContext(NodeContext);
 	//const queryClient = useQueryClient();
 
-	const {
+		const {
 		status,
 		error,
 		data: nodes,
 	} = useQuery({
 		queryKey: ['AllNodes'],
-		queryFn: getAllNodes
+		queryFn: getAllNodes,
 	})
 
 	if (status == "error") {
@@ -35,10 +40,12 @@ export default function NodeSelection() {
 	}
 
 	if (status == "success") {
+		keyIteration.current += 1;
 		console.log(nodes)
 		return (
-			<div>
-				{nodes.map(node => <NodeButton defaultNodeData={node} key={node.name}/>)}
+			<div className="w-full flex flex-wrap" id={"NodeSelection" + keyIteration.current} key={"NodeSelection" + keyIteration.current}>
+				{nodes.map(node => <NodeButton defaultNodeData={node} key={node.id + node.name}/>)}
+				<img src="/icons/ui/plus_icon.png" width={64} height={64} className="m-2" onClick={() => {setCurrentNodeData({...defaultNode})}} />
 			</div>
 		)
 	}

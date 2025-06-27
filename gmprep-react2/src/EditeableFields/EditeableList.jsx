@@ -14,6 +14,10 @@ export default function EditeableList ({children, defaultData, defaultElement, h
 
 	function updateListData(id, value) {
 		listData.current[id] = value;
+		callListDataOnChanged();
+	}
+
+	function callListDataOnChanged() {
 		let listArray = [];
 		let keys = Object.keys(listData.current);
 		keys.map(key => {
@@ -33,6 +37,7 @@ export default function EditeableList ({children, defaultData, defaultElement, h
 		//add new element to list
 		setElements([...elements, newElement])
 
+		updateListData(maxId, newElement)
 		//increment max id
 		setMaxId((prev) => prev + 1);
 	}
@@ -47,6 +52,7 @@ export default function EditeableList ({children, defaultData, defaultElement, h
 		delete tempData[id];
 		
 		listData.current = tempData;
+		callListDataOnChanged();
 
 
 	}

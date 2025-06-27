@@ -5,7 +5,7 @@ const SIDEBAR_MAX_WIDTH = 1000;
 
 
 //Sidebar with variable (user defined width)
-export default function SidebarBase({children, rightSide=true}) {
+export default function SidebarBase({children, rightSide=true, minWidth = SIDEBAR_MIN_WIDTH, maxWidth = SIDEBAR_MAX_WIDTH}) {
 	const [sidebarWidth, setSidebarWidth] = useState(450);
 	const isResized = useRef(false);
 
@@ -20,7 +20,7 @@ export default function SidebarBase({children, rightSide=true}) {
 			setSidebarWidth((previousWidth) => {
 				let dirFactor = rightSide ? -2 : 2;
 				let newWidth = previousWidth + e.movementX / dirFactor;
-				return Math.max( SIDEBAR_MIN_WIDTH, Math.min(SIDEBAR_MAX_WIDTH, newWidth));
+				return Math.max( minWidth, Math.min(maxWidth, newWidth));
 			});
 		});
 	}, []);

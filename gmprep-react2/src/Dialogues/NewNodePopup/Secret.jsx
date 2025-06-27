@@ -15,7 +15,7 @@ export default function Secret({defaultContent, onDelete, onUpdate, onChange}) {
 
 	function stopEditing() {
 		setEditing(false);
-		onUpdate(defaultContent.id, { id: defaultContent.id, skill: selectedSkill, description: descriptionText, difficulty: selectedDifficulty });
+		onUpdate(defaultContent.id, { id: defaultContent.id, testSkill: selectedSkill, description: descriptionText, testDifficulty: selectedDifficulty });
 	}
 
 	if (!editing) {
