@@ -1,10 +1,14 @@
 - DONE Delete nodes
 	- DONE confirmation dialog
 
-- Update nodes when they already exist
+- DONE Update nodes when they already exist
 
 - Place nodes on map background
-	- ToDo: design system for everything
+	- DONE show temp map in Center
+	- Move map with mouse down
+		- DONE basic movement
+		- Edge case: handle map source image smaller than map width
+	- Zoom map with scrollwheel
 
 - Campaign and Map Handling
 
@@ -13,5 +17,9 @@
 
 BUGS:
 - FIXED new secrets say "undefined"
-- should switch currentNOde to new node after adding it
-- should switch back to default node when pressing cancel or plus icon
+- FIXED should switch currentNOde to new node after adding it
+- FIXED should switch back to default node when pressing cancel or plus icon
+
+
+Polish:
+- Warning when discarding unsaved changes

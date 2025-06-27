@@ -18,7 +18,7 @@ async function postNode(data) {
 		body: JSON.stringify(data.data)
 	};
 	return fetch('http://localhost:5140/Nodes/Update', requestOptions)
-		.then(response => response.json);
+		.then(response => response.json());
 }
 
 async function deleteNode(data) {
@@ -27,14 +27,13 @@ async function deleteNode(data) {
 		headers: {'Content-Type': 'application/json'},
 		body: JSON.stringify(data.data)
 	}
-	return fetch('http://localhost:5140/Nodes/Delete', requestOptions)
-		.then(response => response.json);
+	return fetch('http://localhost:5140/Nodes/Delete', requestOptions);
 }
 
 export default function NewNode() {
 
 	const remountCount = useRef(0);
-	const [localNodeData] = useState({});
+	const [localNodeData, setLocalNodeData] = useState({});
 	const {currentNodeData, setCurrentNodeData} = useContext(NodeContext);
 	const [isCharacter, setIsCharacter] = useState(currentNodeData?.creatureInfo != null);
 	const [isLocation, setIsLocation] = useState(currentNodeData?.locationInfo != null);
@@ -42,13 +41,17 @@ export default function NewNode() {
 
 	//remount when current node data changes
 	useEffect(() => {
+		//reset all local data overrides and reload data
+		setLocalNodeData({});
+		//Remount Form
 		remountCount.current += 1;
 	}, [currentNodeData]);
 
 	const updateNodeMutation = useMutation({
 		mutationFn: postNode,
-		onSuccess: () => {
+		onSuccess: (data) => {
 			queryClient.invalidateQueries({queryKey: ['AllNodes']});
+			setCurrentNodeData({...data});
 		}
 	})
 
