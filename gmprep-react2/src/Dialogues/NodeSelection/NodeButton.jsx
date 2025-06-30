@@ -10,7 +10,8 @@ export default function NodeButton({defaultNodeData}) {
 			src={"/icons/default/" + nodeData.mapIconPath}
 			width={64}
 			height={64}
-			className="m-2"
+			className="unselectable m-2"
+			draggable="false"
 			onClick={() => setCurrentNodeData(nodeData)}
 		/>
 	</>)

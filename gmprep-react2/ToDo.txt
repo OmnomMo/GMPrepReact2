@@ -16,6 +16,9 @@
 
 
 BUGS:
+- Editing a listentry (for example an action) sometimes adds it to the EditableList entries a second time under the index "undefined"
+- FIXED Skills do not store their value in the database when being udpated / submitted
+- FIXED Deleting ListItems in a nodeentry and updating it on the database does not work correctly
 - FIXED new secrets say "undefined"
 - FIXED should switch currentNOde to new node after adding it
 - FIXED should switch back to default node when pressing cancel or plus icon

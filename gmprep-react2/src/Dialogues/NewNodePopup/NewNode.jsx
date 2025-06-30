@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import CharacterInfoFormComponent from "./CharacterInfoFormComponent";
+import CreatureinfoFormComponent from "./CreatureInfoFormComponent";
 import LocationInfoFormComponent from "./LocationInfoFormComponent";
 import EditeableMultiline from "../../EditeableFields/EditeableMultiline";
 import IconPicker from "../../EditeableFields/IconPicker";
@@ -17,6 +17,7 @@ async function postNode(data) {
 		headers: {'Content-Type': 'application/json'},
 		body: JSON.stringify(data.data)
 	};
+	console.log(requestOptions.body);
 	return fetch('http://localhost:5140/Nodes/Update', requestOptions)
 		.then(response => response.json());
 }
@@ -35,7 +36,7 @@ export default function NewNode() {
 	const remountCount = useRef(0);
 	const [localNodeData, setLocalNodeData] = useState({});
 	const {currentNodeData, setCurrentNodeData} = useContext(NodeContext);
-	const [isCharacter, setIsCharacter] = useState(currentNodeData?.creatureInfo != null);
+	const [isCreature, setIsCreature] = useState(currentNodeData?.creatureInfo != null);
 	const [isLocation, setIsLocation] = useState(currentNodeData?.locationInfo != null);
 	const queryClient = useQueryClient();
 
@@ -67,10 +68,10 @@ export default function NewNode() {
 			<label className="toggleButton m-2">
 				<input
 					type="checkbox"
-					name="isCharacter"
-					checked={isCharacter}
+					name="isCreature"
+					checked={isCreature}
 					onChange={e => {
-						setIsCharacter(e.target.checked);
+						setIsCreature(e.target.checked);
 					}}
 				/>
 				<span className="toggleBG"><img src="/icons/ui/character_icon.png" className="p-1"/></span>
@@ -90,45 +91,45 @@ export default function NewNode() {
 		<div>
 			<IconPicker
 				onChanged={(dialogResult) => {
-					localNodeData.MapIconPath = dialogResult.icon;
-					localNodeData.MapIconSize = dialogResult.iconSize; }}
+					localNodeData.mapIconPath = dialogResult.icon;
+					localNodeData.mapIconSize = dialogResult.iconSize; }}
 				defaultIcon={currentNodeData?.mapIconPath ?? "well.png"}
 			/>
 		</div>
 		<div>
-			<EditeableHeader defaultValue={currentNodeData?.name ?? "Name"} onChanged={(newText) => localNodeData.Name = newText} />
+			<EditeableHeader defaultValue={currentNodeData?.name ?? "Name"} onChanged={(newText) => localNodeData.name = newText} />
 		</div>
-		{isCharacter && <div>
+		{isCreature && <div>
 			<TypeAlignmentComponent
 				defaultSize={currentNodeData?.creatureInfo?.size ?? "Medium"}
 				defaultType={currentNodeData?.creatureInfo?.creatureType ?? "Humanoid"}
 				defaultAlignment={currentNodeData?.creatureInfo?.alignment ?? "Neutral Good"}
 				onChange={values => {
-					if (!("characterData" in localNodeData)) {
-						localNodeData.CreatureInfo = {};
+					if (!("creatureInfo" in localNodeData)) {
+						localNodeData.creatureInfo = {};
 					}
-					localNodeData.CreatureInfo.CreatureType = values.type;
-					localNodeData.CreatureInfo.Size = values.size;
-					localNodeData.CreatureInfo.Alignment = values.alignment;
+					localNodeData.creatureInfo.creatureType = values.type;
+					localNodeData.creatureInfo.size = values.size;
+					localNodeData.creatureInfo.alignment = values.alignment;
 				}}/>
 		</div>}
 		<div>
-			<EditeableMultiline defaultValue={currentNodeData?.description ?? ""} onChanged={(newDescription) => localNodeData.Description = newDescription} labelName="Description" />
+			<EditeableMultiline defaultValue={currentNodeData?.description ?? ""} onChanged={(newDescription) => localNodeData.description = newDescription} labelName="Description" />
 		</div>
 
-		{isCharacter && <CharacterInfoFormComponent defaultCharacterData={currentNodeData?.creatureInfo ?? {}} onChanged={newData => {localNodeData.CreatureInfo = {...localNodeData.CreatureInfo, ...newData};}}/>}
-		{isLocation && <LocationInfoFormComponent defaultLocationData={currentNodeData?.locationInfo ?? {}} onChange={newData => {localNodeData.LocationInfo = newData;}}/>}
-		<EditeableList defaultData={currentNodeData?.secrets ?? []} defaultElement={{ testSkill: "None", testDifficulty: "10", description: "Description" }} header="Secrets" onChange={(newData) => {localNodeData.Secrets = newData;}} >
+		{isCreature && <CreatureinfoFormComponent defaultCreatureInfoData={currentNodeData?.creatureInfo ?? {}} onChanged={newData => {localNodeData.creatureInfo = {...localNodeData.creatureInfo, ...newData};}}/>}
+		{isLocation && <LocationInfoFormComponent defaultLocationData={currentNodeData?.locationInfo ?? {}} onChange={newData => {localNodeData.locationInfo = newData;}}/>}
+		<EditeableList defaultData={currentNodeData?.secrets ?? []} defaultElement={{ testSkill: "None", testDifficulty: "10", description: "Description" }} header="Secrets" onChange={(newData) => {localNodeData.secrets = newData;}} >
 			<Secret />
 		</EditeableList>
 
 		<div className="p-3 bottom-0 left-2 right-5 ">
 			<button className="mr-10" onClick={() => {
-				localNodeData.Id = currentNodeData.id;
+				localNodeData.id = currentNodeData.id;
 				if (confirm("Are you sure you want to delete this?")) {
 					setCurrentNodeData({...defaultNode})
 					deleteNodeMutation.mutate({
-						data:localNodeData,
+						data: localNodeData,
 					})
 				} 
 			}}>
@@ -138,8 +139,7 @@ export default function NewNode() {
 				() => {setCurrentNodeData({...defaultNode})}
 			}>Cancel</button>
 			<button onClick={() => {
-				localNodeData.Id = currentNodeData.id;
-				console.log(JSON.stringify(localNodeData));
+				localNodeData.id = currentNodeData.id;
 				updateNodeMutation.mutate({
 					data: localNodeData,
 				})

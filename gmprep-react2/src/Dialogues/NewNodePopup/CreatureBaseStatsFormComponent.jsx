@@ -1,12 +1,12 @@
 import { useRef, useState } from "react";
-import CharacterBaseStat from "./CharacterBaseStat";
+import CreatureBaseStat from "./CreatureBaseStat";
 import EditeableNumericicon from "../../EditeableFields/EditeableNumericIcon";
 import { ABILITIES} from "../../Globals/Skills";
 import ImmunitiesResistances from "./ImmunitiesResistances";
 import EditeableMultiline from "../../EditeableFields/EditeableMultiline"
 import EditeableText from "../../EditeableFields/EditeableText"
 
-export default function CharacterBaseStatsFormComponent({defaultStatsData, onChange}) {
+export default function CreatureBaseStatsFormComponent({defaultStatsData, onChange}) {
 	const statsData = useRef(defaultStatsData);
 	const [editingStats, setEditingStats] = useState(false);
 	const [editingSpeed, setEditingSpeed] = useState(false);
@@ -35,10 +35,10 @@ export default function CharacterBaseStatsFormComponent({defaultStatsData, onCha
 		</div>
 
 		<div id="statblock" className="grid grid-cols-2 gap-2 statBlock">
-			<CharacterBaseStat label="HP" defaultValue={defaultStatsData?.hp ?? "20"} editeable={editingStats} doneEditing={doneEditingStats} onChange={updateStatsData}/>
-			<CharacterBaseStat label="AC" defaultValue={defaultStatsData?.ac ?? "10"} editeable={editingStats} doneEditing={doneEditingStats} onChange={updateStatsData}/>
+			<CreatureBaseStat label="HP" defaultValue={defaultStatsData?.hp ?? "20"} editeable={editingStats} doneEditing={doneEditingStats} onChange={updateStatsData}/>
+			<CreatureBaseStat label="AC" defaultValue={defaultStatsData?.ac ?? "10"} editeable={editingStats} doneEditing={doneEditingStats} onChange={updateStatsData}/>
 			{ABILITIES.map(ability =>
-				<CharacterBaseStat
+				<CreatureBaseStat
 					label={ability}
 					key={ability}
 					defaultValue={defaultStatsData[ability.toLowerCase()] ?? "10"}
@@ -58,14 +58,14 @@ export default function CharacterBaseStatsFormComponent({defaultStatsData, onCha
 					conditionImmunities:defaultStatsData.conditionImmunities ?? []
 				}}
 				onChange={(newData) => {
-					updateStatsData("DamageResistances", newData.DamageResistances);
-					updateStatsData("DamageImmunities", newData.DamageImmunities);
-					updateStatsData("ConditionImmunities", newData.ConditionImmunities);
+					updateStatsData("damageResistances", newData.damageResistances);
+					updateStatsData("damageImmunities", newData.damageImmunities);
+					updateStatsData("conditionImmunities", newData.conditionImmunities);
 				}}
 			/>
 		</div>
 		<div className="statBlock">
-		<EditeableText defaultValue={defaultStatsData.cr ?? "1"} labelName="CR" onChanged={(newValue) => {updateStatsData("CR", newValue)}}/>
+		<EditeableText defaultValue={defaultStatsData.cr ?? "1"} labelName="CR" onChanged={(newValue) => {updateStatsData("cr", newValue)}}/>
 		</div>
 		<div id="speedblock" className="statBlock flexRow">
 			<EditeableNumericicon
@@ -74,14 +74,14 @@ export default function CharacterBaseStatsFormComponent({defaultStatsData, onCha
 				showEditIcon={false}
 				editeableOverride={editingSpeed}
 				onUpdate={onUpdateSpeed}
-				onChange={(newValue) => {updateStatsData("Speed", newValue)}}
+				onChange={(newValue) => {updateStatsData("speed", newValue)}}
 			/>
 			<EditeableNumericicon
 				defaultValue={defaultStatsData.speedSwimming ?? "0"}
 				iconSource={"/icons/ui/swim_icon.png"}
 				showEditIcon={false}
 				editeableOverride={editingSpeed}
-				onChange={(newValue) => {updateStatsData("SpeedSwimming", newValue)}}
+				onChange={(newValue) => {updateStatsData("speedSwimming", newValue)}}
 				onUpdate={onUpdateSpeed}
 			/>
 			<EditeableNumericicon
@@ -89,14 +89,14 @@ export default function CharacterBaseStatsFormComponent({defaultStatsData, onCha
 				iconSource={"/icons/ui/fly_icon.png"}
 				showEditIcon={false}
 				editeableOverride={editingSpeed}
-				onChange={(newValue) => {updateStatsData("SpeedFlying", newValue)}}
+				onChange={(newValue) => {updateStatsData("speedFlying", newValue)}}
 				onUpdate={onUpdateSpeed}
 			/>
 			{(!editingSpeed) && <img src="/icons/ui/wrench_icon.png" onClick={ () => setEditingSpeed(true)} />}
 			{editingSpeed && <img src="/icons/ui/check_icon.png" onClick={() => setEditingSpeed(false)} />}
 		</div>
-		<EditeableMultiline defaultValue={defaultStatsData.languages ?? "Common"} labelName="Languages" rows={2} onChanged={(newValue) => {updateStatsData("Languages", newValue)}}/>
-		<EditeableMultiline defaultValue={defaultStatsData.senses ?? "Passive Perception: "} labelName="Senses" rows={2} onChanged={newValue => {updateStatsData("Senses", newValue)}}/>
+		<EditeableMultiline defaultValue={defaultStatsData.languages ?? "Common"} labelName="Languages" rows={2} onChanged={(newValue) => {updateStatsData("languages", newValue)}}/>
+		<EditeableMultiline defaultValue={defaultStatsData.senses ?? "Passive Perception: "} labelName="Senses" rows={2} onChanged={newValue => {updateStatsData("senses", newValue)}}/>
 		</>
 	)
 }

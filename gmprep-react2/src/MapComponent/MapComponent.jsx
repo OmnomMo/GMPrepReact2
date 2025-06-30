@@ -15,9 +15,32 @@ export default function MapComponent() {
 	const [zoom, setZoom] = useState(1.0);
 	const [pos, setPos] = useState({ x: 0.0, y: 0.0 });
 
+	//updates position of map so zoom moves towards mouse pos
+	function adjustZoomPosition(newZoom, zoomDir = 1.0) {
+		let zoomOffset = {
+			x: window.innerWidth / 2 - mousePos.current.x,
+			y: window.innerHeight / 2 - mousePos.current.y};
+
+
+		setPos(prev => {
+			return {
+				x: prev.x - zoomDir * zoomOffset.x / (newZoom * 4),
+				y: prev.y - zoomDir * zoomOffset.y / (newZoom * 4)
+			}
+		})
+	}
 
 	function zoomOut() {
-		setZoom(prev => Math.max(prev * 0.8, 1.0));
+
+		let newZoom = Math.max(zoom * 0.8, 1.0)
+
+		setZoom(newZoom);
+
+		if (newZoom <= 1.0) {
+			return;
+		}
+
+		adjustZoomPosition(newZoom, -1.0);
 	}
 
 	function zoomIn() {
@@ -30,17 +53,9 @@ export default function MapComponent() {
 			return;
 		}
 
-		let zoomOffset = {
-			x: window.innerWidth / 2 - mousePos.current.x,
-			y: window.innerHeight / 2 - mousePos.current.y};
+		adjustZoomPosition(newZoom);
 
 
-		setPos(prev => {
-			return {
-				x: prev.x - zoomOffset.x / (newZoom * 4),
-				y: prev.y - zoomOffset.y / (newZoom * 4)
-			}
-		})
 	}
 
 	function mouseMoveEvent(e) {

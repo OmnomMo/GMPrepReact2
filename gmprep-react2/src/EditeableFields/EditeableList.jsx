@@ -1,43 +1,33 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 //Dynamic list of generic elements (provided as children)
 //Children must implement defaultContent (generic object of default data), and must call functions called onUpdate and onDelete that are
 //passed to them as props
 export default function EditeableList ({children, defaultData, defaultElement, header, onChange}) {
 
-
-	const listData = useRef({});
-
 	const [elements, setElements] = useState(defaultData);
 	const [maxId, setMaxId] = useState(0);
 
 
+	useEffect(() => {
+		onDataChanged();
+	}, [elements])
 
-	function updateListData(id, value) {
-		listData.current[id] = value;
-		callListDataOnChanged();
+	//send elements as list
+	function onDataChanged() {
+
+		let keys = Object.keys(elements);
+		let elementsArray = keys.map(key => elements[key]);
+
+		onChange(elementsArray)
 	}
 
-	function callListDataOnChanged() {
-		let listArray = [];
-		let keys = Object.keys(listData.current);
-		keys.map(key => {
-			//FIXME: Sometimes undefined keys sneak into the data when editing entries;
-			if (key) {
-				listArray.push(listData.current[key]);
-			}
-		});
-		onChange(listArray);
-	}
 
 	function addElement() {
 		//clone default element
 		let newElement = {...defaultElement};
 		newElement['id'] = maxId;
-
 		//add new element to list
 		setElements([...elements, newElement])
-
-		updateListData(maxId, newElement)
 		//increment max id
 		setMaxId((prev) => prev + 1);
 	}
@@ -47,24 +37,18 @@ export default function EditeableList ({children, defaultData, defaultElement, h
 		let updatedElements = elements.filter(function(e) {return e.id !== id});
 		setElements(updatedElements);
 
-		//remove from data ref
-		let tempData = listData.current;
-		delete tempData[id];
-		
-		listData.current = tempData;
-		callListDataOnChanged();
-
-
 	}
 
 	function updateElement(id, content) {
-		setElements(elements.map(element => {
+		let newElements = elements.map(element => {
 			if (element.id ===id) {
+				content.id = id;
 				return content;
 			} else {
 				return element;
 			}
-		}))
+		})
+		setElements(newElements)
 	}
 
 
@@ -75,14 +59,11 @@ export default function EditeableList ({children, defaultData, defaultElement, h
 		</div>
 		<ul>
 			{elements.map(element => 
-			<li className="w-full" key={element.id}>
+			<li className="w-full" key={header + element.id} name={header + element.id}>
 				{React.cloneElement(children, {
 					defaultContent:element,
 					onDelete:deleteElement,
-					onUpdate:updateElement,
-					onChange:(newValue) => {
-						updateListData(element.id, newValue)
-					}
+					onChange:updateElement,
 				})}
 			</li>)}
 		</ul>

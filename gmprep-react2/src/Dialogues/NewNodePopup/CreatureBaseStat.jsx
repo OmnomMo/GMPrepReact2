@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { GetAbilityModifier, GetModifierColor} from "../../Globals/Skills";
 
-export default function CharacterBaseStat({ defaultValue, label, editeable, doneEditing, onChange, showModifier = false}) {
+export default function CreatureBaseStat({ defaultValue, label, editeable, doneEditing, onChange, showModifier = false}) {
 	const [currentValue, setCurrentValue] = useState(defaultValue);
 
 	useEffect(() => {
