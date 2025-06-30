@@ -22,9 +22,25 @@ export default function MapComponent() {
 
 	function zoomIn() {
 
-		let newZoom = Math.min(zoom * 1.2, 10.0)
+		let newZoom = Math.min(zoom * 1.2, MAX_ZOOM)
 
 		setZoom(newZoom);
+
+		if (newZoom >= MAX_ZOOM) {
+			return;
+		}
+
+		let zoomOffset = {
+			x: window.innerWidth / 2 - mousePos.current.x,
+			y: window.innerHeight / 2 - mousePos.current.y};
+
+
+		setPos(prev => {
+			return {
+				x: prev.x - zoomOffset.x / (newZoom * 4),
+				y: prev.y - zoomOffset.y / (newZoom * 4)
+			}
+		})
 	}
 
 	function mouseMoveEvent(e) {
