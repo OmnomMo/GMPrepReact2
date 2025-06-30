@@ -2,7 +2,7 @@ import React, { useContext, useRef, useState } from 'react';
 import './MapComponent.css';
 import { NodeContext } from '../Contexts';
 
-
+let MAX_ZOOM = 10.0;
 
 export default function MapComponent() {
 
@@ -10,44 +10,35 @@ export default function MapComponent() {
 	const { draggingMap } = useContext(NodeContext);
 	const dragStartPos = useRef({ x: 0.0, y: 0.0 });
 	const originalPos = useRef({ x: 0.0, y: 0.0 });
+	const mousePos = useRef({ x: 0, y: 0 });
 
 	const [zoom, setZoom] = useState(1.0);
 	const [pos, setPos] = useState({ x: 0.0, y: 0.0 });
 
-	function getMapResolution() {
-		let image = document.getElementById("mapBackground");
 
-		return { x: image.width, y: image.height };
+	function zoomOut() {
+		setZoom(prev => Math.max(prev * 0.8, 1.0));
 	}
 
-	function getSourceImageResolution() {
+	function zoomIn() {
 
-		let image = document.getElementById("mapBackground");
+		let newZoom = Math.min(zoom * 1.2, 10.0)
 
-		return { x: image.naturalWidth, y: image.naturalHeight };
-	}
-
-
-
-	function setMapStartPos() {
-		let size = getSourceImageResolution();
-		setPos({ x: size.x / 2, y: size.y / 2 });
+		setZoom(newZoom);
 	}
 
 	function mouseMoveEvent(e) {
+
+		mousePos.current = { x: e.clientX, y: e.clientY };
 
 		if (!draggingMap.current) {
 			return;
 		}
 		let dragOffset = { x: dragStartPos.current.x - e.clientX, y: dragStartPos.current.y - e.clientY };
-		let posX = originalPos.current.x + dragOffset.x;
-		let posY = originalPos.current.y + dragOffset.y;
-		posX = Math.max(posX, 0);
-		posX = Math.min(posX, getSourceImageResolution().x - getMapResolution().x);
-		posY = Math.max(posY, 0);
-		posY = Math.min(posY, getSourceImageResolution().y - getMapResolution().y);
+		let posX = originalPos.current.x + dragOffset.x * (1 / zoom);
+		let posY = originalPos.current.y + dragOffset.y * (1 / zoom);
 
-		setPos({ x: posX, y: posY});
+		setPos({ x: posX, y: posY });
 	}
 
 	function startDrag(startPos) {
@@ -57,15 +48,17 @@ export default function MapComponent() {
 	}
 
 	return (
-		<div id="MapContainer" className='fixed w-full h-full left-0 top-0'>
+		<div id="MapContainer" className='absolute bg-black top-0 left-0 overflow-clip'
+			style={{ width: `${window.innerWidth}px`, height: `${window.innerHeight}px` }}>
 			<img
 				src="/maps/testmap.jpg"
 				id="mapBackground"
 				className='map'
 				draggable='false'
-				style={{ objectPosition: `-${pos.x}px -${pos.y}px` }}
-				onLoad={() => {
-					setMapStartPos();
+				style={{
+					objectPosition: `${pos.x * -1}px ${pos.y * -1}px`,
+					scale: `${zoom}`,
+					transformOrigin: `${mousePos.current.x}px ${mousePos.current.y}px`
 				}}
 
 				onMouseMove={mouseMoveEvent}
@@ -74,9 +67,9 @@ export default function MapComponent() {
 				}}
 				onWheelCapture={e => {
 					if (e.deltaY > 0) {
-						setZoom(prev => prev + 0.1);
+						zoomOut();
 					} else {
-						setZoom(prev => prev - 0.1);
+						zoomIn();
 					}
 				}}
 			/>
