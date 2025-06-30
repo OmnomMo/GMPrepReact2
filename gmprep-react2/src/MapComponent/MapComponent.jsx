@@ -56,9 +56,8 @@ export default function MapComponent() {
 				className='map'
 				draggable='false'
 				style={{
-					objectPosition: `${pos.x * -1}px ${pos.y * -1}px`,
-					scale: `${zoom}`,
-					transformOrigin: `${mousePos.current.x}px ${mousePos.current.y}px`
+					transformOrigin: `${window.innerWidth / 2 + pos.x}px ${window.innerHeight / 2 + pos.y}px`,
+					transform: `translate(${pos.x * -1}px, ${pos.y * -1}px) scale(${zoom})` ,
 				}}
 
 				onMouseMove={mouseMoveEvent}
