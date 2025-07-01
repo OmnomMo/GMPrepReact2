@@ -11,8 +11,13 @@ async function getAllNodes() {
 		method: 'GET',
 		headers: { 'Content-Type': 'application/json' },
 	}
+	console.log("Requesting Nodes")
 	return fetch('http://localhost:5140/Nodes', requestOptions)
-		.then(result => result.json());
+		.then(result => result.json())
+		.then(json => {
+			console.log(json);
+			return json;
+		});
 }
 
 export default function NodeSelection() {
@@ -41,7 +46,6 @@ export default function NodeSelection() {
 
 	if (status == "success") {
 		keyIteration.current += 1;
-		console.log(nodes)
 		return (
 			<div className="w-full flex flex-wrap" id={"NodeSelection" + keyIteration.current} key={"NodeSelection" + keyIteration.current}>
 				{nodes.map(node => <NodeButton defaultNodeData={node} key={node.id + node.name}/>)}

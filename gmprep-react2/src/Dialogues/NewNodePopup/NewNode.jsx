@@ -17,7 +17,6 @@ async function postNode(data) {
 		headers: {'Content-Type': 'application/json'},
 		body: JSON.stringify(data.data)
 	};
-	console.log(requestOptions.body);
 	return fetch('http://localhost:5140/Nodes/Update', requestOptions)
 		.then(response => response.json());
 }

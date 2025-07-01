@@ -1,9 +1,12 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { NodeContext } from "../../Contexts";
 
 export default function NodeButton({defaultNodeData}) {
 	const [nodeData] = useState(defaultNodeData);
 	const {setCurrentNodeData} = useContext(NodeContext);
+	const {setDraggedNode} = useContext(NodeContext);
+	const startDrag = useRef(false);
+	
 
 	return (<>
 		<img
@@ -12,7 +15,20 @@ export default function NodeButton({defaultNodeData}) {
 			height={64}
 			className="unselectable m-2"
 			draggable="false"
-			onClick={() => setCurrentNodeData(nodeData)}
+			onMouseDown={() => {
+				startDrag.current = true;
+				}
+			}
+			onMouseLeave={() => {
+				if (startDrag.current) {
+					startDrag.current = false;
+					setDraggedNode(nodeData);
+				}
+			}}
+			onMouseUp={() => {
+				startDrag.current = false;
+				setCurrentNodeData(nodeData);
+			}}
 		/>
 	</>)
 }

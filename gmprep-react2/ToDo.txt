@@ -5,10 +5,17 @@
 
 - Place nodes on map background
 	- DONE show temp map in Center
-	- Move map with mouse down
+	- DONE Move map with mouse down
 		- DONE basic movement
 		- Edge case: handle map source image smaller than map width
-	- Zoom map with scrollwheel
+	- DONE Zoom map with scrollwheel
+	- Drag and Drop nodes
+		- Nodes should not be dropped on map when mouse is not hovering over map
+			- problem: drag and drop consumes mouse events, should probably not do that
+		- Clicking nodes should start editing them
+	- DONE Drag and drop nodes from map
+	- delete MapNodes
+	- Place dropped nodes on the correct location (accoutning for drag and zoom )
 
 - Campaign and Map Handling
 
@@ -16,7 +23,10 @@
 
 
 BUGS:
-- Editing a listentry (for example an action) sometimes adds it to the EditableList entries a second time under the index "undefined"
+- Setting map icon size does nothing / will be reset
+- Updating a node will destroy all map node entries T_T
+- Resizing the window will fuck up map node placement
+- FIXED Editing a listentry (for example an action) sometimes adds it to the EditableList entries a second time under the index "undefined"
 - FIXED Skills do not store their value in the database when being udpated / submitted
 - FIXED Deleting ListItems in a nodeentry and updating it on the database does not work correctly
 - FIXED new secrets say "undefined"
