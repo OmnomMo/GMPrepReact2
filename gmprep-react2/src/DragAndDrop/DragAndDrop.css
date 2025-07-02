@@ -7,4 +7,5 @@
 	width: 64px;
 	height: 64px;
 	z-index: 100;
+	filter: drop-shadow(3px 1px 3px #25252757)
 }

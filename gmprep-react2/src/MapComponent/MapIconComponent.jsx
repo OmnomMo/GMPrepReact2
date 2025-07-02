@@ -23,7 +23,6 @@ export default function MapIconComponent({ mapNodeData, mapHeight, posX, posY, s
 			height={(mapNodeData.node?.mapIconSize ?? 64) * scaleFactor}
 			draggable='false'
 			onMouseDown={(e) => {
-				console.log("MapIcon onMouseDown")
 				e.stopPropagation()
 				startDrag.current = true;
 			}}
@@ -46,7 +45,7 @@ export default function MapIconComponent({ mapNodeData, mapHeight, posX, posY, s
 			}}
 			style={{
 				transform: `
-					translate(${mapNodeData.node.mapIconSize / -2}px, ${mapNodeData.node.mapIconSize / -2}px)
+					translate(${mapNodeData.node.mapIconSize * scaleFactor / -2}px, ${mapNodeData.node.mapIconSize * scaleFactor / -2}px)
 					translate(${0}px, ${mapHeight * -1}px)
 					translate(${posX}px, ${posY}px)`,
 				filter: " drop-shadow(3px 1px 3px #101010)",

@@ -12,6 +12,7 @@ let MAX_ZOOM = 10.0;
 
 export default function MapComponent() {
 
+
 	//#region queries
 	const queryClient = useQueryClient();
 
@@ -38,10 +39,12 @@ export default function MapComponent() {
 	const originalPos = useRef({ x: 0.0, y: 0.0 });
 	const mousePos = useRef({ x: 0, y: 0 });
 	const mapDimensions = useRef({ x: 0, y: 0 });
-	const sourceImageDimensions = useRef({x: 0, y: 0})
+	const sourceImageDimensions = useRef({ x: 0, y: 0 })
 
 	const [zoom, setZoom] = useState(1.0);
 	const [pos, setPos] = useState({ x: 0.0, y: 0.0 });
+	//the map is active when the mouse is hovering over it
+	const [active, setActive] = useState(false);
 
 	//return scale factor of map when zoom = 1.0
 	function getMapWidthFactor() {
@@ -49,12 +52,11 @@ export default function MapComponent() {
 		return widthFactor;
 	}
 
+
 	//When Drag and Drop object drops a node, we create and post a new map node
 	useEffect(() => {
-		if (droppedNodeInfo.node) {
-
-			console.log(droppedNodeInfo)
-
+		if (droppedNodeInfo.node != null && active) {
+			console.log("Node Dropped");
 			let centerOffsetX = droppedNodeInfo.location.x - window.innerWidth / 2;
 			let centerOffsetY = droppedNodeInfo.location.y - window.innerHeight / 2;
 
@@ -80,12 +82,15 @@ export default function MapComponent() {
 			})
 			setDroppedNodeInfo({ node: null, location: droppedNodeInfo.location })
 		}
-	}, [droppedNodeInfo, setDroppedNodeInfo, createMapNodeMutation, pos, zoom])
+		if (droppedNodeInfo.node != null && !active) {
+			setDroppedNodeInfo({ node: null, location: droppedNodeInfo.location })
+		}
+	}, [droppedNodeInfo, setDroppedNodeInfo, createMapNodeMutation, pos, zoom, active])
 
 	//loads the background image for the map to determine it's original dimensions
 	function cacheSourceImageDimensions(imgSrc) {
 		let newImg = new Image();
-		newImg.onload = function() {
+		newImg.onload = function () {
 			sourceImageDimensions.current = {
 				x: newImg.width,
 				y: newImg.height,
@@ -166,13 +171,13 @@ export default function MapComponent() {
 	return (
 		<div id="MapContainer" className='absolute bg-black top-0 left-0 overflow-clip'
 			style={{ width: `${window.innerWidth}px`, height: `${window.innerHeight}px` }}>
+			{/*<div className="absolute top-0 left-0 z-9999 bg-red-500  p-1">Active: {active.toString()}</div>*/}
 			<div
 				className='map'
 				style={{
 					transformOrigin: `${window.innerWidth / 2 + pos.x}px ${window.innerHeight / 2 + pos.y}px`,
 					transform: `translate(${pos.x * -1}px, ${pos.y * -1}px) scale(${zoom})`,
 				}}
-
 				onMouseMove={mouseMoveEvent}
 				onMouseDown={e => {
 					console.log("Map onmousedown")
@@ -184,6 +189,12 @@ export default function MapComponent() {
 					} else {
 						zoomIn();
 					}
+				}}
+				onMouseEnter={() => {
+					setActive(true);
+				}}
+				onMouseLeave={() => {
+					setActive(false)
 				}}
 			>
 				<img

@@ -10,12 +10,12 @@
 		- Edge case: handle map source image smaller than map width
 	- DONE Zoom map with scrollwheel
 	- Drag and Drop nodes
-		- Nodes should not be dropped on map when mouse is not hovering over map
-			- problem: drag and drop consumes mouse events, should probably not do that
-		- Clicking nodes should start editing them
+		- DONE Nodes should not be dropped on map when mouse is not hovering over map
+			- DONE problem: drag and drop consumes mouse events, should probably not do that
+		- DONE Clicking nodes should start editing them
 	- DONE Drag and drop nodes from map
 	- delete MapNodes
-	- Place dropped nodes on the correct location (accoutning for drag and zoom )
+	- DONE Place dropped nodes on the correct location (accoutning for drag and zoom )
 
 - Campaign and Map Handling
 
@@ -36,3 +36,5 @@ BUGS:
 
 Polish:
 - Warning when discarding unsaved changes
+- Maybe we need less requests. can the post request for updating/deleting nodes and mapnodes already return all map nodes?
+	- And can we use that data without invalidating previous queries?
