@@ -23,7 +23,7 @@
 
 
 BUGS:
-- Setting map icon size does nothing / will be reset
+- FIXED Setting map icon size does nothing / will be reset
 - FIXED Updating a node will destroy all map node entries T_T
 - Resizing the window will fuck up map node placement
 - FIXED Editing a listentry (for example an action) sometimes adds it to the EditableList entries a second time under the index "undefined"

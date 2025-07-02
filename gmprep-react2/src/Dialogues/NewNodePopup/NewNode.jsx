@@ -94,6 +94,7 @@ export default function NewNode() {
 					localNodeData.mapIconPath = dialogResult.icon;
 					localNodeData.mapIconSize = dialogResult.iconSize; }}
 				defaultIcon={currentNodeData?.mapIconPath ?? "well.png"}
+				defaultIconSize={currentNodeData?.mapIconSize ?? "64"}
 			/>
 		</div>
 		<div>

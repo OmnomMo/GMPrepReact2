@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import DialogBase from "../Dialogues/DialogueBase";
 import IconSelectorPopup from "../Dialogues/IconSelectorPopup";
 
-export default function IconPicker({defaultIcon, onChanged}) {
+export default function IconPicker({defaultIcon, defaultIconSize, onChanged}) {
 	const [currentIcon, setCurrentIcon] = useState(defaultIcon);
 	const [dialogResult, setDialogResult] = new useState(null);
-	const [iconSize, setIconSize] = new useState("64")
+	const [iconSize, setIconSize] = new useState(defaultIconSize)
 
 	useEffect(() => {
 		onChanged({icon:currentIcon, iconSize:iconSize})
