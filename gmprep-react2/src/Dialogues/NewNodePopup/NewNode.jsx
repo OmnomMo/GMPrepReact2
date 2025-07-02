@@ -51,6 +51,7 @@ export default function NewNode() {
 		mutationFn: postNode,
 		onSuccess: (data) => {
 			queryClient.invalidateQueries({queryKey: ['AllNodes']});
+			queryClient.invalidateQueries({queryKey: ['MapNodes']});
 			setCurrentNodeData({...data});
 		}
 	})

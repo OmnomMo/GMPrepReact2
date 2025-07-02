@@ -24,7 +24,7 @@
 
 BUGS:
 - Setting map icon size does nothing / will be reset
-- Updating a node will destroy all map node entries T_T
+- FIXED Updating a node will destroy all map node entries T_T
 - Resizing the window will fuck up map node placement
 - FIXED Editing a listentry (for example an action) sometimes adds it to the EditableList entries a second time under the index "undefined"
 - FIXED Skills do not store their value in the database when being udpated / submitted
@@ -38,3 +38,4 @@ Polish:
 - Warning when discarding unsaved changes
 - Maybe we need less requests. can the post request for updating/deleting nodes and mapnodes already return all map nodes?
 	- And can we use that data without invalidating previous queries?
+- Show placeholder / loading symbol after node is dropped on map until server answer
