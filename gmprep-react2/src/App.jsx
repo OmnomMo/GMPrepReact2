@@ -1,14 +1,10 @@
 import './App.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import SidebarBase from './Dialogues/SideBarBase';
-import NewNode from './Dialogues/NewNodePopup/NewNode';
-import NodeSelection from './Dialogues/NodeSelection/NodeSelection';
 import { GlobalContext } from './Contexts';
 import { useRef, useState } from 'react';
 import { defaultNode } from './Globals/DefaultNode';
-import MapComponent from './MapComponent/MapComponent';
-import DragAndDrop from './DragAndDrop/DragAndDrop';
 import Home from './Home';
+import HeaderBar from './HeaderBar';
 const queryClient = new QueryClient();
 
 function App() {
@@ -38,6 +34,7 @@ function App() {
 					mapData: mapData,
 					setMapData: setMapData,
 				}}>
+					<HeaderBar />
 					<Home />
 				</GlobalContext.Provider>
 			</QueryClientProvider>

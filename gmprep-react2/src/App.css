@@ -8,7 +8,11 @@
   text-align: center;
 }
 
-
+.bigButtonContainer {
+	background-color: black;
+	flex-direction: row;
+	display: flex;
+}
 
 .Noselect * {
 	-webkit-user-select: none;

@@ -106,7 +106,7 @@ export default function Login() {
 
 	return (
 		<>
-			<h1 className="m-6">LOGIN</h1>
+			<h1>LOGIN</h1>
 			<ul className="bg-gray-900 p-4 h-100">
 				{users.map(user =>
 					<UserButton
