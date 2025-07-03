@@ -18,6 +18,29 @@
 	- DONE Place dropped nodes on the correct location (accoutning for drag and zoom )
 
 - Campaign and Map Handling
+	- DONE basic menu navigation to select user/campaign/map
+	- DONE header bar to change campaign/map/user
+	- remember user/campaign/map after reloading window
+	- node handling for current user/campaign/map
+		- only show nods for current campaign in selection
+		- only show mapnodes for current map in map
+		- set mapnodes to correct map when creating
+		- set nodes to correct campaign when creating
+
+- Map background image selection
+	- provide a few default maps for backgrounds
+
+- User handling
+	- Setup some kind of third party authentication (google?)
+	- Backend needs to check with every interaction if user has the rights for this request
+		- some token?
+		- need to do some research there
+
+- Custom images
+	- let users upload images for map backgrounds, campaign buttons and icons
+
+- Node links
+	
 
 
 

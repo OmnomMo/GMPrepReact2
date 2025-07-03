@@ -58,6 +58,7 @@ export default function CampaignSelect() {
 		mutationFn: requestDeleteCampaign,
 	})
 
+
 	function createNewCampaign(name) {
 		createNewCampaignMutation.mutate({
 			data: {name: name},

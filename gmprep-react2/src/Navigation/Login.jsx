@@ -48,7 +48,7 @@ export default function Login() {
 
 	const queryClient = useQueryClient();
 
-	const { setUserData } = useContext(GlobalContext);
+	const { setUserData} = useContext(GlobalContext);
 
 	const { status, error, data: users } = useQuery(
 		{
@@ -56,6 +56,7 @@ export default function Login() {
 			queryFn: requestAllUsers,
 		}
 	)
+
 
 	const createUserMutation = useMutation({
 		mutationFn: requestCreateUser,

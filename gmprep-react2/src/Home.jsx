@@ -28,22 +28,24 @@ export default function Home() {
 	}
 
 	return (
-	<div
-		id="MapWindow"
-		onMouseUp={() => {
-			draggingMap.current = false;
-		}}
-		onMouseLeave={() => {
-			draggingMap.current = false;
-		}}>
-		<DragAndDrop />
-		<MapComponent />
-		<SidebarBase rightSide={false} minWidth={200}>
-			<NodeSelection />
-		</SidebarBase>
-		<SidebarBase rightSide={true} key={currentNodeData?.id ?? "newNode"}>
-			<NewNode />
-		</SidebarBase>
-	</div>)
+		<div
+			id="MapWindow"
+			onMouseUp={() => {
+				draggingMap.current = false;
+			}}
+			onMouseLeave={() => {
+				draggingMap.current = false;
+			}}>
+			<DragAndDrop />
+			<div id="sideBars">
+				<SidebarBase rightSide={false} minWidth={200}>
+					<NodeSelection />
+				</SidebarBase>
+				<SidebarBase rightSide={true} key={currentNodeData?.id ?? "newNode"}>
+					<NewNode />
+				</SidebarBase>
+			</div>
+			<MapComponent />
+		</div>)
 
 }

@@ -27,8 +27,8 @@
 
 .sidebar {
 	top: 0px;
-	position: fixed;
-	z-index: 40;
+	position: absolute;
+	z-index: 20;
 	height: 100vh;
 	background-color: #1b1b1b93;
 	backdrop-filter: blur(30px);

@@ -169,7 +169,7 @@ export default function MapComponent() {
 
 
 	return (
-		<div id="MapContainer" className='absolute bg-black top-0 left-0 overflow-clip'
+		<div id="MapContainer" className='fixed bg-black top-0 left-0 overflow-clip'
 			style={{ width: `${window.innerWidth}px`, height: `${window.innerHeight}px` }}>
 			{/*<div className="absolute top-0 left-0 z-9999 bg-red-500  p-1">Active: {active.toString()}</div>*/}
 			<div

@@ -1,11 +1,40 @@
+import { useContext } from "react"
+import { GlobalContext } from "./Contexts"
+
 export default function HeaderBar() {
 
+	const {setUserData, setCampaignData, setMapData} = useContext(GlobalContext)
+
 	return (
-			<div name="headerBar" className='flex flex-row absolute top-0 left-0 w-full bg-blue-800'>
+			<div name="headerBar" className='flex flex-row absolute top-0 left-0 w-full bg-blue-800 z-30'>
 				<div className="flex-grow" />
-				<img className="m-1" width={32} src="/icons/ui/map_icon.png" />
-				<img className="m-1" width={32} src="/icons/ui/campaign_icon.png" />
-				<img className="m-1" width={32} src="/icons/ui/logout_icon.png" />
+				<img
+					className="m-1"
+					width={32}
+					src="/icons/ui/map_icon.png"
+					onClick={() => {
+						setMapData({name: "", id: -1});
+					}}
+				/>
+				<img
+					className="m-1"
+					width={32}
+					src="/icons/ui/campaign_icon.png"
+					onClick={() => {
+						setMapData({name: "", id: -1});
+						setCampaignData({name: "", id: -1});
+					}}
+					/>
+				<img
+					className="m-1"
+					width={32}
+					src="/icons/ui/logout_icon.png"
+					onClick={() => {
+						setMapData({name: "", id: -1});
+						setCampaignData({name: "", id: -1});
+						setUserData({name: "", id: -1});
+					}}
+					/>
 			</div>
 	)
 }

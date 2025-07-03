@@ -46,7 +46,7 @@ export default function SidebarBase({children, rightSide=true, minWidth = SIDEBA
 				isResized.current = true;
 			}}>
 			</div>
-			<div id="content" className="p-10 w-full overflow-y-auto">
+			<div id="content" className="p-10 w-full overflow-y-auto pt-15">
 				{children}
 			</div>
 		</aside>
