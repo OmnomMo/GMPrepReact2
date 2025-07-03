@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import './MapComponent.css';
-import { NodeContext } from '../Contexts';
+import { GlobalContext } from '../Contexts';
 import MapIconComponent from './MapIconComponent';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getAllMapNodes, postMapNode } from '../Dialogues/Requests/MapNodeRequests';
@@ -34,7 +34,7 @@ export default function MapComponent() {
 	//#endregion
 
 	//draggingMap is provided by context, because we want to globally stop dragging map when releasing mouse anywhere.
-	const { draggingMap, droppedNodeInfo, setDroppedNodeInfo } = useContext(NodeContext);
+	const { draggingMap, droppedNodeInfo, setDroppedNodeInfo } = useContext(GlobalContext);
 	const dragStartPos = useRef({ x: 0.0, y: 0.0 });
 	const originalPos = useRef({ x: 0.0, y: 0.0 });
 	const mousePos = useRef({ x: 0, y: 0 });

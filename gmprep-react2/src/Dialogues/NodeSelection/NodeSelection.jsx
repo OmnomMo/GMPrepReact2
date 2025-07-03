@@ -1,6 +1,6 @@
 import { useQuery  } from "@tanstack/react-query"
 import { defaultNode } from "../../Globals/DefaultNode";
-import { NodeContext } from "../../Contexts";
+import { GlobalContext } from "../../Contexts";
 import NodeButton from "./NodeButton";
 import { useContext, useRef } from "react";
 
@@ -23,7 +23,7 @@ async function getAllNodes() {
 export default function NodeSelection() {
 
 	const keyIteration = useRef(0);
-	const {setCurrentNodeData} = useContext(NodeContext);
+	const {setCurrentNodeData} = useContext(GlobalContext);
 	//const queryClient = useQueryClient();
 
 		const {

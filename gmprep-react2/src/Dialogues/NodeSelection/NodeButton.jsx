@@ -1,10 +1,10 @@
 import { useContext, useRef, useState } from "react";
-import { NodeContext } from "../../Contexts";
+import { GlobalContext } from "../../Contexts";
 
 export default function NodeButton({defaultNodeData}) {
 	const [nodeData] = useState(defaultNodeData);
-	const {setCurrentNodeData} = useContext(NodeContext);
-	const {setDraggedNode} = useContext(NodeContext);
+	const {setCurrentNodeData} = useContext(GlobalContext);
+	const {setDraggedNode} = useContext(GlobalContext);
 	const startDrag = useRef(false);
 	
 

@@ -1,11 +1,11 @@
 import { useContext, useEffect, useRef } from "react";
 import { createPortal } from 'react-dom';
 import './DragAndDrop.css'
-import { NodeContext } from "../Contexts";
+import { GlobalContext } from "../Contexts";
 
 export default function DragAndDrop() {
 	const element = useRef({});
-	const { draggedNode, setDraggedNode, setDroppedNodeInfo } = useContext(NodeContext)
+	const { draggedNode, setDraggedNode, setDroppedNodeInfo } = useContext(GlobalContext)
 
 	useEffect(() => {
 		window.addEventListener('mouseup', handleMouseUp, false);

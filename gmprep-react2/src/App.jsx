@@ -3,23 +3,27 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import SidebarBase from './Dialogues/SideBarBase';
 import NewNode from './Dialogues/NewNodePopup/NewNode';
 import NodeSelection from './Dialogues/NodeSelection/NodeSelection';
-import { NodeContext } from './Contexts';
+import { GlobalContext } from './Contexts';
 import { useRef, useState } from 'react';
 import { defaultNode } from './Globals/DefaultNode';
 import MapComponent from './MapComponent/MapComponent';
 import DragAndDrop from './DragAndDrop/DragAndDrop';
+import Home from './Home';
 const queryClient = new QueryClient();
 
 function App() {
 	const [currentNodeData, setCurrentNodeData] = useState(defaultNode);
 	const [draggedNode, setDraggedNode] = useState(null);
 	const [droppedNodeInfo, setDroppedNodeInfo] = useState({node: null, location:{x:0, y:0}})
+	const [userData, setUserData] = useState({name: "", id: -1})
+	const [campaignData, setCampaignData] = useState({name: "", id: -1})
+	const [mapData, setMapData] = useState({name: "", id: -1})
 	const draggingMap = useRef(false);
 
 	return (
 		<>
 			<QueryClientProvider client={queryClient}>
-				<NodeContext.Provider value={{
+				<GlobalContext.Provider value={{
 					currentNodeData: currentNodeData,
 					setCurrentNodeData: setCurrentNodeData,
 					draggedNode: draggedNode,
@@ -27,25 +31,15 @@ function App() {
 					droppedNodeInfo: droppedNodeInfo,
 					setDroppedNodeInfo: setDroppedNodeInfo,
 					draggingMap: draggingMap,
+					userData: userData,
+					setUserData: setUserData,
+					campaignData: campaignData,
+					setCampaignData: setCampaignData,
+					mapData: mapData,
+					setMapData: setMapData,
 				}}>
-					<div
-						id="MapDragContainer"
-						onMouseUp={() => {
-							draggingMap.current = false;
-						}}
-						onMouseLeave={() => {
-							draggingMap.current = false;
-						}}>
-						<DragAndDrop />
-						<MapComponent />
-						<SidebarBase rightSide={false} minWidth={200}>
-							<NodeSelection />
-						</SidebarBase>
-						<SidebarBase rightSide={true} key={currentNodeData?.id ?? "newNode"}>
-							<NewNode />
-						</SidebarBase>
-					</div>
-				</NodeContext.Provider>
+					<Home />
+				</GlobalContext.Provider>
 			</QueryClientProvider>
 		</>
 

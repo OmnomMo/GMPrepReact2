@@ -7,7 +7,7 @@ import EditeableHeader from "../../EditeableFields/EditeableHeader";
 import TypeAlignmentComponent from "./TypeAlignmentComponent";
 import EditeableList from "../../EditeableFields/EditeableList";
 import Secret from "./Secret";
-import { NodeContext } from "../../Contexts";
+import { GlobalContext } from "../../Contexts";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { defaultNode } from "../../Globals/DefaultNode";
 
@@ -34,7 +34,7 @@ export default function NewNode() {
 
 	const remountCount = useRef(0);
 	const [localNodeData, setLocalNodeData] = useState({});
-	const {currentNodeData, setCurrentNodeData} = useContext(NodeContext);
+	const {currentNodeData, setCurrentNodeData} = useContext(GlobalContext);
 	const [isCreature, setIsCreature] = useState(currentNodeData?.creatureInfo != null);
 	const [isLocation, setIsLocation] = useState(currentNodeData?.locationInfo != null);
 	const queryClient = useQueryClient();
