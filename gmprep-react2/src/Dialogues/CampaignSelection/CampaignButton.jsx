@@ -1,11 +1,17 @@
 export default function CampaignButton({ campaignData, onSelect, onDelete }) {
 
+
+	let imageSrc = "/maps/" +campaignData.imagePath;
+	if (campaignData.externalImageUrl != "") {
+		imageSrc = campaignData.externalImageUrl;
+	}
+
 	return (
 		<div
 			name="CampaignButton"
 			className="relative h-100 min-w-80 m-3"
 			style={{
-				backgroundImage: "url(/maps/" + campaignData.imagePath + ")",
+				backgroundImage: "url(" + imageSrc + ")",
 				backgroundSize: "cover",
 				backgroundPosition: "center",
 				backgroundColor: "#505050",

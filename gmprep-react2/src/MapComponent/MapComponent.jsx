@@ -51,9 +51,12 @@ export default function MapComponent() {
 		return widthFactor;
 	}, [mapDimensions, sourceImageDimensions]);
 
-	let imgPath = mapData.imagePath;
-	if (imgPath == "") {
-		imgPath = "resolutions_1200.jpg";
+	let imgPath = "/maps/" + mapData.imagePath;
+	if (mapData.imagePath == "") {
+		imgPath = "/maps/resolutions_1200.jpg";
+	}
+	if (mapData.externalImageUrl != "") {
+		imgPath = mapData.externalImageUrl;
 	}
 
 	//When Drag and Drop object drops a node, we create and post a new map node
@@ -152,6 +155,8 @@ export default function MapComponent() {
 
 	function mouseMoveEvent(e) {
 
+		setActive(true);
+
 		mousePos.current = { x: e.clientX, y: e.clientY };
 
 		if (!draggingMap.current) {
@@ -203,7 +208,7 @@ export default function MapComponent() {
 				}}
 			>
 				<img
-					src={"/maps/" + imgPath}
+					src={imgPath}
 					id="mapBackground"
 					draggable='false'
 
