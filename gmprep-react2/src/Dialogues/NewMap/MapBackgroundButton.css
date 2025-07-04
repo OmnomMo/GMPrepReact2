@@ -1,0 +1,13 @@
+.mapBackgroundButton {
+	opacity: 0.5;
+	width: 10em;
+	height: 10em;
+	margin: 0.5em;
+}
+
+.mapBackgroundButton.selected {
+	opacity: 1.0;
+	outline: solid;
+	outline-width: 5px;
+	outline-color: rgb(167, 167, 250);
+}

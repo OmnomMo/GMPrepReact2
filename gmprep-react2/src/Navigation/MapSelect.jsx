@@ -1,7 +1,10 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { GlobalContext } from "../Contexts";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import CampaignButton from "../Dialogues/CampaignSelection/CampaignButton";
+import EditeableHeader from "../EditeableFields/EditeableHeader";
+import EditeableMultiline from "../EditeableFields/EditeableMultiline";
+import NewMap from "../Dialogues/NewMap/NewMap";
 
 
 async function requestMaps({queryKey}) {
@@ -44,6 +47,7 @@ export default function MapSelect() {
 	const queryClient = useQueryClient();
 
 	const {campaignData, setMapData} = useContext(GlobalContext);
+	const [creatingNewMap, setCreatingNewMap] = useState(false);
 
 	const {status, error, data: maps} = useQuery({
 		queryFn: requestMaps,
@@ -58,9 +62,10 @@ export default function MapSelect() {
 		mutationFn: requestDeleteMap,
 	})
 
-	function createNewMap(name) {
+	function createNewMap(data) {
+		setCreatingNewMap(false);
 		createNewMapMutation.mutate({
-			data: {name: name},
+			data: data,
 			campaignId: campaignData.id,
 		}, {
 			onSuccess: (data) => {
@@ -100,6 +105,19 @@ export default function MapSelect() {
 		return (<div>ERROR LOADING MAPS - {error}</div>)
 	}
 
+	
+
+	if (creatingNewMap) {
+		return(
+			<NewMap
+				onSubmit={createNewMap}
+				onCancel={() => {
+					setCreatingNewMap(false);
+				}}
+				/>
+		);
+	}
+
 	return (
 		<>
 			<h1>MAP SELECT</h1>
@@ -113,10 +131,7 @@ export default function MapSelect() {
 				)}
 			</ul>
 			<button className="m-4" onClick={() => {
-				let newMapName = prompt("New Map Name:");
-				if (newMapName != "") {
-					createNewMap(newMapName);
-				}
+				setCreatingNewMap(true);
 			}}>New Map</button>
 		</>
 	)

@@ -15,6 +15,7 @@ export default function HeaderBar() {
 					className="m-1"
 					width={32}
 					src="/icons/ui/map_icon.png"
+					hidden = {mapData.id == -1 || campaignData.id == -1 || userData.id == -1}
 					onClick={() => {
 						setMapData({name: "", id: -1});
 					}}
@@ -23,6 +24,7 @@ export default function HeaderBar() {
 					className="m-1"
 					width={32}
 					src="/icons/ui/campaign_icon.png"
+					hidden = {campaignData.id == -1 || userData.id == -1}
 					onClick={() => {
 						setMapData({name: "", id: -1});
 						setCampaignData({name: "", id: -1});
@@ -32,6 +34,7 @@ export default function HeaderBar() {
 					className="m-1"
 					width={32}
 					src="/icons/ui/logout_icon.png"
+					hidden = {userData.id == -1}
 					onClick={() => {
 						setMapData({name: "", id: -1});
 						setCampaignData({name: "", id: -1});

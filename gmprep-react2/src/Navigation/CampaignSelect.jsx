@@ -115,7 +115,7 @@ export default function CampaignSelect() {
 			</ul>
 			<button className="m-4" onClick={() => {
 				let newCampaignName = prompt("New Campaign Name:");
-				if (newCampaignName != "") {
+				if (newCampaignName != "" && newCampaignName != null) {
 					createNewCampaign(newCampaignName);
 				}
 			}}>New Campaign</button>

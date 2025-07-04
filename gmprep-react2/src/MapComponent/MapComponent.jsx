@@ -51,7 +51,10 @@ export default function MapComponent() {
 		return widthFactor;
 	}, [mapDimensions, sourceImageDimensions]);
 
-
+	let imgPath = mapData.imagePath;
+	if (imgPath == "") {
+		imgPath = "resolutions_1200.jpg";
+	}
 
 	//When Drag and Drop object drops a node, we create and post a new map node
 	useEffect(() => {
@@ -83,6 +86,7 @@ export default function MapComponent() {
 			setDroppedNodeInfo({ node: null, location: droppedNodeInfo.location })
 		}
 		if (droppedNodeInfo.node != null && !active) {
+			console.log("Dropped node outside of map")
 			setDroppedNodeInfo({ node: null, location: droppedNodeInfo.location })
 		}
 	}, [droppedNodeInfo, setDroppedNodeInfo, createMapNodeMutation, pos, zoom, active, getMapWidthFactor, mapData])
@@ -199,7 +203,7 @@ export default function MapComponent() {
 				}}
 			>
 				<img
-					src="/maps/resolutions_1200.jpg"
+					src={"/maps/" + imgPath}
 					id="mapBackground"
 					draggable='false'
 

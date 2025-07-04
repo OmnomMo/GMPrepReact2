@@ -12,6 +12,8 @@
 	background-color: black;
 	flex-direction: row;
 	display: flex;
+	overflow-x: auto;
+	max-width: 100em;
 }
 
 .Noselect * {
