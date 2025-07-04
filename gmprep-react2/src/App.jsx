@@ -1,7 +1,7 @@
 import './App.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { GlobalContext } from './Contexts';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { defaultNode } from './Globals/DefaultNode';
 import Home from './Home';
 import HeaderBar from './HeaderBar';
@@ -11,10 +11,23 @@ function App() {
 	const [currentNodeData, setCurrentNodeData] = useState(defaultNode);
 	const [draggedNode, setDraggedNode] = useState(null);
 	const [droppedNodeInfo, setDroppedNodeInfo] = useState({node: null, location:{x:0, y:0}})
-	const [userData, setUserData] = useState({name: "", id: -1})
-	const [campaignData, setCampaignData] = useState({name: "", id: -1})
-	const [mapData, setMapData] = useState({name: "", id: -1})
 	const draggingMap = useRef(false);
+
+
+	const storedUserData = localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")) : {name: "", id: -1};
+	const storedCampaignData = localStorage.getItem("campaignData") ? JSON.parse(localStorage.getItem("campaignData")) : {name: "", id: -1};
+	const storedMapData = localStorage.getItem("mapData") ? JSON.parse(localStorage.getItem("mapData")) : {name: "", id: -1};
+
+	//Previous user, campaign and map are stored in local storage for now.
+	const [userData, setUserData] = useState(storedUserData)
+	const [campaignData, setCampaignData] = useState(storedCampaignData)
+	const [mapData, setMapData] = useState(storedMapData)
+
+	useEffect(() => {
+		localStorage.setItem("userData", JSON.stringify(userData));
+		localStorage.setItem("campaignData", JSON.stringify(campaignData));
+		localStorage.setItem("mapData", JSON.stringify(mapData))
+	}, [userData, campaignData, mapData])
 
 	return (
 		<>

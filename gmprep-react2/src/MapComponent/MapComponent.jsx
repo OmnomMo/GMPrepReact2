@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import './MapComponent.css';
 import { GlobalContext } from '../Contexts';
 import MapIconComponent from './MapIconComponent';
@@ -12,16 +12,16 @@ let MAX_ZOOM = 10.0;
 
 export default function MapComponent() {
 
-
 	//#region queries
 	const queryClient = useQueryClient();
 
+	const { draggingMap, droppedNodeInfo, setDroppedNodeInfo, mapData} = useContext(GlobalContext);
 	const {
 		status,
 		error,
-		data: mapData,
+		data: mapNodes,
 	} = useQuery({
-		queryKey: ['MapNodes', { mapId: 1 }],
+		queryKey: ['MapNodes', { mapId: mapData.id }],
 		queryFn: getAllMapNodes,
 	})
 
@@ -34,12 +34,11 @@ export default function MapComponent() {
 	//#endregion
 
 	//draggingMap is provided by context, because we want to globally stop dragging map when releasing mouse anywhere.
-	const { draggingMap, droppedNodeInfo, setDroppedNodeInfo } = useContext(GlobalContext);
 	const dragStartPos = useRef({ x: 0.0, y: 0.0 });
 	const originalPos = useRef({ x: 0.0, y: 0.0 });
 	const mousePos = useRef({ x: 0, y: 0 });
-	const mapDimensions = useRef({ x: 0, y: 0 });
-	const sourceImageDimensions = useRef({ x: 0, y: 0 })
+	const [mapDimensions, setMapDimensions] = useState({ x: 1, y: 1 });
+	const [sourceImageDimensions, setSourceImageDimensions] = useState({x:1, y:1})
 
 	const [zoom, setZoom] = useState(1.0);
 	const [pos, setPos] = useState({ x: 0.0, y: 0.0 });
@@ -47,10 +46,11 @@ export default function MapComponent() {
 	const [active, setActive] = useState(false);
 
 	//return scale factor of map when zoom = 1.0
-	function getMapWidthFactor() {
-		let widthFactor = mapDimensions.current.x / sourceImageDimensions.current.x
+	const getMapWidthFactor = useCallback(() => {
+		let widthFactor = mapDimensions.x / sourceImageDimensions.x
 		return widthFactor;
-	}
+	}, [mapDimensions, sourceImageDimensions]);
+
 
 
 	//When Drag and Drop object drops a node, we create and post a new map node
@@ -78,27 +78,28 @@ export default function MapComponent() {
 					locationY: dropLocationY,
 					node: droppedNodeInfo.node,
 				},
-				mapId: 1,
+				mapId: mapData.id,
 			})
 			setDroppedNodeInfo({ node: null, location: droppedNodeInfo.location })
 		}
 		if (droppedNodeInfo.node != null && !active) {
 			setDroppedNodeInfo({ node: null, location: droppedNodeInfo.location })
 		}
-	}, [droppedNodeInfo, setDroppedNodeInfo, createMapNodeMutation, pos, zoom, active])
+	}, [droppedNodeInfo, setDroppedNodeInfo, createMapNodeMutation, pos, zoom, active, getMapWidthFactor, mapData])
 
 	//loads the background image for the map to determine it's original dimensions
 	function cacheSourceImageDimensions(imgSrc) {
 		let newImg = new Image();
 		newImg.onload = function () {
-			sourceImageDimensions.current = {
+			setSourceImageDimensions({
 				x: newImg.width,
 				y: newImg.height,
-			}
+			})
 		}
 		newImg.src = imgSrc;
 
 	}
+
 
 	//#region navigation
 	//updates position of map so zoom moves towards mouse pos
@@ -204,16 +205,16 @@ export default function MapComponent() {
 
 					onLoad={(e) => {
 						cacheSourceImageDimensions(e.target.src);
-						mapDimensions.current = {
+						setMapDimensions({
 							x: e.target.width,
 							y: e.target.height,
-						}
+						})
 					}}
 				/>
-				{mapData && mapData.map((mapNodeData) => {
+				{mapNodes && mapNodes.map((mapNodeData) => {
 					return <MapIconComponent
 						mapNodeData={mapNodeData}
-						mapHeight={mapDimensions.current.y}
+						mapHeight={mapDimensions.y}
 						posX={mapNodeData.locationX * getMapWidthFactor()}
 						posY={mapNodeData.locationY * getMapWidthFactor()}
 						scaleFactor={getMapWidthFactor()}

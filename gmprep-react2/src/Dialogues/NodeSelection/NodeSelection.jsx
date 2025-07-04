@@ -5,14 +5,15 @@ import NodeButton from "./NodeButton";
 import { useContext, useRef } from "react";
 
 
-async function getAllNodes() {
+async function getAllNodes({queryKey}) {
+	const [_key, campaignId] = queryKey;
 
 	const requestOptions = {
 		method: 'GET',
 		headers: { 'Content-Type': 'application/json' },
 	}
 	console.log("Requesting Nodes")
-	return fetch('http://localhost:5140/Nodes', requestOptions)
+	return fetch('http://localhost:5140/Nodes/All/' + campaignId, requestOptions)
 		.then(result => result.json())
 		.then(json => {
 			console.log(json);
@@ -23,7 +24,7 @@ async function getAllNodes() {
 export default function NodeSelection() {
 
 	const keyIteration = useRef(0);
-	const {setCurrentNodeData} = useContext(GlobalContext);
+	const {setCurrentNodeData, campaignData} = useContext(GlobalContext);
 	//const queryClient = useQueryClient();
 
 		const {
@@ -31,9 +32,14 @@ export default function NodeSelection() {
 		error,
 		data: nodes,
 	} = useQuery({
-		queryKey: ['AllNodes'],
+		queryKey: ['AllNodes', campaignData.id],
 		queryFn: getAllNodes,
 	})
+
+	function resetNodeData() {
+		const newNode = {...defaultNode};
+		setCurrentNodeData(newNode);
+	}
 
 	if (status == "error") {
 		console.log(error);
@@ -49,7 +55,16 @@ export default function NodeSelection() {
 		return (
 			<div className="w-full flex flex-wrap" id={"NodeSelection" + keyIteration.current} key={"NodeSelection" + keyIteration.current}>
 				{nodes.map(node => <NodeButton defaultNodeData={node} key={node.id + node.name}/>)}
-				<img src="/icons/ui/plus_icon.png" width={64} height={64} className="m-2" onClick={() => {setCurrentNodeData({...defaultNode})}} />
+				<img
+					src="/icons/ui/plus_icon.png"
+					width={64}
+					height={64}
+					className="m-2"
+					draggable="false"
+					onMouseUp={() => {
+						resetNodeData();
+					}}
+					/>
 			</div>
 		)
 	}

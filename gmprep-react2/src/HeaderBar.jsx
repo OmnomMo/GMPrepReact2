@@ -3,10 +3,13 @@ import { GlobalContext } from "./Contexts"
 
 export default function HeaderBar() {
 
-	const {setUserData, setCampaignData, setMapData} = useContext(GlobalContext)
+	const {userData, campaignData, mapData, setUserData, setCampaignData, setMapData} = useContext(GlobalContext)
+
+
 
 	return (
 			<div name="headerBar" className='flex flex-row absolute top-0 left-0 w-full bg-blue-800 z-30'>
+				<p className="m-2">{userData.name} - {campaignData.name} - {mapData.name}</p>
 				<div className="flex-grow" />
 				<img
 					className="m-1"

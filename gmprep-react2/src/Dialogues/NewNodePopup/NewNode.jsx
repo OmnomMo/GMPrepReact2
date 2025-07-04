@@ -11,13 +11,13 @@ import { GlobalContext } from "../../Contexts";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { defaultNode } from "../../Globals/DefaultNode";
 
-async function postNode(data) {
+async function postNode({data, campaignId}) {
 	const requestOptions = {
 		method: 'POST',
 		headers: {'Content-Type': 'application/json'},
-		body: JSON.stringify(data.data)
+		body: JSON.stringify(data)
 	};
-	return fetch('http://localhost:5140/Nodes/Update', requestOptions)
+	return fetch('http://localhost:5140/Nodes/Update/' + campaignId, requestOptions)
 		.then(response => response.json());
 }
 
@@ -34,7 +34,7 @@ export default function NewNode() {
 
 	const remountCount = useRef(0);
 	const [localNodeData, setLocalNodeData] = useState({});
-	const {currentNodeData, setCurrentNodeData} = useContext(GlobalContext);
+	const {campaignData, currentNodeData, setCurrentNodeData} = useContext(GlobalContext);
 	const [isCreature, setIsCreature] = useState(currentNodeData?.creatureInfo != null);
 	const [isLocation, setIsLocation] = useState(currentNodeData?.locationInfo != null);
 	const queryClient = useQueryClient();
@@ -60,6 +60,7 @@ export default function NewNode() {
 		mutationFn: deleteNode,
 		onSuccess: () => {
 			queryClient.invalidateQueries({queryKey: ['AllNodes']});
+			queryClient.invalidateQueries({queryKey: ['MapNodes']});
 		}
 	})
 
@@ -143,6 +144,7 @@ export default function NewNode() {
 				localNodeData.id = currentNodeData.id;
 				updateNodeMutation.mutate({
 					data: localNodeData,
+					campaignId: campaignData.id,
 				})
 			}}>Submit</button>
 		</div>
