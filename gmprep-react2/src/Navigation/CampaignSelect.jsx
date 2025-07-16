@@ -5,24 +5,24 @@ import CampaignButton from "../Dialogues/CampaignSelection/CampaignButton";
 
 
 async function requestCampaigns({queryKey}) {
-	const [_key, userId] = queryKey;
+	const [_key, userToken] = queryKey;
 	const requestParams = {
 		method: 'GET',
 		header: {'Content-Type': 'application/json'},
 	}
-	console.log("Fetching campaigns for user " + userId)
-	return fetch('http://localhost:5140/Campaigns/' + userId, requestParams)
+	console.log("Fetching campaigns for user " + userToken)
+	return fetch('http://localhost:5140/Campaigns/' + userToken, requestParams)
 		.then(result => result.json())
 }
 
-async function requestCreateNewCampaign({data, userId}) {
+async function requestCreateNewCampaign({data, userToken}) {
 	const requestOptions = {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify(data),
 	}
 	console.log("Adding campaign")
-	return fetch('http://localhost:5140/Campaigns/Create/' + userId, requestOptions)
+	return fetch('http://localhost:5140/Campaigns/Create/' + userToken, requestOptions)
 		.then(result => result.json())
 		.then(json => {
 			console.log(json);
@@ -30,24 +30,24 @@ async function requestCreateNewCampaign({data, userId}) {
 		})
 }
 
-async function requestDeleteCampaign({campaignId}) {
+async function requestDeleteCampaign({campaignId, userToken}) {
 	const requestOptions = {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json'},
 	}
 	console.log("Deleting Campaign")
-	return fetch('http://localhost:5140/Campaigns/Delete/' + campaignId, requestOptions)
+	return fetch('http://localhost:5140/Campaigns/Delete/' + campaignId + "/" + userToken, requestOptions)
 }
 
 export default function CampaignSelect() {
 
 	const queryClient = useQueryClient();
 
-	const {userData, setCampaignData} = useContext(GlobalContext);
+	const { userToken, setCampaignData} = useContext(GlobalContext);
 
 	const {status, error, data: campaigns} = useQuery({
 		queryFn: requestCampaigns,
-		queryKey: ['AllCampaigns', userData.id],
+		queryKey: ['AllCampaigns', userToken],
 	})
 
 	const createNewCampaignMutation = useMutation({
@@ -62,7 +62,7 @@ export default function CampaignSelect() {
 	function createNewCampaign(name) {
 		createNewCampaignMutation.mutate({
 			data: {name: name},
-			userId: userData.id,
+			userToken: userToken,
 		}, {
 			onSuccess: (data) => {
 				console.log("Created new campaign!");
@@ -84,7 +84,8 @@ export default function CampaignSelect() {
 		}
 
 		deleteCampaignMutation.mutate({
-			campaignId
+			campaignId: campaignId,
+			userToken: userToken,
 		}, {
 			onSuccess: () => {
 				console.log("Deleted campaign!")

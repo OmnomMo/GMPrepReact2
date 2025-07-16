@@ -43,7 +43,7 @@
 
 - Node links
 	
-
+- Store client secret using the dotnet secret manager
 
 
 

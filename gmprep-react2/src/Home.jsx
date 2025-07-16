@@ -13,9 +13,9 @@ import NodeSelection from './Dialogues/NodeSelection/NodeSelection';
 
 export default function Home() {
 
-	const { userData, campaignData, mapData, draggingMap, currentNodeData } = useContext(GlobalContext);
+	const { userToken, campaignData, mapData, draggingMap, currentNodeData } = useContext(GlobalContext);
 
-	if (userData.id == -1) {
+	if (userToken == null) {
 		return <Login />
 	}
 

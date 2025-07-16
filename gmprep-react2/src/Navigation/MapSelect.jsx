@@ -8,24 +8,24 @@ import NewMap from "../Dialogues/NewMap/NewMap";
 
 
 async function requestMaps({queryKey}) {
-	const [_key, campaignId] = queryKey;
+	const [_key, campaignId, userToken] = queryKey;
 	const requestParams = {
 		method: 'GET',
 		header: {'Content-Type': 'application/json'},
 	}
 	console.log("Fetching maps for campaign " + campaignId)
-	return fetch('http://localhost:5140/Campaigns/Maps/' + campaignId, requestParams)
+	return fetch('http://localhost:5140/Campaigns/Maps/' + campaignId + "/" + userToken, requestParams)
 		.then(result => result.json())
 }
 
-async function requestCreateNewMap({data, campaignId}) {
+async function requestCreateNewMap({data, campaignId, userToken}) {
 	const requestOptions = {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify(data),
 	}
 	console.log("Adding map")
-	return fetch('http://localhost:5140/Campaigns/Maps/Create/' + campaignId, requestOptions)
+	return fetch('http://localhost:5140/Campaigns/Maps/Create/' + campaignId + "/" + userToken, requestOptions)
 		.then(result => result.json())
 		.then(json => {
 			console.log(json);
@@ -33,25 +33,25 @@ async function requestCreateNewMap({data, campaignId}) {
 		})
 }
 
-async function requestDeleteMap({mapId}) {
+async function requestDeleteMap({mapId, userToken}) {
 	const requestOptions = {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json'},
 	}
 	console.log("Deleting Campaign")
-	return fetch('http://localhost:5140/Campaigns/Maps/Delete/' + mapId, requestOptions)
+	return fetch('http://localhost:5140/Campaigns/Maps/Delete/' + mapId + "/" + userToken, requestOptions)
 }
 
 export default function MapSelect() {
 
 	const queryClient = useQueryClient();
 
-	const {campaignData, setMapData} = useContext(GlobalContext);
+	const {campaignData, setMapData, userToken} = useContext(GlobalContext);
 	const [creatingNewMap, setCreatingNewMap] = useState(false);
 
 	const {status, error, data: maps} = useQuery({
 		queryFn: requestMaps,
-		queryKey: ['AllMaps', campaignData.id],
+		queryKey: ['AllMaps', campaignData.id, userToken],
 	})
 
 	const createNewMapMutation = useMutation({
@@ -67,6 +67,7 @@ export default function MapSelect() {
 		createNewMapMutation.mutate({
 			data: data,
 			campaignId: campaignData.id,
+			userToken: userToken,
 		}, {
 			onSuccess: (data) => {
 				console.log("Created new Map!");
@@ -88,7 +89,8 @@ export default function MapSelect() {
 		}
 
 		deleteMapMutation.mutate({
-			mapId
+			mapId: mapId,
+			userToken: userToken,
 		}, {
 			onSuccess: () => {
 				console.log("Deleted map!")

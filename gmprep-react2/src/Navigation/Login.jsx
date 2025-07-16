@@ -2,6 +2,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import UserButton from "../Dialogues/UserSelection/UserButton";
 import { useContext } from "react";
 import { GlobalContext } from "../Contexts";
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode'
 
 async function requestAllUsers() {
 	const requestOptions = {
@@ -48,15 +50,16 @@ export default function Login() {
 
 	const queryClient = useQueryClient();
 
-	const { setUserData} = useContext(GlobalContext);
+	const { setUserData, setUserToken} = useContext(GlobalContext);
 
+	/*
 	const { status, error, data: users } = useQuery(
 		{
 			queryKey: ['AllUsers'],
 			queryFn: requestAllUsers,
 		}
 	)
-
+*/
 
 	const createUserMutation = useMutation({
 		mutationFn: requestCreateUser,
@@ -95,7 +98,7 @@ export default function Login() {
 				});
 		}
 	}
-
+/*
 	if (status == 'pending') {
 		return <div>LOADING USERS...</div>
 	}
@@ -103,12 +106,26 @@ export default function Login() {
 	if (status == 'error') {
 		return <div>ERROR LOADING USERS ({error})</div>
 	}
-
+*/
 
 	return (
 		<>
 			<h1>LOGIN</h1>
-			<ul className="bg-gray-900 p-4 h-100">
+			<GoogleLogin
+				className="m-5"
+				onSuccess={credentialResponse => {
+					console.log(credentialResponse);
+					let credential = jwtDecode(credentialResponse.credential);
+					console.log(credential)
+					setUserData(credential)
+					setUserToken(credentialResponse.credential)
+					
+				}}
+				onError={error => {
+					console.log("login failed! " + error);
+				}}
+			/>
+{/*}			<ul className="bg-gray-900 p-4 h-100">
 				{users.map(user =>
 					<UserButton
 						key={"UserButton" + user.id}
@@ -121,10 +138,10 @@ export default function Login() {
 			</ul>
 			<button className="m-4" onClick={() => {
 				let newUserName = prompt("New user name:");
-				if (newUserName != "") {
+				if (newUserName != null && newUserName != "") {
 					createNewUser(newUserName);
 				}
-			}}>New User</button>
+			}}>New User</button>*/}
 		</>
 	)
 }
