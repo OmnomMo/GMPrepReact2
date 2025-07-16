@@ -11,30 +11,30 @@ import { GlobalContext } from "../../Contexts";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { defaultNode } from "../../Globals/DefaultNode";
 
-async function postNode({data, campaignId}) {
+async function postNode({data, campaignId, userToken}) {
 	const requestOptions = {
 		method: 'POST',
 		headers: {'Content-Type': 'application/json'},
 		body: JSON.stringify(data)
 	};
-	return fetch('http://localhost:5140/Nodes/Update/' + campaignId, requestOptions)
+	return fetch('http://localhost:5140/Nodes/Update/' + campaignId + "/" + userToken, requestOptions)
 		.then(response => response.json());
 }
 
-async function deleteNode(data) {
+async function deleteNode({data, userToken}) {
 	const requestOptions = {
 		method: 'POST',
 		headers: {'Content-Type': 'application/json'},
 		body: JSON.stringify(data.data)
 	}
-	return fetch('http://localhost:5140/Nodes/Delete', requestOptions);
+	return fetch('http://localhost:5140/Nodes/Delete/' + userToken, requestOptions);
 }
 
 export default function NewNode() {
 
 	const remountCount = useRef(0);
 	const [localNodeData, setLocalNodeData] = useState({});
-	const {campaignData, currentNodeData, setCurrentNodeData} = useContext(GlobalContext);
+	const {userToken, campaignData, currentNodeData, setCurrentNodeData} = useContext(GlobalContext);
 	const [isCreature, setIsCreature] = useState(currentNodeData?.creatureInfo != null);
 	const [isLocation, setIsLocation] = useState(currentNodeData?.locationInfo != null);
 	const queryClient = useQueryClient();
@@ -132,6 +132,7 @@ export default function NewNode() {
 					setCurrentNodeData({...defaultNode})
 					deleteNodeMutation.mutate({
 						data: localNodeData,
+						userToken: userToken,
 					})
 				} 
 			}}>
@@ -145,6 +146,7 @@ export default function NewNode() {
 				updateNodeMutation.mutate({
 					data: localNodeData,
 					campaignId: campaignData.id,
+					userToken: userToken,
 				})
 			}}>Submit</button>
 		</div>

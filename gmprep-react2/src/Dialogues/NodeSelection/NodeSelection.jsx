@@ -6,14 +6,14 @@ import { useContext, useRef } from "react";
 
 
 async function getAllNodes({queryKey}) {
-	const [_key, campaignId] = queryKey;
+	const [_key, campaignId, userToken] = queryKey;
 
 	const requestOptions = {
 		method: 'GET',
 		headers: { 'Content-Type': 'application/json' },
 	}
 	console.log("Requesting Nodes")
-	return fetch('http://localhost:5140/Nodes/All/' + campaignId, requestOptions)
+	return fetch(`http://localhost:5140/Nodes/All/${campaignId}/${userToken}`, requestOptions)
 		.then(result => result.json())
 		.then(json => {
 			console.log(json);
@@ -24,7 +24,7 @@ async function getAllNodes({queryKey}) {
 export default function NodeSelection() {
 
 	const keyIteration = useRef(0);
-	const {setCurrentNodeData, campaignData} = useContext(GlobalContext);
+	const {userToken, setCurrentNodeData, campaignData} = useContext(GlobalContext);
 	//const queryClient = useQueryClient();
 
 		const {
@@ -32,7 +32,7 @@ export default function NodeSelection() {
 		error,
 		data: nodes,
 	} = useQuery({
-		queryKey: ['AllNodes', campaignData.id],
+		queryKey: ['AllNodes', campaignData.id, userToken],
 		queryFn: getAllNodes,
 	})
 

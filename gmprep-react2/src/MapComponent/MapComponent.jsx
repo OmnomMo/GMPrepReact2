@@ -15,13 +15,13 @@ export default function MapComponent() {
 	//#region queries
 	const queryClient = useQueryClient();
 
-	const { draggingMap, droppedNodeInfo, setDroppedNodeInfo, mapData} = useContext(GlobalContext);
+	const {userToken, draggingMap, droppedNodeInfo, setDroppedNodeInfo, mapData} = useContext(GlobalContext);
 	const {
 		status,
 		error,
 		data: mapNodes,
 	} = useQuery({
-		queryKey: ['MapNodes', { mapId: mapData.id }],
+		queryKey: ['MapNodes', { mapId: mapData.id, userToken: userToken}],
 		queryFn: getAllMapNodes,
 	})
 
@@ -77,13 +77,13 @@ export default function MapComponent() {
 			//Drop Locations in map space
 			dropLocationX = dropLocationX / getMapWidthFactor();
 			dropLocationY = dropLocationY / getMapWidthFactor();
-
 			createMapNodeMutation.mutate({
 				data: {
 					locationX: dropLocationX,
 					locationY: dropLocationY,
 					node: droppedNodeInfo.node,
 				},
+				userToken: userToken,
 				mapId: mapData.id,
 			})
 			setDroppedNodeInfo({ node: null, location: droppedNodeInfo.location })
@@ -92,7 +92,7 @@ export default function MapComponent() {
 			console.log("Dropped node outside of map")
 			setDroppedNodeInfo({ node: null, location: droppedNodeInfo.location })
 		}
-	}, [droppedNodeInfo, setDroppedNodeInfo, createMapNodeMutation, pos, zoom, active, getMapWidthFactor, mapData])
+	}, [droppedNodeInfo, setDroppedNodeInfo, createMapNodeMutation, pos, zoom, active, getMapWidthFactor, mapData, userToken])
 
 	//loads the background image for the map to determine it's original dimensions
 	function cacheSourceImageDimensions(imgSrc) {

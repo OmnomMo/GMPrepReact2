@@ -3,7 +3,7 @@ import { GlobalContext } from "../Contexts";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteMapNode } from "../Dialogues/Requests/MapNodeRequests";
 
-export default function MapIconComponent({ mapNodeData, mapHeight, posX, posY, scaleFactor = 1.0}) {
+export default function MapIconComponent({ mapNodeData, mapHeight, posX, posY, scaleFactor = 1.0 }) {
 
 	const queryClient = useQueryClient();
 
@@ -12,7 +12,7 @@ export default function MapIconComponent({ mapNodeData, mapHeight, posX, posY, s
 	})
 
 
-	const { setCurrentNodeData, setDraggedNode } = useContext(GlobalContext);
+	const { userToken, setCurrentNodeData, setDraggedNode } = useContext(GlobalContext);
 	const startDrag = useRef(false);
 
 	return (<>
@@ -31,7 +31,10 @@ export default function MapIconComponent({ mapNodeData, mapHeight, posX, posY, s
 					setDraggedNode(mapNodeData.node);
 					e.target.style.visibility = "hidden";
 					deleteMapNodeMutation.mutate(
-						{ mapNodeId: mapNodeData.id },
+						{
+							mapNodeId: mapNodeData.id,
+							userToken: userToken,
+						},
 						{
 							onSuccess: () => {
 								return queryClient.invalidateQueries({ queryKey: ['MapNodes'] })
