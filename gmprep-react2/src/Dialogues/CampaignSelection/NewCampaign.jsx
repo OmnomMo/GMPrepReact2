@@ -18,8 +18,14 @@ export default function NewCampaign({ onCancel, onSubmit, defaultData}) {
 		description.current = newDescription
 	}
 
-	return (<>
-		<div>
+	return (<div className="w-full flex justify-center">
+		<div
+			style={{
+				backgroundColor: "#ffffff03",
+				backdropFilter: "blur(20px)",
+			}}
+			className="flex-col justify-content-center w-170 p-10"
+		>
 			<EditeableHeader
 				defaultValue={defaultData == null ? "Campaign Name" : defaultData.name}
 				onChanged={onNameChanged}
@@ -54,12 +60,12 @@ export default function NewCampaign({ onCancel, onSubmit, defaultData}) {
 						{name: name.current,
 						description: description.current,
 						imageLink: imageLink,
-						id: defaultData == 0 ? 0 : defaultData.id,
+						id: defaultData == null ? 0 : defaultData.id,
 					});
 				}}
 			>Submit</button>
 
 		</div>
-	</>
+	</div>
 	);
 }

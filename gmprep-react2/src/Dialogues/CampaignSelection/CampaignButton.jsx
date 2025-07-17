@@ -19,11 +19,11 @@ export default function CampaignButton({ campaignData, onSelect, onDelete, onEdi
 			<div name="CampaignButtonContent"
 				className="w-full h-full p-5"
 				style={{
-					backgroundColor: "#000000BB",
+					backgroundColor: "#0000009f",
 					backdropFilter: "blur(5px)"
 				}}>
 				<h3 >{campaignData.name}</h3>
-				<p className="mt-6">{campaignData.description}</p>
+				<p className="mt-6 text-left whitespace-pre-wrap">{campaignData.description}</p>
 				<div className="flex align-right absolute bottom-0 right-0">
 					<img
 						className="m-1"

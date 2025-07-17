@@ -80,21 +80,6 @@ export default function CampaignSelect() {
 	}
 
 
-	if (editingCampaign) {
-		return (
-			<>
-				<NewCampaign
-					onSubmit={data => {
-						createNewCampaign(data)
-					}}
-					onCancel={() => {
-						setEditingCampaign(false);
-					}}
-					defaultData={editedCampaignData.current}
-				/>
-			</>
-		)
-	}
 
 	return (
 		<div
@@ -109,25 +94,40 @@ export default function CampaignSelect() {
 				className="w-full h-full pt-10 flex flex-col justify-center"
 				style={{
 					backdropFilter: "blur(10px)",
-					backgroundColor: "#27272799",
+					backgroundColor: "#5858587c",
 				}}
 			>
-				<h1>CAMPAIGN SELECT</h1>
-				<ul id="CampaignButtonContainer" className="bigButtonContainer self-center">
-					{campaigns.map(campaign =>
-						<CampaignButton
-							key={"campaign-" + campaign.id}
-							campaignData={campaign}
-							onDelete={deleteCampaign}
-							onSelect={selectCampaign}
-							imageSrc={campaign.imageLink}
-							onEdit={editCampaign} />
-					)}
-				</ul>
-				<button className="m-4 self-center" onClick={() => {
-					editedCampaignData.current = null;
-					setEditingCampaign(true);
-				}}>New Campaign</button>
+				{editingCampaign &&
+					<NewCampaign
+						onSubmit={data => {
+							createNewCampaign(data)
+						}}
+						onCancel={() => {
+							setEditingCampaign(false);
+						}}
+						defaultData={editedCampaignData.current}
+					/>
+				}
+				{!editingCampaign &&
+					<>
+						<h1>CAMPAIGN SELECT</h1>
+						<ul id="CampaignButtonContainer" className="bigButtonContainer self-center">
+							{campaigns.map(campaign =>
+								<CampaignButton
+									key={"campaign-" + campaign.id}
+									campaignData={campaign}
+									onDelete={deleteCampaign}
+									onSelect={selectCampaign}
+									imageSrc={campaign.imageLink}
+									onEdit={editCampaign} />
+							)}
+						</ul>
+						<button className="m-4 self-center" onClick={() => {
+							editedCampaignData.current = null;
+							setEditingCampaign(true);
+						}}>New Campaign</button>
+					</>
+				}
 			</div>
 		</div>
 	)

@@ -1,46 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { GlobalContext } from "../Contexts";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import CampaignButton from "../Dialogues/CampaignSelection/CampaignButton";
-import EditeableHeader from "../EditeableFields/EditeableHeader";
-import EditeableMultiline from "../EditeableFields/EditeableMultiline";
 import NewMap from "../Dialogues/NewMap/NewMap";
+import { requestCreateNewMap, requestDeleteMap, requestMaps } from "../Dialogues/Requests/Requests";
 
-
-async function requestMaps({ queryKey }) {
-	const [_key, campaignId, userToken] = queryKey;
-	const requestParams = {
-		method: 'GET',
-		header: { 'Content-Type': 'application/json' },
-	}
-	console.log("Fetching maps for campaign " + campaignId)
-	return fetch('http://localhost:5140/Campaigns/Maps/' + campaignId + "/" + userToken, requestParams)
-		.then(result => result.json())
-}
-
-async function requestCreateNewMap({ data, campaignId, userToken }) {
-	const requestOptions = {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify(data),
-	}
-	console.log("Adding map")
-	return fetch('http://localhost:5140/Campaigns/Maps/Create/' + campaignId + "/" + userToken, requestOptions)
-		.then(result => result.json())
-		.then(json => {
-			console.log(json);
-			return json;
-		})
-}
-
-async function requestDeleteMap({ mapId, userToken }) {
-	const requestOptions = {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-	}
-	console.log("Deleting Campaign")
-	return fetch('http://localhost:5140/Campaigns/Maps/Delete/' + mapId + "/" + userToken, requestOptions)
-}
 
 export default function MapSelect() {
 
@@ -48,6 +12,7 @@ export default function MapSelect() {
 
 	const { campaignData, setMapData, userToken } = useContext(GlobalContext);
 	const [creatingNewMap, setCreatingNewMap] = useState(false);
+	const editedMapData = useRef(null)
 
 	const { status, error, data: maps } = useQuery({
 		queryFn: requestMaps,
@@ -61,6 +26,7 @@ export default function MapSelect() {
 	const deleteMapMutation = useMutation({
 		mutationFn: requestDeleteMap,
 	})
+
 
 	function createNewMap(data) {
 		setCreatingNewMap(false);
@@ -80,6 +46,11 @@ export default function MapSelect() {
 
 	function selectMap(data) {
 		setMapData(data)
+	}
+
+	function editMap(data) {
+		editedMapData.current = data;
+		setCreatingNewMap(true);
 	}
 
 	function deleteMap(mapId) {
@@ -116,33 +87,52 @@ export default function MapSelect() {
 
 
 
-	if (creatingNewMap) {
-		return (
-			<NewMap
-				onSubmit={createNewMap}
-				onCancel={() => {
-					setCreatingNewMap(false);
-				}}
-			/>
-		);
-	}
 
 	return (
-		<>
-			<h1>MAP SELECT</h1>
-			<ul className="bigButtonContainer">
-				{maps.map(map =>
-					<CampaignButton
-						key={"campaign-" + map.id}
-						campaignData={map}
-						onDelete={deleteMap}
-						onSelect={selectMap}
-						imageSrc={getImageSource(map)} />
-				)}
-			</ul>
-			<button className="m-4" onClick={() => {
-				setCreatingNewMap(true);
-			}}>New Map</button>
-		</>
+		<div
+			className="size-full"
+			id="campaignSelect"
+			style={{
+				backgroundImage: "url(" + campaignData.imageLink + ")",
+				backgroundSize: "cover",
+			}}
+		>
+			<div
+				className="w-full h-full pt-10 flex flex-col justify-center"
+				style={{
+					backdropFilter: "blur(10px)",
+					backgroundColor: "#5858587c",
+				}}
+			>
+				{creatingNewMap &&
+					<NewMap
+						onSubmit={createNewMap}
+						onCancel={() => {
+							setCreatingNewMap(false);
+						}}
+						defaultData={editedMapData.current}
+					/>
+				}
+				{!creatingNewMap &&
+					<div className="w-170 p-10 self-center flex flex-col">
+						<h1>MAP SELECT</h1>
+						<ul className="bigButtonContainer self-center">
+							{maps.map(map =>
+								<CampaignButton
+									key={"campaign-" + map.id}
+									campaignData={map}
+									onDelete={deleteMap}
+									onSelect={selectMap}
+									onEdit={editMap}
+									imageSrc={getImageSource(map)} />
+							)}
+						</ul>
+						<button className="m-4 self-center" onClick={() => {
+							setCreatingNewMap(true);
+						}}>New Map</button>
+					</div>
+				}
+			</div>
+		</div>
 	)
 }
