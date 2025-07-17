@@ -1,20 +1,16 @@
-export default function CampaignButton({ campaignData, onSelect, onDelete }) {
+export default function CampaignButton({ campaignData, onSelect, onDelete, onEdit, imageSrc }) {
 
-
-	let imageSrc = "/maps/" +campaignData.imagePath;
-	if (campaignData.externalImageUrl != "") {
-		imageSrc = campaignData.externalImageUrl;
-	}
 
 	return (
 		<div
 			name="CampaignButton"
-			className="relative h-100 min-w-80 m-3"
+			className="relative h-100 min-w-80 m-5"
 			style={{
 				backgroundImage: "url(" + imageSrc + ")",
 				backgroundSize: "cover",
 				backgroundPosition: "center",
 				backgroundColor: "#505050",
+				cursor: "pointer",
 			}}
 			onClick={() => {
 				onSelect(campaignData);
@@ -28,14 +24,22 @@ export default function CampaignButton({ campaignData, onSelect, onDelete }) {
 				}}>
 				<h3 >{campaignData.name}</h3>
 				<p className="mt-6">{campaignData.description}</p>
-
-				<img
-					className="absolute bottom-0 right-0 m-2"
-					src="/icons/ui/delete_icon.png"
-					onClick={(e) => {
-						onDelete(campaignData.id);
-						e.stopPropagation();
-					}} />
+				<div className="flex align-right absolute bottom-0 right-0">
+					<img
+						className="m-1"
+						src="/icons/ui/wrench_icon.png"
+						onClick={(e) => {
+							onEdit(campaignData);
+							e.stopPropagation();
+						}} />
+					<img
+						className="m-1"
+						src="/icons/ui/delete_icon.png"
+						onClick={(e) => {
+							onDelete(campaignData.id);
+							e.stopPropagation();
+						}} />
+				</div>
 			</div>
 		</div>
 	)

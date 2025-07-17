@@ -27,15 +27,19 @@
 		- DONE set mapnodes to correct map when creating
 		- DONE set nodes to correct campaign when creating
 
-- Map background image selection
-	- provide a few default maps for backgrounds
+- DONE Map background image selection
+	- DONE provide a few default maps for backgrounds
 
-- User handling
-	- Setup some kind of third party authentication (google?)
-	- Backend needs to check with every interaction if user has the rights for this request
-		- some token?
-		- need to do some research there
-		- check for every query if all data is accessible to user
+- DONE User handling
+	- DONE Setup some kind of third party authentication (google?)
+	- DONE Backend needs to check with every interaction if user has the rights for this request
+
+- Campaign selection UI
+	- center buttons correctly
+	- handle buttons when too wide
+	- Campaigns should be editeable
+	- Campaigns should have the option to provide image links
+	- Make it a bit prettier
 
 - Custom images
 	- for now: look into letting users provide imgur links for backgrounds or something
@@ -60,6 +64,10 @@ BUGS:
 
 
 Polish:
+- Add default 5e stat blocks to Backend
+	- parse CSV
+	- Add separate selection ui for defaults
+	- Button to override default into own node
 - Warning when discarding unsaved changes
 - Maybe we need less requests. can the post request for updating/deleting nodes and mapnodes already return all map nodes?
 	- And can we use that data without invalidating previous queries?

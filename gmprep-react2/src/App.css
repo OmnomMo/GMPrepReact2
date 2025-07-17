@@ -2,18 +2,21 @@
 
 
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  height: 100vb;
   text-align: center;
 }
 
 .bigButtonContainer {
-	background-color: black;
+	background-color: rgba(204, 204, 204, 0.075);
+	backdrop-filter: blur(10px);
 	flex-direction: row;
 	display: flex;
+	justify-content: center;
 	overflow-x: auto;
-	max-width: 100em;
+	max-width: 80em;
+	min-width: 100em;
 }
 
 .Noselect * {

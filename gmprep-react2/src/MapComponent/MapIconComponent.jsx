@@ -1,7 +1,7 @@
 import { useContext, useRef } from "react"
 import { GlobalContext } from "../Contexts";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteMapNode } from "../Dialogues/Requests/MapNodeRequests";
+import { deleteMapNode } from "../Dialogues/Requests/Requests";
 
 export default function MapIconComponent({ mapNodeData, mapHeight, posX, posY, scaleFactor = 1.0 }) {
 

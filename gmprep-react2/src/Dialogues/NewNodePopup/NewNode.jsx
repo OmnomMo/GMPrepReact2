@@ -10,25 +10,9 @@ import Secret from "./Secret";
 import { GlobalContext } from "../../Contexts";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { defaultNode } from "../../Globals/DefaultNode";
+import { deleteNode, postNode } from "../Requests/Requests";
 
-async function postNode({data, campaignId, userToken}) {
-	const requestOptions = {
-		method: 'POST',
-		headers: {'Content-Type': 'application/json'},
-		body: JSON.stringify(data)
-	};
-	return fetch('http://localhost:5140/Nodes/Update/' + campaignId + "/" + userToken, requestOptions)
-		.then(response => response.json());
-}
 
-async function deleteNode({data, userToken}) {
-	const requestOptions = {
-		method: 'POST',
-		headers: {'Content-Type': 'application/json'},
-		body: JSON.stringify(data.data)
-	}
-	return fetch('http://localhost:5140/Nodes/Delete/' + userToken, requestOptions);
-}
 
 export default function NewNode() {
 
@@ -64,9 +48,9 @@ export default function NewNode() {
 		}
 	})
 
-	return <div className="w-full " key={"NewNode" + remountCount.current}>
+	return <div id="NodePanel" className="w-full " key={"NewNode" + remountCount.current}>
 		<div className="flexRow  mb-4">
-			<label className="toggleButton m-2">
+			<label id="CreatureCheckbock" className="toggleButton m-2">
 				<input
 					type="checkbox"
 					name="isCreature"
@@ -77,7 +61,7 @@ export default function NewNode() {
 				/>
 				<span className="toggleBG"><img src="/icons/ui/character_icon.png" className="p-1"/></span>
 			</label>
-			<label className="toggleButton m-2">
+			<label id="LocationCheckbox" className="toggleButton m-2">
 				<input
 					type="checkbox"
 					name="isLocation"

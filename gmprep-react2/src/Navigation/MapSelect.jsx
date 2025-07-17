@@ -7,18 +7,18 @@ import EditeableMultiline from "../EditeableFields/EditeableMultiline";
 import NewMap from "../Dialogues/NewMap/NewMap";
 
 
-async function requestMaps({queryKey}) {
+async function requestMaps({ queryKey }) {
 	const [_key, campaignId, userToken] = queryKey;
 	const requestParams = {
 		method: 'GET',
-		header: {'Content-Type': 'application/json'},
+		header: { 'Content-Type': 'application/json' },
 	}
 	console.log("Fetching maps for campaign " + campaignId)
 	return fetch('http://localhost:5140/Campaigns/Maps/' + campaignId + "/" + userToken, requestParams)
 		.then(result => result.json())
 }
 
-async function requestCreateNewMap({data, campaignId, userToken}) {
+async function requestCreateNewMap({ data, campaignId, userToken }) {
 	const requestOptions = {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
@@ -33,10 +33,10 @@ async function requestCreateNewMap({data, campaignId, userToken}) {
 		})
 }
 
-async function requestDeleteMap({mapId, userToken}) {
+async function requestDeleteMap({ mapId, userToken }) {
 	const requestOptions = {
 		method: 'POST',
-		headers: { 'Content-Type': 'application/json'},
+		headers: { 'Content-Type': 'application/json' },
 	}
 	console.log("Deleting Campaign")
 	return fetch('http://localhost:5140/Campaigns/Maps/Delete/' + mapId + "/" + userToken, requestOptions)
@@ -46,10 +46,10 @@ export default function MapSelect() {
 
 	const queryClient = useQueryClient();
 
-	const {campaignData, setMapData, userToken} = useContext(GlobalContext);
+	const { campaignData, setMapData, userToken } = useContext(GlobalContext);
 	const [creatingNewMap, setCreatingNewMap] = useState(false);
 
-	const {status, error, data: maps} = useQuery({
+	const { status, error, data: maps } = useQuery({
 		queryFn: requestMaps,
 		queryKey: ['AllMaps', campaignData.id, userToken],
 	})
@@ -73,7 +73,7 @@ export default function MapSelect() {
 				console.log("Created new Map!");
 				console.log(data);
 				queryClient.invalidateQueries(['AllMaps']);
-				
+
 			}
 		})
 	}
@@ -107,16 +107,23 @@ export default function MapSelect() {
 		return (<div>ERROR LOADING MAPS - {error}</div>)
 	}
 
-	
+	function getImageSource(mapData) {
+		if (mapData.externalImageUrl != "") {
+			return mapData.externalImageUrl;
+		}
+		return "/maps/" + mapData.imagePath;
+	}
+
+
 
 	if (creatingNewMap) {
-		return(
+		return (
 			<NewMap
 				onSubmit={createNewMap}
 				onCancel={() => {
 					setCreatingNewMap(false);
 				}}
-				/>
+			/>
 		);
 	}
 
@@ -126,10 +133,11 @@ export default function MapSelect() {
 			<ul className="bigButtonContainer">
 				{maps.map(map =>
 					<CampaignButton
-						key={"campaign-"+map.id}
+						key={"campaign-" + map.id}
 						campaignData={map}
 						onDelete={deleteMap}
-						onSelect={selectMap}/>
+						onSelect={selectMap}
+						imageSrc={getImageSource(map)} />
 				)}
 			</ul>
 			<button className="m-4" onClick={() => {

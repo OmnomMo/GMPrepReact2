@@ -3,7 +3,7 @@ import './MapComponent.css';
 import { GlobalContext } from '../Contexts';
 import MapIconComponent from './MapIconComponent';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { getAllMapNodes, postMapNode } from '../Dialogues/Requests/MapNodeRequests';
+import { getAllMapNodes, postMapNode } from '../Dialogues/Requests/Requests';
 
 let MAX_ZOOM = 10.0;
 
@@ -109,6 +109,7 @@ export default function MapComponent() {
 
 
 	//#region navigation
+
 	//updates position of map so zoom moves towards mouse pos
 	function adjustZoomPosition(newZoom, zoomDir = 1.0) {
 		let zoomOffset = {
@@ -125,6 +126,7 @@ export default function MapComponent() {
 		})
 	}
 
+	//On scroll wheel down
 	function zoomOut() {
 
 		let newZoom = Math.max(zoom * 0.8, 1.0)
@@ -138,6 +140,7 @@ export default function MapComponent() {
 		adjustZoomPosition(newZoom, -1.0);
 	}
 
+	//On Scroll wheel up
 	function zoomIn() {
 
 		let newZoom = Math.min(zoom * 1.2, MAX_ZOOM)
@@ -153,8 +156,9 @@ export default function MapComponent() {
 
 	}
 
+	//Mouse moves over map
 	function mouseMoveEvent(e) {
-
+		//Set map active (for drag and drop)
 		setActive(true);
 
 		mousePos.current = { x: e.clientX, y: e.clientY };
@@ -162,6 +166,7 @@ export default function MapComponent() {
 		if (!draggingMap.current) {
 			return;
 		}
+		//If we are currently dragging the map we calculate the offset to the previous position based on current position and zoom factor.
 		let dragOffset = { x: dragStartPos.current.x - e.clientX, y: dragStartPos.current.y - e.clientY };
 		let posX = originalPos.current.x + dragOffset.x * (1 / zoom);
 		let posY = originalPos.current.y + dragOffset.y * (1 / zoom);
@@ -169,6 +174,8 @@ export default function MapComponent() {
 		setPos({ x: posX, y: posY });
 	}
 
+	//OnMouseDown: Start dragging the map
+	//The actual movement is handled in mouseMoveEvent()
 	function startDrag(startPos) {
 		draggingMap.current = true;
 		originalPos.current = pos;

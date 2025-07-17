@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { GlobalContext } from "./Contexts"
 import Login from "./Navigation/Login";
-import CampaignSelect from "./Navigation/CampaignSelect";
+import CampaignSelect from "./Dialogues/CampaignSelection/CampaignSelect";
 import MapSelect from "./Navigation/MapSelect";
 import MapComponent from './MapComponent/MapComponent';
 import DragAndDrop from './DragAndDrop/DragAndDrop';
