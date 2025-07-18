@@ -18,18 +18,20 @@ function App() {
 	const storedUserData = localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")) : null;
 	const storedCampaignData = localStorage.getItem("campaignData") ? JSON.parse(localStorage.getItem("campaignData")) : { name: "", id: -1 };
 	const storedMapData = localStorage.getItem("mapData") ? JSON.parse(localStorage.getItem("mapData")) : { name: "", id: -1 };
+	const storedUserToken = localStorage.getItem("userToken") ?? null;
 
 	//Previous user, campaign and map are stored in local storage for now.
 	const [userData, setUserData] = useState(storedUserData)
-	const [userToken, setUserToken] = useState(null);
+	const [userToken, setUserToken] = useState(storedUserToken);
 	const [campaignData, setCampaignData] = useState(storedCampaignData)
 	const [mapData, setMapData] = useState(storedMapData)
 
 	useEffect(() => {
 		localStorage.setItem("userData", JSON.stringify(userData));
 		localStorage.setItem("campaignData", JSON.stringify(campaignData));
-		localStorage.setItem("mapData", JSON.stringify(mapData))
-	}, [userData, campaignData, mapData])
+		localStorage.setItem("mapData", JSON.stringify(mapData));
+		localStorage.setItem("userToken", userToken)
+	}, [userData, campaignData, mapData, userToken])
 
 	return (
 		<>

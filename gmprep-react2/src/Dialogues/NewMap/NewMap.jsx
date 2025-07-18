@@ -6,9 +6,9 @@ import MapBackgroundButton from "./MapBackgroundButton";
 
 
 
-export default function NewMap({ onCancel, onSubmit, defaultData}) {
+export default function NewMap({ onCancel, onSubmit, defaultData }) {
 
-	const name = useRef(defaultData != null? defaultData.name : "Map Name");
+	const name = useRef(defaultData != null ? defaultData.name : "Map Name");
 	const description = useRef(defaultData != null ? defaultData.description : "");
 	const [mapBackgroundPath, setMapBackgroundPath] = useState(defaultData != null ? defaultData.imagePath : "");
 	const [mapBackgroundUrl, setMapBackgroundUrl] = useState(defaultData != null ? defaultData.externalImageUrl : "");
@@ -32,12 +32,12 @@ export default function NewMap({ onCancel, onSubmit, defaultData}) {
 	return (<div className="w-120 self-center">
 		<h1>CREATE NEW MAP</h1>
 		<div>
-			<EditeableHeader defaultValue={name.current} onChanged={onNameChanged}/>
-			<EditeableMultiline labelName={"Decsription"} defaultValue={description.current} onChanged={onDescriptionChanged}/>
+			<EditeableHeader defaultValue={name.current} onChanged={onNameChanged} />
+			<EditeableMultiline labelName={"Decsription"} defaultValue={description.current} onChanged={onDescriptionChanged} />
 			<h4 className="text-left m-1 mt-4">Select background image:</h4>
 			<div id="MapBackgroundSelection" className="flex flex-wrap bg-gray-800  p-2">
 				{mapBackgrounds.map(bg => {
-					return <MapBackgroundButton src={bg} key={bg} onSelected={onMapBackgroundSelected} isSelected={mapBackgroundPath == bg}/>;
+					return <MapBackgroundButton src={bg} key={bg} onSelected={onMapBackgroundSelected} isSelected={mapBackgroundPath == bg} />;
 				})}
 			</div>
 			<div className="bg-black/5 p-2 mt-2 mb-2">
@@ -45,11 +45,14 @@ export default function NewMap({ onCancel, onSubmit, defaultData}) {
 				<input className="ml-4 p-1" type="text" defaultValue={mapBackgroundUrl} onChange={e => {
 					setMapBackgroundUrl(e.target.value);
 				}}></input>
-				{mapBackgroundUrl != "" && <img src={mapBackgroundUrl} className="w-30 h-30 m-4 " />}
+				{mapBackgroundUrl != "" &&
+					<div className="flex flex-row justify-center">
+						<img src={mapBackgroundUrl} className="w-30 h-30 m-6 object-cover" />
+					</div>}
 			</div>
 
 			<button
-				onClick={() => {onCancel();}}
+				onClick={() => { onCancel(); }}
 			>Cancel</button>
 			{!canSubmit && <button disabled style={{
 				opacity: "0.5",
@@ -58,12 +61,13 @@ export default function NewMap({ onCancel, onSubmit, defaultData}) {
 			{canSubmit && <button
 				onClick={() => {
 					onSubmit(
-						{name: name.current,
-						description: description.current,
-						imagePath: mapBackgroundPath,
-						externalImageUrl: mapBackgroundUrl,
-						id: defaultData != null ? defaultData.Id : 0,
-					});
+						{
+							name: name.current,
+							description: description.current,
+							imagePath: mapBackgroundPath,
+							externalImageUrl: mapBackgroundUrl,
+							id: defaultData != null ? defaultData.id : 0,
+						});
 				}}
 			>Submit</button>}
 

@@ -34,12 +34,12 @@
 	- DONE Setup some kind of third party authentication (google?)
 	- DONE Backend needs to check with every interaction if user has the rights for this request
 
-- Campaign selection UI
-	- center buttons correctly
-	- handle buttons when too wide
-	- Campaigns should be editeable
-	- Campaigns should have the option to provide image links
-	- Make it a bit prettier
+- DONE Campaign selection UI
+	- DONE center buttons correctly
+	- DONE handle buttons when too wide
+	- DONE Campaigns should be editeable
+	- DONE Campaigns should have the option to provide image links
+	- DONE Make it a bit prettier
 
 - Custom images
 	- for now: look into letting users provide imgur links for backgrounds or something
@@ -47,7 +47,6 @@
 
 - Node links
 	
-- Store client secret using the dotnet secret manager
 
 
 

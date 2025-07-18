@@ -16,24 +16,27 @@ export default function Login() {
 
 
 	return (
-		<div className="size-full flex flex-col justify-center">
-			<h1>LOGIN</h1>
-			<div className="self-center">
+		<div id="loginBackground" className="loginBackground size-full flex flex-col justify-center">
+			<div className="loginPanel self-center">
+				<h1>LOGIN</h1>
+				<div className="self-center">
 
-				<GoogleLogin
-					onSuccess={credentialResponse => {
-						console.log(credentialResponse);
-						let credential = jwtDecode(credentialResponse.credential);
-						console.log(credential)
-						setUserData(credential)
-						setUserToken(credentialResponse.credential)
+					<GoogleLogin
+						onSuccess={credentialResponse => {
+							console.log(credentialResponse);
+							let credential = jwtDecode(credentialResponse.credential);
+							console.log(credential)
+							setUserData(credential)
+							setUserToken(credentialResponse.credential)
 
-					}}
-					onError={error => {
-						console.log("login failed! " + error);
-					}}
-				/>
+						}}
+						onError={error => {
+							console.log("login failed! " + error);
+						}}
+					/>
+				</div>
 			</div>
+
 		</div>
 	)
 }

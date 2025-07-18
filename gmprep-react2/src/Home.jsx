@@ -13,9 +13,12 @@ import NodeSelection from './Dialogues/NodeSelection/NodeSelection';
 
 export default function Home() {
 
-	const { userToken, campaignData, mapData, draggingMap, currentNodeData } = useContext(GlobalContext);
+	const { userData, userToken, campaignData, mapData, draggingMap, currentNodeData } = useContext(GlobalContext);
 
-	if (userToken == null) {
+	let userTokenExpired = userData != null && new Date() / 1000 > userData.ext;
+
+	if (userToken == null || userToken == "null" || userTokenExpired ) {
+		console.log("rerender")
 		return <Login />
 	}
 
