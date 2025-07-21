@@ -1,0 +1,9 @@
+testuser:
+gmprep.testuser@gmail.com
+
+start vite client:
+cd gmprep-react2
+npm run dev
+
+google identity dashboard:
+https://console.cloud.google.com/projectselector2/auth/clients?pli=1&inv=1&invt=Ab2_pQ&supportedpurview=project

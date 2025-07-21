@@ -1,0 +1,78 @@
+- DONE Delete nodes
+	- DONE confirmation dialog
+
+- DONE Update nodes when they already exist
+
+- Place nodes on map background
+	- DONE show temp map in Center
+	- DONE Move map with mouse down
+		- DONE basic movement
+		- Edge case: handle map source image smaller than map width
+	- DONE Zoom map with scrollwheel
+	- Drag and Drop nodes
+		- DONE Nodes should not be dropped on map when mouse is not hovering over map
+			- DONE problem: drag and drop consumes mouse events, should probably not do that
+		- DONE Clicking nodes should start editing them
+	- DONE Drag and drop nodes from map
+	- delete MapNodes
+	- DONE Place dropped nodes on the correct location (accoutning for drag and zoom )
+
+- Campaign and Map Handling
+	- DONE basic menu navigation to select user/campaign/map
+	- DONE header bar to change campaign/map/user
+	- DONE remember user/campaign/map after reloading window
+	- DONE node handling for current user/campaign/map
+		- DONE only show nods for current campaign in selection
+		- DONE only show mapnodes for current map in map
+		- DONE set mapnodes to correct map when creating
+		- DONE set nodes to correct campaign when creating
+
+- DONE Map background image selection
+	- DONE provide a few default maps for backgrounds
+
+- DONE User handling
+	- DONE Setup some kind of third party authentication (google?)
+	- DONE Backend needs to check with every interaction if user has the rights for this request
+
+- DONE Campaign selection UI
+	- DONE center buttons correctly
+	- DONE handle buttons when too wide
+	- DONE Campaigns should be editeable
+	- DONE Campaigns should have the option to provide image links
+	- DONE Make it a bit prettier
+
+- Custom images
+	- for now: look into letting users provide imgur links for backgrounds or something
+	- let users upload images for map backgrounds, campaign buttons and icons
+
+- Login changes:
+	https://developers.google.com/identity/protocols/oauth2/web-server
+	https://developers.google.com/identity/sign-in/web/server-side-flow
+	https://developers.google.com/identity/sign-in/web/sign-in
+
+
+	
+
+
+
+BUGS:
+- FIXED Setting map icon size does nothing / will be reset
+- FIXED Updating a node will destroy all map node entries T_T
+- Resizing the window will fuck up map node placement
+- FIXED Editing a listentry (for example an action) sometimes adds it to the EditableList entries a second time under the index "undefined"
+- FIXED Skills do not store their value in the database when being udpated / submitted
+- FIXED Deleting ListItems in a nodeentry and updating it on the database does not work correctly
+- FIXED new secrets say "undefined"
+- FIXED should switch currentNOde to new node after adding it
+- FIXED should switch back to default node when pressing cancel or plus icon
+
+
+Polish:
+- Add default 5e stat blocks to Backend
+	- parse CSV
+	- Add separate selection ui for defaults
+	- Button to override default into own node
+- Warning when discarding unsaved changes
+- Maybe we need less requests. can the post request for updating/deleting nodes and mapnodes already return all map nodes?
+	- And can we use that data without invalidating previous queries?
+- Show placeholder / loading symbol after node is dropped on map until server answer
