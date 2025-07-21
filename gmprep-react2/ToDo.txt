@@ -45,7 +45,12 @@
 	- for now: look into letting users provide imgur links for backgrounds or something
 	- let users upload images for map backgrounds, campaign buttons and icons
 
-- Node links
+- Login changes:
+	https://developers.google.com/identity/protocols/oauth2/web-server
+	https://developers.google.com/identity/sign-in/web/server-side-flow
+	https://developers.google.com/identity/sign-in/web/sign-in
+
+
 	
 
 

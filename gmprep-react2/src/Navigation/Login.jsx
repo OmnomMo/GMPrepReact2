@@ -6,7 +6,7 @@ import { jwtDecode } from 'jwt-decode'
 
 
 
-
+//Page is shown when there is no user data available
 
 export default function Login() {
 	const { setUserData, setUserToken } = useContext(GlobalContext);
