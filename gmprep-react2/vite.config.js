@@ -8,5 +8,5 @@ export default defineConfig({
 	react(),
 	tailwindcss(),
   ], 
-  base: "GMPrepReact2",
+  base: "/gmprep_web/",
 })
