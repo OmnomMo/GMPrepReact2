@@ -18,6 +18,7 @@ export default function Login() {
 	return (
 		<div id="loginBackground" className="loginBackground size-full flex flex-col justify-center">
 			<div className="loginPanel self-center">
+				<p>v_01_01</p>
 				<h1>LOGIN</h1>
 				<div className="self-center">
 

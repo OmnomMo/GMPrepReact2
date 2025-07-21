@@ -1,10 +1,10 @@
 //#region campaigns
 
 let IP = "http://localhost"
-let PORT = "5140"
+let PORT = ":5140"
 
 IP = "https://gmprep-server.fly.dev"
-PORT = "8080"
+PORT = ""
 
 async function requestCampaigns({queryKey}) {
 	const [_key, userToken] = queryKey;
@@ -13,8 +13,8 @@ async function requestCampaigns({queryKey}) {
 		header: {'Content-Type': 'application/json'},
 	}
 	console.log("Fetching campaigns for user " + userToken)
-	console.log(`${IP}:${PORT}/Campaigns/${userToken}`)
-	return fetch(`${IP}:${PORT}/Campaigns/${userToken}`, requestParams)
+	console.log(`${IP}${PORT}/Campaigns/${userToken}`)
+	return fetch(`${IP}${PORT}/Campaigns/${userToken}`, requestParams)
 		.then(result => result.json())
 }
 
@@ -25,7 +25,7 @@ async function requestCreateNewCampaign({data, userToken}) {
 		body: JSON.stringify(data),
 	}
 	console.log("Adding campaign")
-	return fetch(`${IP}:${PORT}/Campaigns/Create/${userToken}` + userToken, requestOptions)
+	return fetch(`${IP}${PORT}/Campaigns/Create/${userToken}` + userToken, requestOptions)
 		.then(result => result.json())
 		.then(json => {
 			console.log(json);
@@ -39,7 +39,7 @@ async function requestDeleteCampaign({campaignId, userToken}) {
 		headers: { 'Content-Type': 'application/json'},
 	}
 	console.log("Deleting Campaign")
-	return fetch(`${IP}:${PORT}/Campaigns/Delete/${campaignId}/${userToken}`, requestOptions)
+	return fetch(`${IP}${PORT}/Campaigns/Delete/${campaignId}/${userToken}`, requestOptions)
 }
 //#region Nodes
 async function postNode({data, campaignId, userToken}) {
@@ -48,7 +48,7 @@ async function postNode({data, campaignId, userToken}) {
 		headers: {'Content-Type': 'application/json'},
 		body: JSON.stringify(data)
 	};
-	return fetch(`${IP}:${PORT}/Nodes/Update/${campaignId}/${userToken}`, requestOptions)
+	return fetch(`${IP}${PORT}/Nodes/Update/${campaignId}/${userToken}`, requestOptions)
 		.then(response => response.json());
 }
 
@@ -58,7 +58,7 @@ async function deleteNode({data, userToken}) {
 		headers: {'Content-Type': 'application/json'},
 		body: JSON.stringify(data.data)
 	}
-	return fetch(`${IP}:${PORT}/Nodes/Delete/${userToken}`, requestOptions);
+	return fetch(`${IP}${PORT}/Nodes/Delete/${userToken}`, requestOptions);
 }
 
 //#region Maps
@@ -69,7 +69,7 @@ async function requestMaps({ queryKey }) {
 		header: { 'Content-Type': 'application/json' },
 	}
 	console.log("Fetching maps for campaign " + campaignId)
-	return fetch(`${IP}:${PORT}/Campaigns/Maps/${campaignId}/${userToken}`, requestParams)
+	return fetch(`${IP}${PORT}/Campaigns/Maps/${campaignId}/${userToken}`, requestParams)
 		.then(result => result.json())
 }
 
@@ -80,7 +80,7 @@ async function requestCreateNewMap({ data, campaignId, userToken }) {
 		body: JSON.stringify(data),
 	}
 	console.log("Adding map")
-	return fetch(`${IP}:${PORT}/Campaigns/Maps/Create/${campaignId}/${userToken}`, requestOptions)
+	return fetch(`${IP}${PORT}/Campaigns/Maps/Create/${campaignId}/${userToken}`, requestOptions)
 		.then(result => result.json())
 		.then(json => {
 			console.log(json);
@@ -94,7 +94,7 @@ async function requestDeleteMap({ mapId, userToken }) {
 		headers: { 'Content-Type': 'application/json' },
 	}
 	console.log("Deleting Campaign")
-	return fetch(`${IP}:${PORT}/Campaigns/Maps/Delete/${mapId}/${userToken}`, requestOptions)
+	return fetch(`${IP}${PORT}/Campaigns/Maps/Delete/${mapId}/${userToken}`, requestOptions)
 }
 
 async function getAllMapNodes({ queryKey }) {
@@ -105,7 +105,7 @@ async function getAllMapNodes({ queryKey }) {
 		headers: { 'Content-Type': 'application/json' },
 	}
 	console.log("Requesting Map Nodes")
-	return fetch(`${IP}:${PORT}/Nodes/MapNodes/${mapId}/${userToken}`, requestOptions)
+	return fetch(`${IP}${PORT}/Nodes/MapNodes/${mapId}/${userToken}`, requestOptions)
 		.then(result => {
 			return result.json();
 		})
@@ -121,7 +121,7 @@ async function postMapNode({ data, mapId , userToken}) {
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify(data)
 	};
-	return fetch(`${IP}:${PORT}/Nodes/CreateMapNode/${mapId}/${userToken}`, requestOptions)
+	return fetch(`${IP}${PORT}/Nodes/CreateMapNode/${mapId}/${userToken}`, requestOptions)
 		.then(response => response.json());
 }
 
@@ -131,7 +131,7 @@ async function deleteMapNode({ mapNodeId, userToken}) {
 		headers: {'Content-Type': 'application/json' },
 	}
 	console.log("deleting map node")
-	return fetch(`${IP}:${PORT}/Nodes/DeleteMapNode/${mapNodeId}/${userToken}`, requestOptions)
+	return fetch(`${IP}${PORT}/Nodes/DeleteMapNode/${mapNodeId}/${userToken}`, requestOptions)
 		.then(response => {
 			return response.json;
 		})
