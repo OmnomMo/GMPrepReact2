@@ -3,7 +3,7 @@
 let IP = "http://localhost"
 let PORT = "5140"
 
-IP = "http://gmprep-server.fly.dev"
+IP = "https://gmprep-server.fly.dev"
 PORT = "8080"
 
 async function requestCampaigns({queryKey}) {
