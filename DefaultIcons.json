@@ -1,0 +1,719 @@
+[
+    {
+        "Name":  "alien-bug.png"
+    },
+    {
+        "Name":  "alien-egg.png"
+    },
+    {
+        "Name":  "all-for-one.png"
+    },
+    {
+        "Name":  "ancient-ruins.png"
+    },
+    {
+        "Name":  "ancient-sword.png"
+    },
+    {
+        "Name":  "anubis.png"
+    },
+    {
+        "Name":  "arc-triomphe.png"
+    },
+    {
+        "Name":  "assassin-pocket.png"
+    },
+    {
+        "Name":  "axe-sword.png"
+    },
+    {
+        "Name":  "bad-gnome.png"
+    },
+    {
+        "Name":  "bat-blade.png"
+    },
+    {
+        "Name":  "bat-leth.png"
+    },
+    {
+        "Name":  "battle-gear.png"
+    },
+    {
+        "Name":  "bayonet.png"
+    },
+    {
+        "Name":  "beast-eye.png"
+    },
+    {
+        "Name":  "behold.png"
+    },
+    {
+        "Name":  "bestial-fangs.png"
+    },
+    {
+        "Name":  "blade-bite.png"
+    },
+    {
+        "Name":  "blade-drag.png"
+    },
+    {
+        "Name":  "blade-fall.png"
+    },
+    {
+        "Name":  "bloody-sword.png"
+    },
+    {
+        "Name":  "bone-knife.png"
+    },
+    {
+        "Name":  "bottled-shadow.png"
+    },
+    {
+        "Name":  "bouncing-sword.png"
+    },
+    {
+        "Name":  "bowie-knife.png"
+    },
+    {
+        "Name":  "box-cutter.png"
+    },
+    {
+        "Name":  "brain-tentacle.png"
+    },
+    {
+        "Name":  "brick-pile.png"
+    },
+    {
+        "Name":  "broad-dagger.png"
+    },
+    {
+        "Name":  "broadsword.png"
+    },
+    {
+        "Name":  "brute.png"
+    },
+    {
+        "Name":  "bully-minion.png"
+    },
+    {
+        "Name":  "cage.png"
+    },
+    {
+        "Name":  "camping-tent.png"
+    },
+    {
+        "Name":  "carnivorous-plant.png"
+    },
+    {
+        "Name":  "castle-ruins.png"
+    },
+    {
+        "Name":  "castle.png"
+    },
+    {
+        "Name":  "ceiling-barnacle.png"
+    },
+    {
+        "Name":  "centaur.png"
+    },
+    {
+        "Name":  "chakram.png"
+    },
+    {
+        "Name":  "circular-sawblade.png"
+    },
+    {
+        "Name":  "cleaver.png"
+    },
+    {
+        "Name":  "cloak-dagger.png"
+    },
+    {
+        "Name":  "cloaked-figure-on-horseback.png"
+    },
+    {
+        "Name":  "closed-doors.png"
+    },
+    {
+        "Name":  "coiled-nail.png"
+    },
+    {
+        "Name":  "cracked-alien-skull.png"
+    },
+    {
+        "Name":  "cracked-saber.png"
+    },
+    {
+        "Name":  "crescent-blade.png"
+    },
+    {
+        "Name":  "croc-sword.png"
+    },
+    {
+        "Name":  "crossed-sabres.png"
+    },
+    {
+        "Name":  "crossed-swords.png"
+    },
+    {
+        "Name":  "crypt-entrance.png"
+    },
+    {
+        "Name":  "curvy-knife.png"
+    },
+    {
+        "Name":  "cyclops.png"
+    },
+    {
+        "Name":  "daemon-pull.png"
+    },
+    {
+        "Name":  "daemon-skull.png"
+    },
+    {
+        "Name":  "daggers.png"
+    },
+    {
+        "Name":  "dervish-swords.png"
+    },
+    {
+        "Name":  "desert-camp.png"
+    },
+    {
+        "Name":  "devil-mask.png"
+    },
+    {
+        "Name":  "diablo-skull.png"
+    },
+    {
+        "Name":  "diamond-hilt.png"
+    },
+    {
+        "Name":  "dinosaur-bones.png"
+    },
+    {
+        "Name":  "dinosaur-egg.png"
+    },
+    {
+        "Name":  "dinosaur-rex.png"
+    },
+    {
+        "Name":  "diving-dagger.png"
+    },
+    {
+        "Name":  "djed-pillar.png"
+    },
+    {
+        "Name":  "djinn.png"
+    },
+    {
+        "Name":  "dog-house.png"
+    },
+    {
+        "Name":  "double-dragon.png"
+    },
+    {
+        "Name":  "double-street-lights.png"
+    },
+    {
+        "Name":  "dragon-head.png"
+    },
+    {
+        "Name":  "dragon-spiral.png"
+    },
+    {
+        "Name":  "drakkar-dragon.png"
+    },
+    {
+        "Name":  "dripping-sword.png"
+    },
+    {
+        "Name":  "dungeon-gate.png"
+    },
+    {
+        "Name":  "dungeon-light.png"
+    },
+    {
+        "Name":  "egyptian-pyramids.png"
+    },
+    {
+        "Name":  "egyptian-sphinx.png"
+    },
+    {
+        "Name":  "egyptian-temple.png"
+    },
+    {
+        "Name":  "elysium-shade.png"
+    },
+    {
+        "Name":  "energy-sword.png"
+    },
+    {
+        "Name":  "ent-mouth.png"
+    },
+    {
+        "Name":  "entry-door.png"
+    },
+    {
+        "Name":  "evasion.png"
+    },
+    {
+        "Name":  "evil-bat.png"
+    },
+    {
+        "Name":  "evil-book.png"
+    },
+    {
+        "Name":  "evil-comet.png"
+    },
+    {
+        "Name":  "evil-minion.png"
+    },
+    {
+        "Name":  "evil-moon.png"
+    },
+    {
+        "Name":  "evil-tower.png"
+    },
+    {
+        "Name":  "evil-tree.png"
+    },
+    {
+        "Name":  "exit-door.png"
+    },
+    {
+        "Name":  "eyestalk.png"
+    },
+    {
+        "Name":  "fairy.png"
+    },
+    {
+        "Name":  "family-house.png"
+    },
+    {
+        "Name":  "female-vampire.png"
+    },
+    {
+        "Name":  "fish-monster.png"
+    },
+    {
+        "Name":  "fleshy-mass.png"
+    },
+    {
+        "Name":  "floating-ghost.png"
+    },
+    {
+        "Name":  "floating-tentacles.png"
+    },
+    {
+        "Name":  "fragmented-sword.png"
+    },
+    {
+        "Name":  "frankenstein-creature.png"
+    },
+    {
+        "Name":  "gargoyle.png"
+    },
+    {
+        "Name":  "ghost.png"
+    },
+    {
+        "Name":  "giant.png"
+    },
+    {
+        "Name":  "gluttonous-smile.png"
+    },
+    {
+        "Name":  "goblin-camp.png"
+    },
+    {
+        "Name":  "goblin-head.png"
+    },
+    {
+        "Name":  "goblin.png"
+    },
+    {
+        "Name":  "gold-mine.png"
+    },
+    {
+        "Name":  "golem-head.png"
+    },
+    {
+        "Name":  "gooey-daemon.png"
+    },
+    {
+        "Name":  "grasping-slug.png"
+    },
+    {
+        "Name":  "graveyard.png"
+    },
+    {
+        "Name":  "greek-sphinx.png"
+    },
+    {
+        "Name":  "griffin-symbol.png"
+    },
+    {
+        "Name":  "grim-reaper.png"
+    },
+    {
+        "Name":  "half-body-crawling.png"
+    },
+    {
+        "Name":  "harpy.png"
+    },
+    {
+        "Name":  "haunting.png"
+    },
+    {
+        "Name":  "horned-reptile.png"
+    },
+    {
+        "Name":  "horned-skull.png"
+    },
+    {
+        "Name":  "horus.png"
+    },
+    {
+        "Name":  "hydra.png"
+    },
+    {
+        "Name":  "ice-golem.png"
+    },
+    {
+        "Name":  "ifrit.png"
+    },
+    {
+        "Name":  "imp-laugh.png"
+    },
+    {
+        "Name":  "imp.png"
+    },
+    {
+        "Name":  "infested-mass.png"
+    },
+    {
+        "Name":  "jawless-cyclop.png"
+    },
+    {
+        "Name":  "kenku-head.png"
+    },
+    {
+        "Name":  "knife-fork.png"
+    },
+    {
+        "Name":  "knife-thrust.png"
+    },
+    {
+        "Name":  "kraken-tentacle.png"
+    },
+    {
+        "Name":  "lizardman.png"
+    },
+    {
+        "Name":  "master-of-arms.png"
+    },
+    {
+        "Name":  "medieval-pavilion.png"
+    },
+    {
+        "Name":  "medusa-head.png"
+    },
+    {
+        "Name":  "mermaid.png"
+    },
+    {
+        "Name":  "metroid.png"
+    },
+    {
+        "Name":  "mimic-chest.png"
+    },
+    {
+        "Name":  "minotaur.png"
+    },
+    {
+        "Name":  "mummy-head.png"
+    },
+    {
+        "Name":  "obelisk.png"
+    },
+    {
+        "Name":  "ogre.png"
+    },
+    {
+        "Name":  "oni.png"
+    },
+    {
+        "Name":  "orc-head.png"
+    },
+    {
+        "Name":  "pick-of-destiny.png"
+    },
+    {
+        "Name":  "pirate-flag.png"
+    },
+    {
+        "Name":  "plain-dagger.png"
+    },
+    {
+        "Name":  "reaper-scythe.png"
+    },
+    {
+        "Name":  "relic-blade.png"
+    },
+    {
+        "Name":  "resting-vampire.png"
+    },
+    {
+        "Name":  "rock-golem.png"
+    },
+    {
+        "Name":  "rune-sword.png"
+    },
+    {
+        "Name":  "rusty-sword.png"
+    },
+    {
+        "Name":  "sacrificial-dagger.png"
+    },
+    {
+        "Name":  "samara-mosque.png"
+    },
+    {
+        "Name":  "sand-castle.png"
+    },
+    {
+        "Name":  "sasquatch.png"
+    },
+    {
+        "Name":  "scabbard.png"
+    },
+    {
+        "Name":  "scythe.png"
+    },
+    {
+        "Name":  "sea-creature.png"
+    },
+    {
+        "Name":  "sea-dragon.png"
+    },
+    {
+        "Name":  "secret-door.png"
+    },
+    {
+        "Name":  "shambling-mound.png"
+    },
+    {
+        "Name":  "shambling-zombie.png"
+    },
+    {
+        "Name":  "sharp-smile.png"
+    },
+    {
+        "Name":  "shattered-sword.png"
+    },
+    {
+        "Name":  "shining-sword.png"
+    },
+    {
+        "Name":  "sickle.png"
+    },
+    {
+        "Name":  "siege-tower.png"
+    },
+    {
+        "Name":  "slime.png"
+    },
+    {
+        "Name":  "spark-spirit.png"
+    },
+    {
+        "Name":  "spectre.png"
+    },
+    {
+        "Name":  "spider-eye.png"
+    },
+    {
+        "Name":  "spiked-dragon-head.png"
+    },
+    {
+        "Name":  "spinning-blades.png"
+    },
+    {
+        "Name":  "spinning-sword.png"
+    },
+    {
+        "Name":  "spiral-hilt.png"
+    },
+    {
+        "Name":  "spiral-thrust.png"
+    },
+    {
+        "Name":  "split-body.png"
+    },
+    {
+        "Name":  "stabbed-note.png"
+    },
+    {
+        "Name":  "stairs.png"
+    },
+    {
+        "Name":  "stakes-fence.png"
+    },
+    {
+        "Name":  "steel-claws.png"
+    },
+    {
+        "Name":  "stiletto.png"
+    },
+    {
+        "Name":  "stone-tower.png"
+    },
+    {
+        "Name":  "stone-wall.png"
+    },
+    {
+        "Name":  "sverd-i-fjell.png"
+    },
+    {
+        "Name":  "swamp-bat.png"
+    },
+    {
+        "Name":  "sword-altar.png"
+    },
+    {
+        "Name":  "sword-brandish.png"
+    },
+    {
+        "Name":  "sword-break.png"
+    },
+    {
+        "Name":  "sword-clash.png"
+    },
+    {
+        "Name":  "sword-hilt.png"
+    },
+    {
+        "Name":  "sword-in-stone.png"
+    },
+    {
+        "Name":  "sword-mold.png"
+    },
+    {
+        "Name":  "sword-slice.png"
+    },
+    {
+        "Name":  "sword-smithing.png"
+    },
+    {
+        "Name":  "sword-spade.png"
+    },
+    {
+        "Name":  "sword-spin.png"
+    },
+    {
+        "Name":  "sword-tie.png"
+    },
+    {
+        "Name":  "swords-emblem.png"
+    },
+    {
+        "Name":  "swords-power.png"
+    },
+    {
+        "Name":  "tearing.png"
+    },
+    {
+        "Name":  "thrown-daggers.png"
+    },
+    {
+        "Name":  "thunder-blade.png"
+    },
+    {
+        "Name":  "toad-teeth.png"
+    },
+    {
+        "Name":  "tower-flag.png"
+    },
+    {
+        "Name":  "transparent-slime.png"
+    },
+    {
+        "Name":  "tree-face.png"
+    },
+    {
+        "Name":  "trefoil-shuriken.png"
+    },
+    {
+        "Name":  "triple-gate.png"
+    },
+    {
+        "Name":  "triton-head.png"
+    },
+    {
+        "Name":  "troglodyte.png"
+    },
+    {
+        "Name":  "troll.png"
+    },
+    {
+        "Name":  "tumulus.png"
+    },
+    {
+        "Name":  "unfriendly-fire.png"
+    },
+    {
+        "Name":  "unicorn.png"
+    },
+    {
+        "Name":  "vampire-dracula.png"
+    },
+    {
+        "Name":  "viking-longhouse.png"
+    },
+    {
+        "Name":  "vile-fluid.png"
+    },
+    {
+        "Name":  "village.png"
+    },
+    {
+        "Name":  "watchtower.png"
+    },
+    {
+        "Name":  "water-fountain.png"
+    },
+    {
+        "Name":  "wave-strike.png"
+    },
+    {
+        "Name":  "well.png"
+    },
+    {
+        "Name":  "werewolf.png"
+    },
+    {
+        "Name":  "windmill.png"
+    },
+    {
+        "Name":  "window.png"
+    },
+    {
+        "Name":  "winged-sword.png"
+    },
+    {
+        "Name":  "witch-flight.png"
+    },
+    {
+        "Name":  "wolverine-claws.png"
+    },
+    {
+        "Name":  "wood-cabin.png"
+    },
+    {
+        "Name":  "wyvern.png"
+    },
+    {
+        "Name":  "zeus-sword.png"
+    }
+]
