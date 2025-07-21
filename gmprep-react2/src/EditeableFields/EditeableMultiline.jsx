@@ -14,7 +14,7 @@ export default function EditeableMultiline({ defaultValue, labelName, onChanged,
 			<div className="flex flex-col w-full">
 				<div className="flex flex-row">
 					<h4 className="flex-grow text-left">{labelName}</h4>
-					<img src="/icons/ui/check_icon.png"
+					<img src="./icons/ui/check_icon.png"
 						onClick={() => {
 							setIsBeingEdited(false);
 						}}
@@ -49,7 +49,7 @@ export default function EditeableMultiline({ defaultValue, labelName, onChanged,
 			<div className="flex flex-col w-full">
 				<div className="flex flex-row w-full">
 					<h4 className="flex-grow text-left">{labelName}</h4>
-					<img src="/icons/ui/wrench_icon.png"  className="self-end pb-1" onClick={() => setIsBeingEdited(true)} />
+					<img src="./icons/ui/wrench_icon.png"  className="self-end pb-1" onClick={() => setIsBeingEdited(true)} />
 				</div>
 				<div className="flex-grow text-left whitespace-pre-wrap statBlock">{textContent}</div>
 			</div>

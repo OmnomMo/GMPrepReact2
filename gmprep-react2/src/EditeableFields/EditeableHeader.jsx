@@ -24,7 +24,7 @@ export default function EditeableHeader({defaultValue, onChanged}) {
 					}
 				}}
 			/>
-			<img src="/icons/ui/check_icon.png" className="self-end" onClick={() => {
+			<img src="./icons/ui/check_icon.png" className="self-end" onClick={() => {
 				setIsBeingEdited(false);
 			}}/>
 			</div>
@@ -33,7 +33,7 @@ export default function EditeableHeader({defaultValue, onChanged}) {
 		return (
 			<div className="flex columns w-full">
 			<h3 className="flex-grow">{textContent}</h3>
-			<img src="/icons/ui/wrench_icon.png" className="self-end" onClick={() => setIsBeingEdited(true)} />
+			<img src="./icons/ui/wrench_icon.png" className="self-end" onClick={() => setIsBeingEdited(true)} />
 			</div>
 		);
 	}

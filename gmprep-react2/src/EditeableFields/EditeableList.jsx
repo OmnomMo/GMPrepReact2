@@ -55,7 +55,7 @@ export default function EditeableList ({children, defaultData, defaultElement, h
 	return <div>
 		<div style={{display: "flex", flexDirection:"row"}} className="pt-2">
 			<h4 className=" text-left flex-initial ">{header}</h4>
-			<img src="/icons/ui/add_icon.png" className="self-end pb-1" onClick={addElement}/>
+			<img src="./icons/ui/add_icon.png" className="self-end pb-1" onClick={addElement}/>
 		</div>
 		<ul>
 			{elements.map(element => 

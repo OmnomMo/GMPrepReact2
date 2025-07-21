@@ -49,7 +49,7 @@ export default function SkillEntry({ defaultContent, onDelete, onChange}) {
 					}}
 					/>
 				<div className="w-full" />
-				<img src="/icons/ui/check_icon.png" className="self-center" onClick={() => doneEditing()}/>
+				<img src="./icons/ui/check_icon.png" className="self-center" onClick={() => doneEditing()}/>
 			</div>
 		)
 	} else {
@@ -57,8 +57,8 @@ export default function SkillEntry({ defaultContent, onDelete, onChange}) {
 		<div style={{ display: "flex", flexDirection: "row" }} >
 			<p className="w-60 text-left">{skillName.current}:</p>
 			<p className="w-full text-left">+{bonus.current}</p>
-			<img src="/icons/ui/delete_icon.png" className="self-center" onClick={() => onDelete(defaultContent.id)} />
-			<img src="/icons/ui/wrench_icon.png" className="self-center" onClick={() => setEditing(true)}/>
+			<img src="./icons/ui/delete_icon.png" className="self-center" onClick={() => onDelete(defaultContent.id)} />
+			<img src="./icons/ui/wrench_icon.png" className="self-center" onClick={() => setEditing(true)}/>
 		</div>
 		)
 	}

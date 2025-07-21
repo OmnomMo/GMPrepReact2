@@ -59,7 +59,7 @@ export default function NewNode() {
 						setIsCreature(e.target.checked);
 					}}
 				/>
-				<span className="toggleBG"><img src="/icons/ui/character_icon.png" className="p-1"/></span>
+				<span className="toggleBG"><img src="./icons/ui/character_icon.png" className="p-1"/></span>
 			</label>
 			<label id="LocationCheckbox" className="toggleButton m-2">
 				<input
@@ -70,7 +70,7 @@ export default function NewNode() {
 						setIsLocation(e.target.checked);
 					}}
 				/>
-				<span className="toggleBG"><img src="/icons/ui/location_icon.png" className="p-1" /></span>
+				<span className="toggleBG"><img src="./icons/ui/location_icon.png" className="p-1" /></span>
 			</label>
 		</div>
 		<div>

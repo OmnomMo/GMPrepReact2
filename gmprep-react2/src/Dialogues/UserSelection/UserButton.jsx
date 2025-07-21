@@ -10,7 +10,7 @@ export default function UserButton({ userName, userId, onSelected, onDeleted}) {
 			</div>
 			<img
 				className="self-center"
-				src="/icons/ui/delete_icon.png"
+				src="./icons/ui/delete_icon.png"
 				onClick={() => {
 					onDeleted(userId)
 				}}

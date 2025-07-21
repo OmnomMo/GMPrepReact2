@@ -25,7 +25,7 @@ async function requestCreateNewCampaign({data, userToken}) {
 		body: JSON.stringify(data),
 	}
 	console.log("Adding campaign")
-	return fetch(`${IP}${PORT}/Campaigns/Create/${userToken}` + userToken, requestOptions)
+	return fetch(`${IP}${PORT}/Campaigns/Create/${userToken}`, requestOptions)
 		.then(result => result.json())
 		.then(json => {
 			console.log(json);
@@ -61,6 +61,21 @@ async function deleteNode({data, userToken}) {
 	return fetch(`${IP}${PORT}/Nodes/Delete/${userToken}`, requestOptions);
 }
 
+async function getAllNodes({queryKey}) {
+	const [_key, campaignId, userToken] = queryKey;
+
+	const requestOptions = {
+		method: 'GET',
+		headers: { 'Content-Type': 'application/json' },
+	}
+	console.log("Requesting Nodes")
+	return fetch(`${IP}${PORT}/Nodes/All/${campaignId}/${userToken}`, requestOptions)
+		.then(result => result.json())
+		.then(json => {
+			console.log(json);
+			return json;
+		});
+}
 //#region Maps
 async function requestMaps({ queryKey }) {
 	const [_key, campaignId, userToken] = queryKey;
@@ -153,6 +168,7 @@ export {
 	requestDeleteCampaign,
 	postNode,
 	deleteNode,
+	getAllNodes,
 	requestMaps,
 	requestCreateNewMap,
 	requestDeleteMap

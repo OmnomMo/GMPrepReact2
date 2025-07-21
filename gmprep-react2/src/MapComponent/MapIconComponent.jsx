@@ -17,7 +17,7 @@ export default function MapIconComponent({ mapNodeData, mapHeight, posX, posY, s
 
 	return (<>
 		<img
-			src={"/icons/default/" + (mapNodeData?.node?.mapIconPath ?? "wyvern.png")}
+			src={"./icons/default/" + (mapNodeData?.node?.mapIconPath ?? "wyvern.png")}
 			className='mapIcon'
 			width={(mapNodeData.node?.mapIconSize ?? 64) * scaleFactor}
 			height={(mapNodeData.node?.mapIconSize ?? 64) * scaleFactor}

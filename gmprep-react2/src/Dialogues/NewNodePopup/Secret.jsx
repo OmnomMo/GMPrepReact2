@@ -42,8 +42,8 @@ export default function Secret({defaultContent, onDelete, onChange}) {
 					}
 					<p className="text-left whitespace-pre-wrap">{secretData.description}</p>
 				</div>
-				<img src="/icons/ui/delete_icon.png" className="self-start" onClick={() => onDelete(secretData.id)} />
-				<img src="/icons/ui/wrench_icon.png" className="self-start" onClick={() => setEditing(true)} />
+				<img src="./icons/ui/delete_icon.png" className="self-start" onClick={() => onDelete(secretData.id)} />
+				<img src="./icons/ui/wrench_icon.png" className="self-start" onClick={() => setEditing(true)} />
 			</div>
 		)
 	} else {
@@ -69,7 +69,7 @@ export default function Secret({defaultContent, onDelete, onChange}) {
 						}}
 						onChange={e => testDifficulty.current = (e.target.value)} />
 					<div className="w-full"></div>
-					<img src="/icons/ui/check_icon.png" onClick={() => {
+					<img src="./icons/ui/check_icon.png" onClick={() => {
 						stopEditing();
 					}} />
 				</div>

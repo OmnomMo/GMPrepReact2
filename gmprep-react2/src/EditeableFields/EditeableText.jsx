@@ -25,7 +25,7 @@ export default function EditeableText({defaultValue, onChanged, labelName = ""})
 					}
 				}}
 			/>
-			<img src="/icons/ui/check_icon.png" onClick={() => {
+			<img src="./icons/ui/check_icon.png" onClick={() => {
 				setIsBeingEdited(false);
 			}}/>
 			</div>
@@ -35,7 +35,7 @@ export default function EditeableText({defaultValue, onChanged, labelName = ""})
 			<div className="flex columns w-full">
 			{labelName != "" && <p className="mr-2">{labelName}: </p>}
 			<p className="flex-grow text-left">{textContent}</p>
-			<img src="/icons/ui/wrench_icon.png" className="self-end" onClick={() => setIsBeingEdited(true)} />
+			<img src="./icons/ui/wrench_icon.png" className="self-end" onClick={() => setIsBeingEdited(true)} />
 			</div>
 		);
 	}

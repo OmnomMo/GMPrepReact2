@@ -27,14 +27,14 @@ export default function CampaignButton({ campaignData, onSelect, onDelete, onEdi
 				<div className="flex align-right absolute bottom-0 right-0">
 					<img
 						className="m-1"
-						src="/icons/ui/wrench_icon.png"
+						src="./icons/ui/wrench_icon.png"
 						onClick={(e) => {
 							onEdit(campaignData);
 							e.stopPropagation();
 						}} />
 					<img
 						className="m-1"
-						src="/icons/ui/delete_icon.png"
+						src="./icons/ui/delete_icon.png"
 						onClick={(e) => {
 							onDelete(campaignData.id);
 							e.stopPropagation();

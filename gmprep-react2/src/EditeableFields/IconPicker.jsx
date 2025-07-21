@@ -15,7 +15,7 @@ export default function IconPicker({defaultIcon, defaultIconSize, onChanged}) {
 
 	return (
 		<div id="iconPicker" className="w-full flex flex-row justify-center">
-			<img src={"/icons/default/" + currentIcon} className="" width="64" height="64" onClick={() => {
+			<img src={"./icons/default/" + currentIcon} className="" width="64" height="64" onClick={() => {
 				dialogRef.current.showModal();
 			}}
 			/>

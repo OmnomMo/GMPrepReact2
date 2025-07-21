@@ -30,8 +30,8 @@ export default function CreatureBaseStatsFormComponent({defaultStatsData, onChan
 		<>
 		<div className="flexRow">
 			<h4 className="text-left w-full">Stats</h4>
-			{(!editingStats) && <img src="/icons/ui/wrench_icon.png" className="self-end pb-1" onClick={() => setEditingStats(true)} />}
-			{(editingStats) && <img src="/icons/ui/check_icon.png" className="self-end pb-1" onClick={() => setEditingStats(false)} />}
+			{(!editingStats) && <img src="./icons/ui/wrench_icon.png" className="self-end pb-1" onClick={() => setEditingStats(true)} />}
+			{(editingStats) && <img src="./icons/ui/check_icon.png" className="self-end pb-1" onClick={() => setEditingStats(false)} />}
 		</div>
 
 		<div id="statblock" className="grid grid-cols-2 gap-2 statBlock">
@@ -70,7 +70,7 @@ export default function CreatureBaseStatsFormComponent({defaultStatsData, onChan
 		<div id="speedblock" className="statBlock flexRow">
 			<EditeableNumericicon
 				defaultValue={defaultStatsData.speed ?? "30"}
-				iconSource={"/icons/ui/walk_icon.png"}
+				iconSource={"./icons/ui/walk_icon.png"}
 				showEditIcon={false}
 				editeableOverride={editingSpeed}
 				onUpdate={onUpdateSpeed}
@@ -78,7 +78,7 @@ export default function CreatureBaseStatsFormComponent({defaultStatsData, onChan
 			/>
 			<EditeableNumericicon
 				defaultValue={defaultStatsData.speedSwimming ?? "0"}
-				iconSource={"/icons/ui/swim_icon.png"}
+				iconSource={"./icons/ui/swim_icon.png"}
 				showEditIcon={false}
 				editeableOverride={editingSpeed}
 				onChange={(newValue) => {updateStatsData("speedSwimming", newValue)}}
@@ -86,14 +86,14 @@ export default function CreatureBaseStatsFormComponent({defaultStatsData, onChan
 			/>
 			<EditeableNumericicon
 				defaultValue={defaultStatsData.speedFlying ?? "0"}
-				iconSource={"/icons/ui/fly_icon.png"}
+				iconSource={"./icons/ui/fly_icon.png"}
 				showEditIcon={false}
 				editeableOverride={editingSpeed}
 				onChange={(newValue) => {updateStatsData("speedFlying", newValue)}}
 				onUpdate={onUpdateSpeed}
 			/>
-			{(!editingSpeed) && <img src="/icons/ui/wrench_icon.png" onClick={ () => setEditingSpeed(true)} />}
-			{editingSpeed && <img src="/icons/ui/check_icon.png" onClick={() => setEditingSpeed(false)} />}
+			{(!editingSpeed) && <img src="./icons/ui/wrench_icon.png" onClick={ () => setEditingSpeed(true)} />}
+			{editingSpeed && <img src="./icons/ui/check_icon.png" onClick={() => setEditingSpeed(false)} />}
 		</div>
 		<EditeableMultiline defaultValue={defaultStatsData.languages ?? "Common"} labelName="Languages" rows={2} onChanged={(newValue) => {updateStatsData("languages", newValue)}}/>
 		<EditeableMultiline defaultValue={defaultStatsData.senses ?? "Passive Perception: "} labelName="Senses" rows={2} onChanged={newValue => {updateStatsData("senses", newValue)}}/>

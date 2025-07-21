@@ -32,7 +32,7 @@ useEffect(() => {
 				element.current.style.visibility = 'visible';
 				element.current.style.width = `${size}px`;
 				element.current.style.height = `${size}px`;
-				element.current.src = "/icons/default/" + draggedNode.mapIconPath;
+				element.current.src = "./icons/default/" + draggedNode.mapIconPath;
 			}
 		}
 	}
@@ -48,7 +48,7 @@ useEffect(() => {
 return createPortal(
 	<img
 		ref={element}
-		src="/icons/default/wyvern.png"
+		src="./icons/default/wyvern.png"
 		className="mouse-tracker"
 		/>,
 	document.body

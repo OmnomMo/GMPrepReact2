@@ -51,9 +51,9 @@ export default function MapComponent() {
 		return widthFactor;
 	}, [mapDimensions, sourceImageDimensions]);
 
-	let imgPath = "/maps/" + mapData.imagePath;
+	let imgPath = "./maps/" + mapData.imagePath;
 	if (mapData.imagePath == "") {
-		imgPath = "/maps/resolutions_1200.jpg";
+		imgPath = "./maps/resolutions_1200.jpg";
 	}
 	if (mapData.externalImageUrl != "") {
 		imgPath = mapData.externalImageUrl;

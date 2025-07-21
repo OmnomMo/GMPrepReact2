@@ -33,7 +33,7 @@ export default function NewMap({ onCancel, onSubmit, defaultData }) {
 		<h1>CREATE NEW MAP</h1>
 		<div>
 			<EditeableHeader defaultValue={name.current} onChanged={onNameChanged} />
-			<EditeableMultiline labelName={"Decsription"} defaultValue={description.current} onChanged={onDescriptionChanged} />
+			<EditeableMultiline labelName={"Description"} defaultValue={description.current} onChanged={onDescriptionChanged} />
 			<h4 className="text-left m-1 mt-4">Select background image:</h4>
 			<div id="MapBackgroundSelection" className="flex flex-wrap bg-gray-800  p-2">
 				{mapBackgrounds.map(bg => {

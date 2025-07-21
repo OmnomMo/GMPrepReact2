@@ -19,7 +19,7 @@ export default function TypeAlignmentComponent({defaultSize, defaultType, defaul
 		return (
 			<div style={{display:"flex", flexDirection:"row"}}>
 				<p className="italic w-full">{valueSize} {valueType}, {valueAlignment}</p>
-				<img src="/icons/ui/wrench_icon.png" onClick={() => setEditing(true)}/>
+				<img src="./icons/ui/wrench_icon.png" onClick={() => setEditing(true)}/>
 			</div>
 		)
 	} else {
@@ -50,7 +50,7 @@ export default function TypeAlignmentComponent({defaultSize, defaultType, defaul
 				>
 					{ALIGNMENTS.map(alignment => <option key ={alignment} value={alignment}>{alignment}</option>)}
 				</select>
-				<img src="/icons/ui/check_icon.png" onClick={() => setEditing(false)}/>
+				<img src="./icons/ui/check_icon.png" onClick={() => setEditing(false)}/>
 			</div>
 			</>
 		)

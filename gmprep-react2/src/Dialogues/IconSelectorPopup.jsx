@@ -60,7 +60,7 @@ function IconSelectorPopup({ setDialogResult, defaultIconSize, defaultIcon}) {
 					<div className=" columns-5 w-100 ">
 						{
 							iconData && iconData.length > 0 && iconData.map(
-								(icon) => <img className="deselected" id={icon.Name} key={icon.Name} src={"/icons/default/" + icon.Name} height="64" width="64" onClick={iconSelected} />)
+								(icon) => <img className="deselected" id={icon.Name} key={icon.Name} src={"./icons/default/" + icon.Name} height="64" width="64" onClick={iconSelected} />)
 						}
 					</div>
 				</div>

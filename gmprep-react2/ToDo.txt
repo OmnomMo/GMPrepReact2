@@ -51,7 +51,8 @@
 	https://developers.google.com/identity/sign-in/web/sign-in
 
 
-	
+Deployment/Hosting
+	- DB changes are not preserved after redeploy? reload website? new login? find out!	
 
 
 
@@ -68,6 +69,7 @@ BUGS:
 
 
 Polish:
+- Show loading icon when loading campaigns or other
 - Add default 5e stat blocks to Backend
 	- parse CSV
 	- Add separate selection ui for defaults

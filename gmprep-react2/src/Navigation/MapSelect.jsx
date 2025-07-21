@@ -82,7 +82,7 @@ export default function MapSelect() {
 		if (mapData.externalImageUrl != "") {
 			return mapData.externalImageUrl;
 		}
-		return "/maps/" + mapData.imagePath;
+		return "./maps/" + mapData.imagePath;
 	}
 
 

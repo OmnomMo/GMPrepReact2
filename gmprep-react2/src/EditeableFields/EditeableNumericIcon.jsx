@@ -15,7 +15,7 @@ export default function EditeableNumericicon({ defaultValue, iconSource, onUpdat
 					<div style={{ display: "flex", flexDirection: "row" }} className="w-full">
 						<img src={iconSource} />
 						<p className=" w-10 text-center">{value}</p>
-						{showEditIcon && <img src="/icons/ui/wrench_icon.png" onClick={() => setEditing(true)} />}
+						{showEditIcon && <img src="./icons/ui/wrench_icon.png" onClick={() => setEditing(true)} />}
 					</div>
 				}
 			</>
@@ -36,7 +36,7 @@ export default function EditeableNumericicon({ defaultValue, iconSource, onUpdat
 							onUpdate(value);
 						}
 					}}/>
-				{showEditIcon && <img src="/icons/ui/check_icon.png" onClick={() => setEditing(false)} />}
+				{showEditIcon && <img src="./icons/ui/check_icon.png" onClick={() => setEditing(false)} />}
 			</div>
 		)
 	}
