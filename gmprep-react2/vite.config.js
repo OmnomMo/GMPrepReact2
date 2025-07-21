@@ -8,5 +8,5 @@ export default defineConfig({
 	react(),
 	tailwindcss(),
   ], 
-  base: "/gmprep_web/",
+  base: "https://omnommo.github.io/gmprep_web/",
 })
