@@ -16,7 +16,7 @@ export default function HeaderBar() {
 
 	return (
 			<div name="headerBar" className='flex flex-row absolute top-0 left-0 w-full bg-gray-800 z-30'>
-				<p className="m-2">{getHeaderText()}</p>
+				<p className="m-1">{getHeaderText()}</p>
 				<div className="flex-grow" />
 				<img
 					className="m-1"

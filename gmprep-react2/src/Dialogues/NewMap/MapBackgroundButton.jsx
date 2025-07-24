@@ -7,7 +7,7 @@ export default function MapBackgroundButton({src, onSelected, isSelected}) {
 
 	return (
 		<div className={className} onClick={() => {onSelected(src);}}>
-			<img className="w-full h-full object-cover" src={"/maps/" + src}></img>
+			<img className="w-full h-full object-cover" src={"./maps/" + src}></img>
 		</div>
 	)
 }
