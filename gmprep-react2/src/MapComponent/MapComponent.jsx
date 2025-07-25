@@ -218,7 +218,7 @@ export default function MapComponent() {
 					src={imgPath}
 					id="mapBackground"
 					draggable='false'
-
+					className='fadeIn'
 					onLoad={(e) => {
 						cacheSourceImageDimensions(e.target.src);
 						setMapDimensions({

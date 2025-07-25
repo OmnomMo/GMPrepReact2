@@ -4,7 +4,7 @@ export default function CampaignButton({ campaignData, onSelect, onDelete, onEdi
 	return (
 		<div
 			name="CampaignButton"
-			className="relative h-100 min-w-80 m-5"
+			className="fadeIn relative h-100 min-w-80 m-5"
 			style={{
 				backgroundImage: "url(" + imageSrc + ")",
 				backgroundSize: "cover",

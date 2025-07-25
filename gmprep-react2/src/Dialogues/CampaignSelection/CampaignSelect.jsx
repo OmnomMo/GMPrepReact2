@@ -4,6 +4,7 @@ import CampaignButton from "./CampaignButton";
 import { GlobalContext } from "../../Contexts";
 import { requestCampaigns, requestCreateNewCampaign, requestDeleteCampaign } from "../Requests/Requests";
 import NewCampaign from "./NewCampaign";
+import Loading from "../../Utils/Loading";
 
 
 
@@ -72,7 +73,12 @@ export default function CampaignSelect() {
 	}
 
 	if (status == 'pending') {
-		return (<div>Loading Campaigns...</div>)
+		return (
+			<div className="size-full content-center">
+				<Loading />
+				<p>Loading Campaigns...</p>
+			</div>
+		)
 	}
 
 	if (status == 'error') {
@@ -83,7 +89,7 @@ export default function CampaignSelect() {
 
 	return (
 		<div
-			className="size-full"
+			className="size-full fadeIn"
 			id="campaignSelect"
 			style={{
 				backgroundImage: "url(https://cdna.artstation.com/p/assets/images/images/002/107/616/large/karin-wittig-map-scyllhia-as.jpg?1457360365)",

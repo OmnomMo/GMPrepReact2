@@ -51,8 +51,8 @@
 	https://developers.google.com/identity/sign-in/web/sign-in
 
 
-Deployment/Hosting
-	- DB changes are not preserved after redeploy? reload website? new login? find out!	
+DONE Deployment/Hosting
+	- DONE DB changes are not preserved after redeploy? reload website? new login? find out!	
 
 
 

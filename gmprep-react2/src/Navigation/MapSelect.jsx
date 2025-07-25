@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import CampaignButton from "../Dialogues/CampaignSelection/CampaignButton";
 import NewMap from "../Dialogues/NewMap/NewMap";
 import { requestCreateNewMap, requestDeleteMap, requestMaps } from "../Dialogues/Requests/Requests";
+import Loading from "../Utils/Loading";
 
 
 export default function MapSelect() {
@@ -71,7 +72,12 @@ export default function MapSelect() {
 	}
 
 	if (status == 'pending') {
-		return (<div>Loading Maps...</div>)
+		return (
+			<div className="size-full content-center">
+				<Loading />
+				<p>Loading Maps...</p>
+			</div>
+		)
 	}
 
 	if (status == 'error') {
@@ -90,7 +96,7 @@ export default function MapSelect() {
 
 	return (
 		<div
-			className="size-full"
+			className="size-full fadeIn"
 			id="campaignSelect"
 			style={{
 				backgroundImage: "url(" + campaignData.imageLink + ")",

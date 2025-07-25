@@ -1,0 +1,20 @@
+.LoadingIcon {
+	animation-name: loadingSpin;
+	animation-duration: 1.6s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+	margin: 2em;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	color: rgba(255, 255, 255, 0.267);
+}
+
+@keyframes loadingSpin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg)
+	}
+}
