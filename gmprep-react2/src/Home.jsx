@@ -15,10 +15,11 @@ export default function Home() {
 
 	const { userData, userToken, campaignData, mapData, draggingMap, currentNodeData } = useContext(GlobalContext);
 
-	let userTokenExpired = userData != null && new Date() / 1000 > userData.ext;
+	let userTokenExpired = userData != null && new Date() / 1000 > userData.exp;
+
 
 	if (userToken == null || userToken == "null" || userTokenExpired ) {
-		console.log("rerender")
+		console.log("User Token expired: " + userTokenExpired);
 		return <Login />
 	}
 
